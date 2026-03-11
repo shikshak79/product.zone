@@ -1,1 +1,273 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Outbound Readiness X-RAY Report",
+  "type": "object",
+  "required": ["meta", "company_context", "verdict", "implication", "stages", "breakpoint", "observed_hero", "evidence", "decisions", "personas", "next_step"],
+  
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["company_name", "homepage_url", "target_buyer", "prepared_date", "method_version"],
+      "properties": {
+        "company_name": { "type": "string" },
+        "homepage_url": { "type": "string", "format": "uri" },
+        "target_buyer": { "type": "string" },
+        "prepared_date": { "type": "string", "format": "date" },
+        "partner": { "type": ["string", "null"] },
+        "method_version": { "type": "string", "default": "v4.0" }
+      }
+    },
+    
+    "company_context": {
+      "type": "object",
+      "required": ["what_they_claim"],
+      "properties": {
+        "what_they_claim": { "type": "string", "maxLength": 300 },
+        "stage": { "type": "string" },
+        "team_size": { "type": "string" },
+        "customer_count": { "type": "string" },
+        "outbound_goal": { "type": "string" }
+      }
+    },
+    
+    "verdict": {
+      "type": "object",
+      "required": ["score", "status", "status_label", "headline", "diagnosis"],
+      "properties": {
+        "score": {
+          "type": "object",
+          "required": ["passing", "weak", "breaking"],
+          "properties": {
+            "passing": { "type": "integer", "minimum": 0, "maximum": 6 },
+            "weak": { "type": "integer", "minimum": 0, "maximum": 6 },
+            "breaking": { "type": "integer", "minimum": 0, "maximum": 6 }
+          }
+        },
+        "status": { 
+          "type": "string", 
+          "enum": ["RED", "AMBER", "GREEN"] 
+        },
+        "status_label": { 
+          "type": "string",
+          "enum": ["Fix Before Outbound", "Proceed with Caution", "Ready for Outbound"]
+        },
+        "headline": { "type": "string", "maxLength": 100 },
+        "diagnosis": { 
+          "type": "string", 
+          "maxLength": 400,
+          "description": "2-3 sentence copyable diagnosis. Must be specific to the company."
+        }
+      }
+    },
+    
+    "implication": {
+      "type": "object",
+      "required": ["metrics", "reason", "expect_to_hear"],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["name", "prediction", "sentiment"],
+            "properties": {
+              "name": { 
+                "type": "string",
+                "enum": ["Reply Rate", "Demo Conversion", "Internal Sell", "Pipeline Speed", "Champion Carry"]
+              },
+              "prediction": { 
+                "type": "string",
+                "enum": ["Healthy", "Strong", "Good", "Weak", "Poor", "Slow", "Moderate", "Elevated Risk"]
+              },
+              "sentiment": { 
+                "type": "string",
+                "enum": ["good", "weak", "poor"]
+              }
+            }
+          }
+        },
+        "reason": { "type": "string", "maxLength": 200 },
+        "expect_to_hear": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "stages": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "status_label"],
+        "properties": {
+          "name": { 
+            "type": "string",
+            "enum": ["Land", "Make Sense", "Self-Select", "Compare", "Validate", "Commit"]
+          },
+          "status": { 
+            "type": "string",
+            "enum": ["ok", "weak", "break"]
+          },
+          "status_label": { 
+            "type": "string",
+            "enum": ["OK", "Weak", "Breaks"]
+          }
+        }
+      }
+    },
+    
+    "breakpoint": {
+      "type": "object",
+      "required": ["stage", "type", "insight", "missing_signals"],
+      "properties": {
+        "stage": { 
+          "type": "string",
+          "enum": ["Land", "Make Sense", "Self-Select", "Compare", "Validate", "Commit", "None"]
+        },
+        "type": { 
+          "type": "string",
+          "enum": ["primary_break", "friction", "minor_friction", "no_major_break"]
+        },
+        "insight": { "type": "string", "maxLength": 300 },
+        "missing_signals": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "observed_hero": {
+      "type": "object",
+      "required": ["quote", "buyer_question", "verdict"],
+      "properties": {
+        "quote": { "type": "string" },
+        "buyer_question": { "type": "string" },
+        "verdict": { 
+          "type": "string",
+          "enum": ["CLEAR", "PARTIAL", "MISSING", "NOT ANSWERED"]
+        }
+      }
+    },
+    
+    "evidence": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": ["stage", "stage_key", "question", "finding", "status"],
+        "properties": {
+          "stage": { "type": "string" },
+          "stage_key": { 
+            "type": "string",
+            "enum": ["land", "make-sense", "self-select", "compare", "validate", "commit"]
+          },
+          "question": { "type": "string" },
+          "finding": { 
+            "type": "string", 
+            "maxLength": 300,
+            "description": "Must reference specific homepage content. No generic statements."
+          },
+          "status": { 
+            "type": "string",
+            "enum": ["clear", "partial", "missing"]
+          }
+        }
+      }
+    },
+    
+    "decisions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "finding", "consequence"],
+        "properties": {
+          "name": { 
+            "type": "string",
+            "description": "One of the 15 core decisions: Category, Alternative, Customer, Outcome, Difference, Win Mechanism, Proof Type, First Step, Risk Reversal, etc."
+          },
+          "status": { 
+            "type": "string",
+            "enum": ["partial", "missing"]
+          },
+          "finding": { "type": "string", "maxLength": 200 },
+          "consequence": { 
+            "type": "string", 
+            "maxLength": 150,
+            "description": "What this means for SDR or champion. Format: action implication."
+          }
+        }
+      }
+    },
+    
+    "personas": {
+      "type": "object",
+      "required": ["target_buyer_intro", "checks"],
+      "properties": {
+        "target_buyer_intro": { 
+          "type": "string",
+          "description": "Identifies champion and who they carry story to (boss, users)."
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["type", "role", "question", "answer", "verdict", "icon"],
+            "properties": {
+              "type": { 
+                "type": "string",
+                "enum": ["Champion → Boss", "Champion → User", "Economic Buyer"]
+              },
+              "role": { "type": "string" },
+              "question": { "type": "string" },
+              "answer": { "type": "string", "maxLength": 200 },
+              "verdict": { 
+                "type": "string",
+                "enum": ["pass", "weak", "fail"]
+              },
+              "icon": { 
+                "type": "string",
+                "enum": ["✓", "△", "✗"]
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "next_step": {
+      "type": "object",
+      "required": ["label", "action", "goals"],
+      "properties": {
+        "label": { "type": "string", "default": "Recommended Path" },
+        "action": { "type": "string" },
+        "goals": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["decision", "instruction"],
+            "properties": {
+              "decision": { "type": "string" },
+              "instruction": { "type": "string" }
+            }
+          }
+        },
+        "without_this": { "type": "string", "maxLength": 200 },
+        "with_this": { "type": "string", "maxLength": 200 }
+      }
+    }
+  }
+}
