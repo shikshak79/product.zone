@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outbound Readiness X-RAY · LabV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --light: #F5F4EF;
+      --light2: #ECEAE3;
+      --lborder: #D8D6CF;
+      --ltext: #1a1a1a;
+      --lmuted: #555555;
+      --lmuted2: #888888;
+      --teal: #33C4D9;
+      --orange: #F5A623;
+      --green: #2ECC71;
+      --red: #C0392B;
+      --black: #0a0a0a;
+      --dtext: #F0EFE9;
+      --dmuted2: rgba(255,255,255,0.4);
+      --dborder: rgba(255,255,255,0.1);
+      --mono: 'Space Mono', monospace;
+      --display: 'Barlow Condensed', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: #333; color: var(--ltext); line-height: 1.5; }
+    
+    .report {
+      width: 900px;
+      background: var(--white);
+      margin: 40px auto;
+      padding: 48px 56px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+    
+    .report-header {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--lborder);
+    }
+    .report-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .report-title {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--ltext);
+      margin-bottom: 16px;
+    }
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .context-item {
+      background: var(--light);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+    .context-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 4px;
+    }
+    .context-value {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--ltext);
+    }
+    
+    .company-context {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .company-context-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 8px;
+    }
+    .company-claim {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--ltext);
+      margin-bottom: 8px;
+    }
+    .company-details {
+      display: flex;
+      gap: 24px;
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--lmuted);
+    }
+    .company-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .company-detail-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+    }
+    
+    .method-note {
+      background: var(--light);
+      border-left: 3px solid var(--teal);
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--lmuted);
+    }
+    
+    .verdict-banner {
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .verdict-banner.red {
+      background: rgba(192,57,43,0.06);
+      border: 2px solid var(--red);
+    }
+    .verdict-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .verdict-score-block {
+      text-align: center;
+      min-width: 100px;
+    }
+    .verdict-number {
+      font-family: var(--display);
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .verdict-number.red { color: var(--red); }
+    .verdict-breakdown {
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+    .breakdown-line {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .breakdown-icon { width: 12px; text-align: center; }
+    .breakdown-icon.green { color: var(--green); }
+    .breakdown-icon.amber { color: var(--orange); }
+    .breakdown-icon.red { color: var(--red); }
+    .breakdown-text { color: var(--lmuted); }
+    .verdict-main { flex: 1; }
+    .verdict-status {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .verdict-status.red { color: var(--red); }
+    .verdict-headline {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    
+    .diagnosis-box {
+      background: var(--black);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .diagnosis-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .diagnosis-text {
+      font-family: var(--body);
+      font-size: 16px;
+      color: var(--dtext);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .diagnosis-copy-hint {
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dmuted2);
+    }
+    
+    .implication-box {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .implication-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 16px;
+    }
+    .implication-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .implication-item {
+      text-align: center;
+      padding: 12px 8px;
+      background: var(--white);
+      border-radius: 6px;
+    }
+    .implication-metric {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .implication-metric.good { color: var(--green); }
+    .implication-metric.weak { color: var(--orange); }
+    .implication-metric.poor { color: var(--red); }
+    .implication-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+    }
+    .implication-reason {
+      padding-top: 16px;
+      border-top: 1px solid var(--lborder);
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--lmuted);
+    }
+    .implication-expect {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 6px;
+      border-left: 3px solid var(--orange);
+    }
+    .implication-expect-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 6px;
+    }
+    .implication-expect-list {
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--ltext);
+      line-height: 1.6;
+    }
+    
+    /* Core Summary Divider */
+    .core-divider {
+      margin: 32px 0;
+      padding: 12px 0;
+      border-top: 2px solid var(--lborder);
+      border-bottom: 1px solid var(--light2);
+      text-align: center;
+    }
+    .core-divider-text {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+    }
+    
+    .section {
+      margin-bottom: 28px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-number {
+      width: 24px;
+      height: 24px;
+      background: var(--black);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    
+    .stage-flow {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .stage-cell {
+      flex: 1;
+      background: var(--light);
+      border-radius: 6px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .stage-cell.break {
+      background: rgba(192,57,43,0.10);
+      border: 1px solid var(--red);
+    }
+    .stage-cell.weak {
+      background: rgba(245,166,35,0.10);
+      border: 1px solid var(--orange);
+    }
+    .stage-cell.ok {
+      background: rgba(46,204,113,0.10);
+      border: 1px solid var(--green);
+    }
+    .stage-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 2px;
+    }
+    .stage-status {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .stage-cell.break .stage-status { color: var(--red); }
+    .stage-cell.weak .stage-status { color: var(--orange); }
+    .stage-cell.ok .stage-status { color: var(--green); }
+    .stage-arrow {
+      font-size: 14px;
+      color: var(--lmuted2);
+    }
+    
+    .breakpoint-discovery {
+      background: var(--black);
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+    .breakpoint-eyebrow {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 4px;
+    }
+    .breakpoint-stage {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .breakpoint-insight {
+      font-family: var(--body);
+      font-size: 15px;
+      color: var(--dtext);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .breakpoint-signals {
+      padding-top: 16px;
+      border-top: 1px solid var(--dborder);
+    }
+    .breakpoint-signals-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 8px;
+    }
+    .breakpoint-signal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .breakpoint-signal {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--dtext);
+    }
+    .breakpoint-signal-icon {
+      color: var(--red);
+      font-weight: 700;
+    }
+    
+    .evidence-artifact {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--lmuted2);
+    }
+    .evidence-artifact-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 8px;
+    }
+    .evidence-artifact-quote {
+      font-family: var(--body);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ltext);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .evidence-artifact-question {
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--lmuted);
+    }
+    .evidence-artifact-verdict {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      background: rgba(245,166,35,0.12);
+      color: var(--orange);
+    }
+    
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .evidence-table th {
+      background: var(--light);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--lborder);
+    }
+    .evidence-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--light2);
+      font-family: var(--body);
+      vertical-align: top;
+    }
+    .evidence-table tr:last-child td {
+      border-bottom: none;
+    }
+    .stage-cell-inline {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-right: 6px;
+      background: rgba(51,196,217,0.15);
+      color: var(--teal);
+    }
+    .question-cell {
+      color: var(--lmuted);
+      width: 28%;
+    }
+    .finding-cell {
+      color: var(--ltext);
+      width: 52%;
+    }
+    .status-cell {
+      width: 20%;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .status-badge.missing {
+      background: rgba(192,57,43,0.12);
+      color: var(--red);
+    }
+    .status-badge.partial {
+      background: rgba(245,166,35,0.12);
+      color: var(--orange);
+    }
+    .status-badge.clear {
+      background: rgba(46,204,113,0.12);
+      color: var(--green);
+    }
+    
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .decision-card {
+      background: var(--light);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .decision-card.missing {
+      border-left: 3px solid var(--red);
+    }
+    .decision-card.partial {
+      border-left: 3px solid var(--orange);
+    }
+    .decision-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .decision-name {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+    }
+    .decision-finding {
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--ltext);
+      margin-bottom: 8px;
+    }
+    .decision-consequence {
+      font-family: var(--body);
+      font-size: 12px;
+      color: var(--lmuted);
+      padding-top: 8px;
+      border-top: 1px solid var(--lborder);
+    }
+    .decision-consequence::before {
+      content: "→ ";
+      color: var(--orange);
+    }
+    
+    .persona-section-intro {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--lmuted);
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: var(--light);
+      border-radius: 6px;
+    }
+    .persona-section-intro strong {
+      color: var(--ltext);
+    }
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .persona-card {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .persona-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .persona-info { flex: 1; }
+    .persona-type {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 2px;
+    }
+    .persona-role {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    .persona-verdict {
+      text-align: center;
+      min-width: 50px;
+    }
+    .persona-icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .persona-status {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .persona-status.fail { color: var(--red); }
+    .persona-status.weak { color: var(--orange); }
+    .persona-status.pass { color: var(--green); }
+    .persona-question {
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ltext);
+      margin-bottom: 6px;
+    }
+    .persona-answer {
+      font-family: var(--body);
+      font-size: 12px;
+      color: var(--lmuted);
+      line-height: 1.5;
+    }
+    
+    .next-step-box {
+      background: var(--light);
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+    .next-step-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .next-step-action {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ltext);
+      margin-bottom: 12px;
+    }
+    .next-step-goals {
+      margin-bottom: 16px;
+    }
+    .next-step-goals-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 8px;
+    }
+    .next-step-goal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .next-step-goal {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--ltext);
+    }
+    .next-step-goal-icon {
+      color: var(--teal);
+      font-weight: 700;
+    }
+    .next-step-detail {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--lmuted);
+      line-height: 1.6;
+      padding-top: 16px;
+      border-top: 1px solid var(--lborder);
+    }
+    
+    .report-footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--lborder);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+    }
+    .footer-method {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--lmuted2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="report">
+  
+  <!-- Header -->
+  <div class="report-header">
+    <div class="report-eyebrow">Outbound Readiness X-RAY</div>
+    <div class="report-title">LabV</div>
+    
+    <div class="context-grid">
+      <div class="context-item">
+        <div class="context-label">Homepage Evaluated</div>
+        <div class="context-value">labv.io/en</div>
+      </div>
+      <div class="context-item">
+        <div class="context-label">Target Buyer</div>
+        <div class="context-value">Head of R&D / Lab Manager at industrial companies</div>
+      </div>
+      <div class="context-item">
+        <div class="context-label">Prepared</div>
+        <div class="context-value">March 11, 2026</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Company Context -->
+  <div class="company-context">
+    <div class="company-context-header">What they claim to do</div>
+    <div class="company-claim">LabV builds a "Material Intelligence Platform" for R&D teams. They help labs manage formulations, processes, and test data in one place. The platform replaces Excel spreadsheets and scattered files with structured, searchable data. Target sectors appear to be materials, coatings, and battery development based on testimonials.</div>
+    <div class="company-details">
+      <div class="company-detail-item">
+        <span class="company-detail-label">Stage:</span> Early (German startup)
+      </div>
+      <div class="company-detail-item">
+        <span class="company-detail-label">Customers:</span> Enterprise (VARTA, NETZSCH)
+      </div>
+      <div class="company-detail-item">
+        <span class="company-detail-label">Outbound goal:</span> Scale beyond existing network
+      </div>
+    </div>
+  </div>
+  
+  <!-- Method Note -->
+  <div class="method-note">
+    This report scores your homepage across <strong>6 buying-path stages</strong>. Score is based on stage performance. Evidence comes from question-level analysis. Decision gaps explain weak stages.
+  </div>
+  
+  <!-- Verdict Banner -->
+  <div class="verdict-banner red">
+    <div class="verdict-top">
+      <div class="verdict-score-block">
+        <div class="verdict-number red">1/6</div>
+        <div class="verdict-breakdown">
+          <div class="breakdown-line">
+            <span class="breakdown-icon green">✓</span>
+            <span class="breakdown-text">1 pass</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon amber">△</span>
+            <span class="breakdown-text">5 weak</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon red">✕</span>
+            <span class="breakdown-text">0 break</span>
+          </div>
+        </div>
+      </div>
+      <div class="verdict-main">
+        <div class="verdict-status red">Fix Before Outbound</div>
+        <div class="verdict-headline">Pain is clear. But buyers cannot self-select or compare.</div>
+      </div>
+    </div>
+    
+    <div class="diagnosis-box">
+      <div class="diagnosis-label">The diagnosis</div>
+      <div class="diagnosis-text">Outbound will generate interest because the Excel pain is real and recognizable. But prospects will stall after checking the homepage because they cannot tell if LabV is for their industry, and they do not know how it compares to the LIMS or internal tools they already use.</div>
+      <div class="diagnosis-copy-hint">↑ Copy this line when explaining the situation internally</div>
+    </div>
+  </div>
+  
+  <!-- Outbound Implication -->
+  <div class="implication-box">
+    <div class="implication-header">If outbound starts now</div>
+    <div class="implication-grid">
+      <div class="implication-item">
+        <div class="implication-metric good">Healthy</div>
+        <div class="implication-label">Reply Rate</div>
+      </div>
+      <div class="implication-item">
+        <div class="implication-metric weak">Weak</div>
+        <div class="implication-label">Demo Conversion</div>
+      </div>
+      <div class="implication-item">
+        <div class="implication-metric weak">Weak</div>
+        <div class="implication-label">Internal Sell</div>
+      </div>
+      <div class="implication-item">
+        <div class="implication-metric poor">Slow</div>
+        <div class="implication-label">Pipeline Speed</div>
+      </div>
+    </div>
+    <div class="implication-reason">
+      <strong>Why:</strong> The Excel pain resonates. R&D leads will reply because they recognize the chaos. But when they check the site, they cannot self-select (is this for my industry?) or compare (how is this different from our LIMS?). Discovery calls must do work the homepage should have done.
+    </div>
+    <div class="implication-expect">
+      <div class="implication-expect-header">Expect to hear</div>
+      <div class="implication-expect-list">
+        • "Interesting. Is this for companies like ours?"<br>
+        • "We already have a LIMS. How is this different?"<br>
+        • "What's the typical implementation look like?"<br>
+        • "I need to check with my team if this fits our workflow"
+      </div>
+    </div>
+  </div>
+  
+  <!-- Core Summary Divider -->
+  <div class="core-divider">
+    <div class="core-divider-text">Supporting Detail</div>
+  </div>
+  
+  <!-- Section 1: Stage Flow -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <div class="section-title">Where buyer momentum breaks</div>
+    </div>
+    
+    <div class="stage-flow">
+      <div class="stage-cell weak">
+        <div class="stage-label">Land</div>
+        <div class="stage-status">Weak</div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage-cell ok">
+        <div class="stage-label">Make Sense</div>
+        <div class="stage-status">OK</div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage-cell weak">
+        <div class="stage-label">Self-Select</div>
+        <div class="stage-status">Weak</div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage-cell weak">
+        <div class="stage-label">Compare</div>
+        <div class="stage-status">Weak</div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage-cell weak">
+        <div class="stage-label">Validate</div>
+        <div class="stage-status">Weak</div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage-cell weak">
+        <div class="stage-label">Commit</div>
+        <div class="stage-status">Weak</div>
+      </div>
+    </div>
+    
+    <div class="breakpoint-discovery">
+      <div class="breakpoint-eyebrow">Primary friction</div>
+      <div class="breakpoint-stage">Self-Select + Compare</div>
+      <div class="breakpoint-insight">Buyers understand the pain (Excel chaos in R&D). But they cannot tell if this is for their specific situation. "R&D teams" could be pharma, chemicals, food, materials. And they do not know how LabV compares to the LIMS or internal databases they already use. Excel is named as an alternative, but prospects with existing systems need a different comparison frame.</div>
+      <div class="breakpoint-signals">
+        <div class="breakpoint-signals-header">What buyers cannot find</div>
+        <div class="breakpoint-signal-list">
+          <div class="breakpoint-signal">
+            <span class="breakpoint-signal-icon">✕</span>
+            <span>Which industries this is built for (materials? pharma? food?)</span>
+          </div>
+          <div class="breakpoint-signal">
+            <span class="breakpoint-signal-icon">✕</span>
+            <span>How this compares to LIMS or internal R&D databases</span>
+          </div>
+          <div class="breakpoint-signal">
+            <span class="breakpoint-signal-icon">✕</span>
+            <span>Demo specifics (how long, what happens, what to prepare)</span>
+          </div>
+          <div class="breakpoint-signal">
+            <span class="breakpoint-signal-icon">✕</span>
+            <span>Low-risk entry (trial, sandbox, pilot terms)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 2: Evidence Table -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <div class="section-title">Supporting evidence</div>
+    </div>
+    
+    <!-- Evidence Artifact -->
+    <div class="evidence-artifact">
+      <div class="evidence-artifact-header">Observed homepage hero</div>
+      <div class="evidence-artifact-quote">"Turn your R&D into a competitive edge"</div>
+      <div class="evidence-artifact-question">Buyer question: "What is this? What category?"</div>
+      <div class="evidence-artifact-verdict">PARTIAL</div>
+    </div>
+    
+    <table class="evidence-table">
+      <thead>
+        <tr>
+          <th>Stage / Question</th>
+          <th>What the Homepage Shows</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Land</span>What is this?</td>
+          <td class="finding-cell">"Material Intelligence Platform" is visible below the hero. Buyers may be more likely to think in terms of "R&D data management," "formulation software," or "LIMS alternative." The invented term may create friction for some prospects.</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Make Sense</span>What pain is worth switching for?</td>
+          <td class="finding-cell">"Data chaos instead of progress." Then specific symptoms: knowledge scattered across folders, data hard to compare, administration instead of value creation. This section is strong. Buyers recognize the problem.</td>
+          <td class="status-cell"><span class="status-badge clear">CLEAR</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Self-Select</span>Is this for my team?</td>
+          <td class="finding-cell">"R&D teams" is the only stated audience. No industry specified. No company size. No team structure. Testimonials mention coatings, batteries, milling, but the ICP is never stated directly.</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Compare</span>Why you vs. what I use today?</td>
+          <td class="finding-cell">"The platform replaces Excel chaos and disconnected tools." Excel is named, but prospects with existing LIMS or internal databases need a different comparison. The "We already have a LIMS" objection is not addressed.</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Compare</span>What do my current tools lack?</td>
+          <td class="finding-cell">"Different formats, units and naming conventions make evaluation complex." This describes Excel weaknesses, but does not explain why LIMS or other dedicated R&D tools fail.</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Validate</span>Does this work for real teams?</td>
+          <td class="finding-cell">VARTA and NETZSCH logos visible. Video testimonials present. But the metrics section shows "0%" (appears to be a display bug). No specific numbers like "reduced search time by X%."</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Commit</span>What is the first step?</td>
+          <td class="finding-cell">"Request Demo" button visible. "Book a live walkthrough" mentioned. But no specifics: How long? What will I see? Do I need to prepare anything?</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td class="question-cell"><span class="stage-cell-inline">Commit</span>Does this feel safe to try?</td>
+          <td class="finding-cell">GDPR compliance and German hosting mentioned in FAQ. But no free trial, no pilot program, no sandbox. The only entry is "Request Demo."</td>
+          <td class="status-cell"><span class="status-badge partial">PARTIAL</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Section 3: Decisions -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <div class="section-title">Decisions that are unclear or missing</div>
+    </div>
+    
+    <div class="decisions-grid">
+      <div class="decision-card partial">
+        <div class="decision-header">
+          <div class="decision-name">Category</div>
+          <span class="status-badge partial">PARTIAL</span>
+        </div>
+        <div class="decision-finding">"Material Intelligence Platform" is an invented category. Buyers may think in terms of "R&D data management," "formulation software," or "LIMS alternative."</div>
+        <div class="decision-consequence">SDR must explain what category LabV competes in. Adds friction to first 30 seconds.</div>
+      </div>
+      
+      <div class="decision-card partial">
+        <div class="decision-header">
+          <div class="decision-name">Customer</div>
+          <span class="status-badge partial">PARTIAL</span>
+        </div>
+        <div class="decision-finding">"R&D teams" is too broad. Industries implied through testimonials (coatings, batteries, milling) but never stated directly.</div>
+        <div class="decision-consequence">Mismatched prospects enter pipeline. Discovery reveals fit issues late.</div>
+      </div>
+      
+      <div class="decision-card partial">
+        <div class="decision-header">
+          <div class="decision-name">Alternative</div>
+          <span class="status-badge partial">PARTIAL</span>
+        </div>
+        <div class="decision-finding">Excel is named, but LIMS and internal R&D databases are not addressed. Prospects with existing systems need a different comparison frame.</div>
+        <div class="decision-consequence">SDR hears "We already have a LIMS" and must improvise the comparison.</div>
+      </div>
+      
+      <div class="decision-card partial">
+        <div class="decision-header">
+          <div class="decision-name">First Step</div>
+          <span class="status-badge partial">PARTIAL</span>
+        </div>
+        <div class="decision-finding">"Request Demo" exists but lacks specifics. "Start within three months" signals heavy implementation without explaining entry.</div>
+        <div class="decision-consequence">Prospects hesitate because they imagine worst-case commitment.</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 4: Personas (reduced to 2) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <div class="section-title">Can your buyers carry this story?</div>
+    </div>
+    
+    <div class="persona-section-intro">
+      <strong>Target buyer:</strong> Head of R&D or Lab Manager (also your champion). They need to carry the story upward to CTO or VP Operations (budget holder).
+    </div>
+    
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-info">
+            <div class="persona-type">Champion → Boss</div>
+            <div class="persona-role">CTO / VP Operations</div>
+          </div>
+          <div class="persona-verdict">
+            <div class="persona-icon">△</div>
+            <div class="persona-status weak">Weak</div>
+          </div>
+        </div>
+        <div class="persona-question">Can champion explain why this matters?</div>
+        <div class="persona-answer">Partially. They can explain the pain ("we waste hours searching Excel files"). But when CTO asks "how much does this save us?" or "why not just use our existing LIMS?" they have no ready answer from the site.</div>
+      </div>
+      
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-info">
+            <div class="persona-type">Economic Buyer</div>
+            <div class="persona-role">CTO</div>
+          </div>
+          <div class="persona-verdict">
+            <div class="persona-icon">✗</div>
+            <div class="persona-status fail">Fails</div>
+          </div>
+        </div>
+        <div class="persona-question">Can they see the ROI?</div>
+        <div class="persona-answer">No. Pain is described but not quantified. "Three months to implement" signals cost but no payback timeline. The "0%" metrics are broken. CTO will ask "what's the business case?" and there is no answer.</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 5: Next Step -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <div class="section-title">What should happen next</div>
+    </div>
+    
+    <div class="next-step-box">
+      <div class="next-step-label">Recommended Path</div>
+      <div class="next-step-action">Repeatable Sales System sprint before outbound begins</div>
+      
+      <div class="next-step-goals">
+        <div class="next-step-goals-header">Sprint goals</div>
+        <div class="next-step-goal-list">
+          <div class="next-step-goal">
+            <span class="next-step-goal-icon">→</span>
+            <span>Define <strong>Customer</strong>: state the industries explicitly (materials, coatings, batteries)</span>
+          </div>
+          <div class="next-step-goal">
+            <span class="next-step-goal-icon">→</span>
+            <span>Define <strong>Alternative</strong>: address LIMS and internal tools, not just Excel</span>
+          </div>
+          <div class="next-step-goal">
+            <span class="next-step-goal-icon">→</span>
+            <span>Fix <strong>Proof</strong>: repair the 0% metrics bug, add real numbers from VARTA/NETZSCH</span>
+          </div>
+          <div class="next-step-goal">
+            <span class="next-step-goal-icon">→</span>
+            <span>Specify <strong>First Step</strong>: "30-minute walkthrough, we show you a sample project, no prep needed"</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="next-step-detail">
+        <strong>Without this:</strong> SDR time burns on qualification the homepage should handle. Pipeline fills with mismatched prospects. Champions cannot carry the story internally.
+        <br><br>
+        <strong>With this:</strong> Right-fit prospects self-select. Champions have numbers to show their CTO. Conversion improves from week one.
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="report-footer">
+    <div class="footer-brand">Product.Zone</div>
+    <div class="footer-method">Buying Path X-RAY v4.1 · 6 Stages · 15 Core Decisions</div>
+  </div>
+  
+</div>
+
+</body>
+</html>
