@@ -1,1 +1,261 @@
-
+{
+  "meta": {
+    "company_name": "LabV",
+    "homepage_url": "https://www.labv.io/en",
+    "target_buyer": "Head of R&D / Lab Manager at industrial companies",
+    "prepared_date": "2026-03-11",
+    "partner": null,
+    "method_version": "v4.0"
+  },
+  
+  "company_context": {
+    "what_they_claim": "LabV builds a 'Material Intelligence Platform' for R&D teams. They help labs manage formulations, processes, and test data in one place. The platform replaces Excel spreadsheets and scattered files with structured, searchable data. Target sectors appear to be materials, coatings, and battery development based on testimonials.",
+    "stage": "Early (German startup)",
+    "team_size": "Unknown",
+    "customer_count": "Enterprise (VARTA, NETZSCH)",
+    "outbound_goal": "Scale beyond existing network"
+  },
+  
+  "verdict": {
+    "score": {
+      "passing": 2,
+      "weak": 4,
+      "breaking": 0
+    },
+    "status": "RED",
+    "status_label": "Fix Before Outbound",
+    "headline": "Pain is clear. But buyers cannot tell if this is for them.",
+    "diagnosis": "Outbound will generate interest because the Excel pain is real and recognizable. But prospects will stall after checking the homepage because they cannot quickly tell if LabV is built for their industry, their team size, or their specific workflow. Your Head of R&D cannot explain to their CTO why LabV is better than the alternatives they already know."
+  },
+  
+  "implication": {
+    "metrics": [
+      {
+        "name": "Reply Rate",
+        "prediction": "Healthy",
+        "sentiment": "good"
+      },
+      {
+        "name": "Demo Conversion",
+        "prediction": "Weak",
+        "sentiment": "weak"
+      },
+      {
+        "name": "Internal Sell",
+        "prediction": "Weak",
+        "sentiment": "weak"
+      },
+      {
+        "name": "Pipeline Speed",
+        "prediction": "Slow",
+        "sentiment": "poor"
+      }
+    ],
+    "reason": "The Excel pain resonates. R&D leads will reply because they recognize the chaos. But when they check the site, they cannot quickly self-select. Discovery calls must establish fit that the homepage should have signaled.",
+    "expect_to_hear": [
+      "Interesting. Is this for companies like ours?",
+      "We already have a LIMS. How is this different?",
+      "What's the typical implementation look like?",
+      "I need to check with my team if this fits our workflow"
+    ]
+  },
+  
+  "stages": [
+    {
+      "name": "Land",
+      "status": "weak",
+      "status_label": "Weak"
+    },
+    {
+      "name": "Make Sense",
+      "status": "ok",
+      "status_label": "OK"
+    },
+    {
+      "name": "Self-Select",
+      "status": "weak",
+      "status_label": "Weak"
+    },
+    {
+      "name": "Compare",
+      "status": "ok",
+      "status_label": "OK"
+    },
+    {
+      "name": "Validate",
+      "status": "weak",
+      "status_label": "Weak"
+    },
+    {
+      "name": "Commit",
+      "status": "weak",
+      "status_label": "Weak"
+    }
+  ],
+  
+  "breakpoint": {
+    "stage": "Self-Select",
+    "type": "friction",
+    "insight": "Buyers understand the pain (Excel chaos in R&D). They understand the solution category (data platform). But they cannot quickly tell if this is for their specific situation. 'R&D teams' could be pharma, chemicals, food, materials, automotive. The page does not narrow it. Testimonials hint at materials/coatings/batteries but never state it directly.",
+    "missing_signals": [
+      "Which industries this is built for (materials? pharma? food?)",
+      "What company size or team structure fits best",
+      "Demo specifics (how long, what happens, what to prepare)",
+      "Low-risk entry (trial, sandbox, pilot terms)"
+    ]
+  },
+  
+  "observed_hero": {
+    "quote": "Turn your R&D into a competitive edge",
+    "buyer_question": "What is this? What category?",
+    "verdict": "PARTIAL"
+  },
+  
+  "evidence": [
+    {
+      "stage": "Land",
+      "stage_key": "land",
+      "question": "What is this?",
+      "finding": "\"Material Intelligence Platform\" is visible below the hero. But this is not a category buyers search for. They search for \"R&D data management\" or \"formulation software\" or \"LIMS alternative.\" The invented term creates friction.",
+      "status": "partial"
+    },
+    {
+      "stage": "Make Sense",
+      "stage_key": "make-sense",
+      "question": "What pain is worth switching for?",
+      "finding": "\"Data chaos instead of progress.\" Then specific symptoms: knowledge scattered across folders, data hard to compare, administration instead of value creation. This section is strong. Buyers recognize the problem.",
+      "status": "clear"
+    },
+    {
+      "stage": "Make Sense",
+      "stage_key": "make-sense",
+      "question": "What are the stakes if I do nothing?",
+      "finding": "\"Searching takes time and often leads to repeating what was already known.\" The cost of inaction is implied (wasted time, repeated work) but not quantified. No number like \"teams spend X hours per week on this.\"",
+      "status": "partial"
+    },
+    {
+      "stage": "Self-Select",
+      "stage_key": "self-select",
+      "question": "Is this for my team?",
+      "finding": "\"R&D teams\" is the only stated audience. No industry specified. No company size. No team structure. Testimonials mention coatings, batteries, milling, but the ICP is never stated directly.",
+      "status": "partial"
+    },
+    {
+      "stage": "Compare",
+      "stage_key": "compare",
+      "question": "Why you vs. what I use today?",
+      "finding": "\"The platform replaces Excel chaos and disconnected tools.\" Excel is named directly as the alternative. This gives buyers a frame: \"I'm switching from Excel and scattered files.\"",
+      "status": "clear"
+    },
+    {
+      "stage": "Compare",
+      "stage_key": "compare",
+      "question": "What do my current tools lack?",
+      "finding": "\"Different formats, units and naming conventions make evaluation complex.\" \"Data exists, but not where it is needed.\" Specific Excel weaknesses are named. Buyers see why the current way fails.",
+      "status": "clear"
+    },
+    {
+      "stage": "Validate",
+      "stage_key": "validate",
+      "question": "Does this work for real teams?",
+      "finding": "VARTA and NETZSCH logos visible. Video testimonials present. But the metrics section shows \"0%\" (appears to be a display bug). No specific numbers like \"reduced search time by X%.\" Proof is thin.",
+      "status": "partial"
+    },
+    {
+      "stage": "Commit",
+      "stage_key": "commit",
+      "question": "What is the first step?",
+      "finding": "\"Request Demo\" button visible. \"Book a live walkthrough\" mentioned. But no specifics: How long? What will I see? Do I need to prepare anything? Buyer imagines worst case (2-hour sales pitch).",
+      "status": "partial"
+    },
+    {
+      "stage": "Commit",
+      "stage_key": "commit",
+      "question": "Does this feel safe to try?",
+      "finding": "GDPR compliance and German hosting mentioned in FAQ. But no free trial, no pilot program, no sandbox. The only entry is \"Request Demo.\" For enterprise software, this is a high-commitment first step.",
+      "status": "partial"
+    }
+  ],
+  
+  "decisions": [
+    {
+      "name": "Category",
+      "status": "partial",
+      "finding": "\"Material Intelligence Platform\" is an invented category. Buyers search for \"R&D data management,\" \"formulation software,\" or \"LIMS alternative.\" The positioning creates a naming gap.",
+      "consequence": "SDR must explain what category LabV competes in on every call. Adds friction to the first 30 seconds."
+    },
+    {
+      "name": "Customer",
+      "status": "partial",
+      "finding": "\"R&D teams\" is too broad. Industries are implied through testimonials (coatings, batteries, milling) but never stated directly. No company size or team structure guidance.",
+      "consequence": "Mismatched prospects enter pipeline. Discovery calls reveal fit issues late. SDRs waste time qualifying what the homepage should have filtered."
+    },
+    {
+      "name": "Proof Type",
+      "status": "partial",
+      "finding": "Named logos (VARTA, NETZSCH) and video testimonials present. But metrics section shows \"0%\" (display bug). No quantified outcomes like \"reduced search time by X%.\"",
+      "consequence": "Champion cannot show ROI to their CTO. Testimonial quotes are good but lack numbers. Enterprise buyers need metrics."
+    },
+    {
+      "name": "First Step",
+      "status": "partial",
+      "finding": "\"Request Demo\" exists but lacks specifics. How long is it? What will I see? Do I need to prepare? \"Start within three months\" signals heavy implementation without explaining entry.",
+      "consequence": "Prospects hesitate because they imagine worst-case commitment. A simple \"20-minute walkthrough\" would reduce friction."
+    }
+  ],
+  
+  "personas": {
+    "target_buyer_intro": "Target buyer: Head of R&D or Lab Manager (this is also your champion). They need to carry the story upward to CTO or VP Operations (budget holder) and downward to Lab Technicians and Researchers (end users who will work in the system daily).",
+    "checks": [
+      {
+        "type": "Champion → Boss",
+        "role": "CTO / VP Operations",
+        "question": "Can champion explain why this matters?",
+        "answer": "Partially. They can explain the pain (\"we waste hours searching Excel files\"). But when CTO asks \"how much does this save us?\" or \"why not just use our existing LIMS?\" they have no ready answer from the site.",
+        "verdict": "weak",
+        "icon": "△"
+      },
+      {
+        "type": "Champion → User",
+        "role": "Lab Technicians",
+        "question": "Can champion explain why technicians should adopt?",
+        "answer": "Partially. \"Easier than Excel\" is clear. But technicians will ask \"does this work with our specific equipment?\" and \"what about our existing data?\" No workflow examples visible.",
+        "verdict": "weak",
+        "icon": "△"
+      },
+      {
+        "type": "Economic Buyer",
+        "role": "CTO",
+        "question": "Can they see the ROI?",
+        "answer": "No. Pain is described but not quantified. \"Three months to implement\" signals cost but no payback timeline. The \"0%\" metrics are broken. CTO will ask \"what's the business case?\" and there is no answer.",
+        "verdict": "fail",
+        "icon": "✗"
+      }
+    ]
+  },
+  
+  "next_step": {
+    "label": "Recommended Path",
+    "action": "Repeatable Sales System sprint before outbound begins",
+    "goals": [
+      {
+        "decision": "Category",
+        "instruction": "Position against what buyers search for (LIMS alternative? R&D data platform? Formulation software?)"
+      },
+      {
+        "decision": "Customer",
+        "instruction": "State the industries explicitly (materials, coatings, batteries, chemicals) and company profile"
+      },
+      {
+        "decision": "Proof Type",
+        "instruction": "Fix the 0% metrics display bug. Add real numbers from VARTA/NETZSCH."
+      },
+      {
+        "decision": "First Step",
+        "instruction": "Specify: \"30-minute walkthrough. We'll show you a sample project in your industry. No prep needed.\""
+      }
+    ],
+    "without_this": "SDR time burns on qualification that the homepage should have handled. Pipeline fills with mismatched prospects. Conversion stays weak because champions cannot carry the story internally.",
+    "with_this": "Right-fit prospects self-select. Champions have numbers to show their CTO. Demo requests come from qualified buyers. Conversion improves from week one."
+  }
+}
