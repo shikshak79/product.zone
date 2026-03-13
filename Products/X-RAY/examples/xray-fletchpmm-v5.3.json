@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "company": "FletchPMM",
+    "url": "https://www.fletchpmm.com/",
+    "target_buyer": "VP Marketing / Head of Marketing / Founder",
+    "date": "2026-03-12",
+    "version": "5.3"
+  },
+  "score": {
+    "value": 7,
+    "max": 10,
+    "label": "Good",
+    "interpretation": "Good — minor friction in comparison layer",
+    "breakdown": {
+      "clear": 11,
+      "partial": 7,
+      "missing": 0
+    },
+    "depth": {
+      "status": "Partial",
+      "q21": "partial",
+      "q22": "partial"
+    }
+  },
+  "diagnosis": {
+    "verdict": "Ready for Outbound",
+    "verdict_class": "green",
+    "headline": "Homepage is strong — buyers can land, make sense, and commit. Comparison layer needs work.",
+    "text": "This is a well-built homepage. Pain is clear, process is visible, proof is strong. The gaps are in the comparison layer: buyers do not know what they're switching from (DIY? Freelancer? Agency?) and urgency is weak. These gaps create friction for skeptical stakeholders but won't break the buying path."
+  },
+  "predictions": {
+    "reply_rate": {
+      "value": "Strong",
+      "basis": "Based on Q3 (pain clear) + Q6 (ICP defined)"
+    },
+    "demo_conversion": {
+      "value": "Strong",
+      "basis": "Based on Q13 (process visible) + Q11-12 (proof strong)"
+    },
+    "internal_sell": {
+      "value": "Moderate",
+      "basis": "Based on Q8 (alternative unclear) + Q22 (ROI scattered)"
+    },
+    "pipeline_speed": {
+      "value": "Moderate",
+      "basis": "Based on Q5 (urgency weak) + Q9 (no why-not-X)"
+    },
+    "summary": "Buyers will respond and convert to calls. Deals may slow when CFO asks 'why not just hire a freelancer?' or 'where's the ROI case?'"
+  },
+  "recognition": [
+    "How is this different from hiring a freelance PMM or agency?",
+    "What happens if we don't love the positioning options you present?",
+    "Can you show me a before/after for a company in our specific industry?",
+    "Is this the right time, or should we wait until we're bigger / have more traction?"
+  ],
+  "risk_signals": {
+    "message_priority": {
+      "value": "Strong",
+      "basis": "Q3, Q4, Q5 (Make Sense)",
+      "evidence": "Pain-first hero: 'Let's fix your confusing positioning.' Buyers immediately see the problem Fletch solves. No category-first confusion."
+    },
+    "buyer_focus": {
+      "value": "Strong",
+      "basis": "Q6, Q7 (Self-Select)",
+      "evidence": "'B2B software companies' is clear. Pricing by stage ($10K/$20K/$30K) helps buyers self-select. ICP is well-defined."
+    },
+    "why_act_now": {
+      "value": "Weak",
+      "basis": "Q4, Q5 (Make Sense)",
+      "evidence": "'Booking in April' creates scarcity but no cost of waiting. Buyers can defer because there's no 'this costs you X' framing."
+    },
+    "proof_relevance": {
+      "value": "Strong",
+      "basis": "Q11, Q12, Q14 (Validate)",
+      "evidence": "Quantified results: '25% conversion increase', '54% ARR growth', '5% to 20% conversion'. Same-role testimonials (CMOs, VPs, Founders). Recognizable logos."
+    },
+    "explanation_burden": {
+      "value": "Strong",
+      "basis": "Q1, Q2, Q10 (Land + Compare)",
+      "evidence": "'Product marketing consultancy' is a known category. 'Homepage Positioning Sprint' is immediately understandable. No invented terms."
+    },
+    "internal_sharing": {
+      "value": "Strong",
+      "basis": "Q11-Q14, Q22 (Validate + Depth)",
+      "evidence": "If champion forwards this link, second reader can understand value from before/afters and testimonials. Clear pricing helps budget conversations."
+    },
+    "mixed_signals": {
+      "value": "Strong",
+      "basis": "Q15, Q19, Q20 (Enterprise + Commit)",
+      "evidence": "Consistent consulting motion throughout. Pricing is visible. Process is detailed. No contradictions between positioning and offer shape."
+    }
+  },
+  "stages": {
+    "land": "ok",
+    "make_sense": "ok",
+    "self_select": "ok",
+    "compare": "weak",
+    "validate": "ok",
+    "commit": "ok"
+  },
+  "breakpoint": {
+    "stage": "compare",
+    "stage_class": "amber",
+    "insight": "Buyers get the value but cannot easily compare Fletch to alternatives. The homepage never names what buyers are switching from — DIY? Freelancer? Agency? Internal PMM hire? This creates objection-handling work for sales and gives skeptical stakeholders ammunition.",
+    "missing_items": [
+      { "text": "What am I switching from? (DIY, freelancer, agency not named)", "status": "partial" },
+      { "text": "Why do alternatives fail? (No explicit comparison)", "status": "partial" },
+      { "text": "Cost of waiting with bad positioning (urgency missing)", "status": "partial" }
+    ]
+  },
+  "decisions": [
+    {
+      "name": "Alternative",
+      "status": "partial",
+      "status_label": "Implicit",
+      "finding": "What is buyer switching from? DIY positioning? Freelance PMM? Agency? Internal hire? None are named. Skeptical CFO will ask 'why not just hire someone?'"
+    },
+    {
+      "name": "Why Not Wait",
+      "status": "partial",
+      "status_label": "Weak",
+      "finding": "'Booking in April' creates scarcity, but no cost of inaction. What does bad positioning cost per month? Per quarter? Not quantified."
+    },
+    {
+      "name": "Risk Reversal",
+      "status": "partial",
+      "status_label": "Implicit",
+      "finding": "'Chat' CTA is low-commitment, but no explicit 'what if it doesn't work' framing. FAQ addresses some objections but no guarantee language visible."
+    }
+  ],
+  "recommendations": {
+    "eyebrow": "Light Refinement — Not a Major Rebuild",
+    "action": "This homepage is already strong. Three targeted additions would close the gaps:",
+    "goals": [
+      {
+        "label": "Name the Alternative",
+        "description": "Add a section addressing 'Why Fletch vs. DIY / Freelancer / Agency / Internal Hire?' — preempt the comparison question."
+      },
+      {
+        "label": "Quantify Cost of Waiting",
+        "description": "Add urgency — 'Every month with unclear positioning costs you X% conversion' or 'Deals stall when buyers can't explain your value.'"
+      },
+      {
+        "label": "Add Risk Reversal",
+        "description": "Consider explicit language about what happens if the positioning doesn't land — even a light 'we iterate until you're confident' would help."
+      }
+    ]
+  },
+  "evidence": [
+    { "id": "Q1", "stage": "land", "question": "What is this?", "quote": "product marketing consultancy", "inference": "Clear category. Buyers know what they're looking at.", "status": "clear" },
+    { "id": "Q2", "stage": "land", "question": "What do you do?", "quote": "helped 500+ B2B software companies find their positioning strategy...", "inference": "Core function clearly stated.", "status": "clear" },
+    { "id": "Q3", "stage": "make_sense", "question": "Pain worth switching?", "quote": "Let's fix your confusing positioning", "inference": "Pain named in hero. Checklist reinforces symptoms.", "status": "clear" },
+    { "id": "Q4", "stage": "make_sense", "question": "What project?", "quote": "Homepage Positioning Sprint", "inference": "Named deliverable. 2-week timeline. Clear project scope.", "status": "clear" },
+    { "id": "Q5", "stage": "make_sense", "question": "Why act now?", "quote": "Booking in April", "inference": "Scarcity exists but no cost of waiting quantified.", "status": "partial" },
+    { "id": "Q6", "stage": "self_select", "question": "For my team?", "quote": "B2B software companies + pricing by stage", "inference": "Clear segment. Tiered pricing helps self-selection.", "status": "clear" },
+    { "id": "Q7", "stage": "self_select", "question": "For my situation?", "quote": "Do you have a positioning problem? checklist", "inference": "Interactive checklist helps buyers diagnose fit.", "status": "clear" },
+    { "id": "Q8", "stage": "compare", "question": "Switching from?", "quote": "Not explicitly stated", "inference": "No 'instead of DIY' or 'instead of agency' framing.", "status": "partial" },
+    { "id": "Q9", "stage": "compare", "question": "Why alternatives fail?", "quote": "Not addressed", "inference": "Why DIY fails, why agencies fail — none covered.", "status": "partial" },
+    { "id": "Q10", "stage": "compare", "question": "What's different?", "quote": "500+ B2B software companies + 2 weeks", "inference": "Experience + speed implied. Not positioned against specific alternative.", "status": "partial" },
+    { "id": "Q11", "stage": "validate", "question": "Teams like mine?", "quote": "Superhuman, Notion, Synthesia, Lemlist, PagerDuty, GitLab", "inference": "Strong logos. Recognizable B2B SaaS companies.", "status": "clear" },
+    { "id": "Q12", "stage": "validate", "question": "Results achieved?", "quote": "25% increase in homepage conversion, 54% ARR growth", "inference": "Quantified outcomes with named people.", "status": "clear" },
+    { "id": "Q13", "stage": "validate", "question": "How much effort?", "quote": "2 weeks + detailed day-by-day timeline", "inference": "Time commitment extremely clear.", "status": "clear" },
+    { "id": "Q14", "stage": "validate", "question": "Proof match role?", "quote": "CMO, CEO, VP Marketing, Head of Marketing, Founder", "inference": "Same-role testimonials. Target buyer roles represented.", "status": "clear" },
+    { "id": "Q15", "stage": "validate", "question": "Enterprise signals?", "quote": "ABB, Procore logos", "inference": "Enterprise logos suggest capability. Consulting doesn't need security page.", "status": "partial" },
+    { "id": "Q16", "stage": "commit", "question": "First step?", "quote": "Reserve your sprint / Calendly link", "inference": "Clear CTA. Books directly to calendar.", "status": "clear" },
+    { "id": "Q17", "stage": "commit", "question": "Safe to try?", "quote": "Fletch Positioning Chat", "inference": "Chat is low-commitment. No explicit risk reversal.", "status": "partial" },
+    { "id": "Q18", "stage": "commit", "question": "After I click?", "quote": "Calendly opens + FAQ describes process", "inference": "Standard booking flow. Pre-engagement process visible.", "status": "partial" },
+    { "id": "Q19", "stage": "commit", "question": "CTA match readiness?", "quote": "Chat + Reserve your sprint", "inference": "Appropriate for consulting motion.", "status": "clear" },
+    { "id": "Q20", "stage": "commit", "question": "Offer match motion?", "quote": "$10K / $20K / $30K by stage", "inference": "Clear pricing. Matches consulting motion.", "status": "clear" },
+    { "id": "Q21", "stage": "depth", "question": "Explore without sales?", "quote": "Before/After, Newsletter, FAQs", "inference": "Some depth content. No ungated guide or framework.", "status": "partial" },
+    { "id": "Q22", "stage": "depth", "question": "ROI documentation?", "quote": "Testimonials contain ROI", "inference": "ROI scattered in quotes. No systematic framework.", "status": "partial" }
+  ],
+  "indicators": [
+    { "what": "'How is this different from hiring a freelancer?' asked on calls", "direction": "Should decrease after naming alternative" },
+    { "what": "Deals that stall at budget approval", "direction": "Should decrease after urgency framing added" },
+    { "what": "Time from first touch to signed contract", "direction": "Should shorten as comparison layer strengthens" }
+  ]
+}

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-RAY Diagnostic · LabV · Product.Zone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --light: #F5F4EF;
+      --light2: #ECEAE3;
+      --lborder: #D8D6CF;
+      --ltext: #1a1a1a;
+      --lmuted: #555555;
+      --lmuted2: #888888;
+      --teal: #33C4D9;
+      --orange: #F5A623;
+      --green: #2ECC71;
+      --yellow: #E8C85A;
+      --red: #C0392B;
+      --black: #0a0a0a;
+      --surface: #141414;
+      --dtext: #F0EFE9;
+      --dmuted: rgba(255,255,255,0.7);
+      --dmuted2: rgba(255,255,255,0.4);
+      --dborder: rgba(255,255,255,0.1);
+      --mono: 'Space Mono', monospace;
+      --display: 'Barlow Condensed', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: #333; color: var(--ltext); line-height: 1.5; }
+    
+    .report {
+      width: 900px;
+      background: var(--white);
+      margin: 40px auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+
+    /* === HEADER (DARK) === */
+    .report-header {
+      background: var(--black);
+      padding: 40px 48px 32px;
+    }
+    .report-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .report-title {
+      font-family: var(--display);
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--dtext);
+      margin-bottom: 6px;
+    }
+    .report-url {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--dmuted2);
+      margin-bottom: 20px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--dborder);
+    }
+    .meta-item {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+    }
+    .meta-item strong {
+      display: block;
+      color: var(--dtext);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+      text-transform: none;
+    }
+
+    /* === DIAGNOSIS SECTION (DARK) === */
+    .diagnosis-section {
+      background: var(--surface);
+      padding: 32px 48px;
+    }
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    
+    /* === SCORE BLOCK (1-10) === */
+    .score-block {
+      text-align: center;
+      min-width: 140px;
+    }
+    .score-number {
+      font-family: var(--display);
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .score-number.high { color: var(--green); }
+    .score-number.good { color: #7ED957; }
+    .score-number.mid { color: var(--orange); }
+    .score-number.low { color: #E67E22; }
+    .score-number.critical { color: var(--red); }
+    .score-denominator {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--dmuted2);
+      margin-left: 2px;
+    }
+    .score-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .score-interpretation {
+      font-family: var(--body);
+      font-size: 11px;
+      color: var(--dmuted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .score-breakdown {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      padding-top: 12px;
+      border-top: 1px solid var(--dborder);
+    }
+    .breakdown-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+    .breakdown-icon { width: 14px; text-align: center; }
+    .breakdown-icon.green { color: var(--green); }
+    .breakdown-icon.yellow { color: var(--yellow); }
+    .breakdown-icon.red { color: var(--red); }
+    .breakdown-text { color: var(--dmuted2); }
+    
+    .depth-indicator {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--dborder);
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dmuted2);
+      text-align: center;
+    }
+    .depth-indicator .label {
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .depth-indicator .value {
+      font-size: 11px;
+      color: var(--dtext);
+    }
+    .depth-indicator .value.partial { color: var(--orange); }
+    .depth-indicator .value.weak { color: var(--red); }
+    .depth-indicator .value.strong { color: var(--green); }
+    
+    .diagnosis-content { padding-top: 4px; }
+    .diagnosis-verdict {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .diagnosis-verdict.red { background: rgba(192,57,43,0.2); color: var(--red); }
+    .diagnosis-verdict.amber { background: rgba(245,166,35,0.2); color: var(--orange); }
+    .diagnosis-verdict.green { background: rgba(46,204,113,0.2); color: var(--green); }
+    .diagnosis-headline {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--dtext);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      margin-top: 12px;
+    }
+    .diagnosis-text {
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--dmuted);
+    }
+
+    /* === PREDICTION SECTION (DARK) === */
+    .prediction-section {
+      background: var(--black);
+      padding: 24px 48px;
+      border-top: 1px solid var(--dborder);
+    }
+    .prediction-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 16px;
+    }
+    .prediction-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .prediction-item {
+      background: var(--surface);
+      border: 1px solid var(--dborder);
+      border-radius: 6px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .prediction-metric {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prediction-metric.strong { color: var(--green); }
+    .prediction-metric.moderate { color: var(--orange); }
+    .prediction-metric.weak { color: var(--red); }
+    .prediction-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .prediction-basis {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--dmuted2);
+      line-height: 1.4;
+      border-top: 1px solid var(--dborder);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .prediction-reason {
+      font-size: 13px;
+      color: var(--dmuted);
+      font-style: italic;
+    }
+
+    /* === RECOGNITION SECTION (DARK) === */
+    .recognition-section {
+      background: var(--surface);
+      padding: 24px 48px;
+      border-top: 1px solid var(--dborder);
+    }
+    .recognition-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 12px;
+    }
+    .recognition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .recognition-item {
+      background: var(--black);
+      border: 1px solid var(--dborder);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--dtext);
+      font-style: italic;
+    }
+
+    /* === MAIN CONTENT (LIGHT) === */
+    .report-body { padding: 32px 48px 48px; }
+
+    .section { margin-bottom: 32px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-number {
+      width: 28px;
+      height: 28px;
+      background: var(--black);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+
+    /* === RISK SIGNALS === */
+    .risk-signals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .risk-signal-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .risk-signal-card.full-width {
+      grid-column: 1 / -1;
+    }
+    .risk-signal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .risk-signal-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    .risk-signal-score {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+    .risk-signal-score.strong { background: rgba(46,204,113,0.12); color: var(--green); }
+    .risk-signal-score.weak { background: rgba(245,166,35,0.12); color: var(--orange); }
+    .risk-signal-score.high-risk { background: rgba(192,57,43,0.12); color: var(--red); }
+    .risk-signal-basis {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      color: var(--lmuted2);
+      margin-bottom: 8px;
+    }
+    .risk-signal-evidence {
+      font-size: 13px;
+      color: var(--lmuted);
+      line-height: 1.5;
+    }
+
+    /* === BREAKPOINT === */
+    .breakpoint-box {
+      background: var(--black);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .breakpoint-eyebrow {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .breakpoint-stage {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .breakpoint-stage.red { color: var(--red); }
+    .breakpoint-stage.amber { color: var(--orange); }
+    .breakpoint-insight {
+      font-size: 15px;
+      color: var(--dmuted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .missing-signals {
+      border-top: 1px solid var(--dborder);
+      padding-top: 16px;
+    }
+    .missing-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 10px;
+    }
+    .missing-item {
+      color: var(--dtext);
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .missing-x { color: var(--red); }
+
+    /* === STAGE FLOW === */
+    .stage-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+    .stage-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .stage-card .name {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 6px;
+    }
+    .stage-card .verdict {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 6px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .stage-card .verdict.ok { background: rgba(46,204,113,0.15); color: var(--green); }
+    .stage-card .verdict.weak { background: rgba(245,166,35,0.15); color: var(--orange); }
+    .stage-card .verdict.break { background: rgba(192,57,43,0.15); color: var(--red); }
+
+    /* === DECISIONS === */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .decision-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .decision-card.missing {
+      border-left: 3px solid var(--red);
+    }
+    .decision-card.partial {
+      border-left: 3px solid var(--orange);
+    }
+    .decision-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .decision-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    .decision-status {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .decision-status.missing { background: rgba(192,57,43,0.12); color: var(--red); }
+    .decision-status.partial { background: rgba(245,166,35,0.12); color: var(--orange); }
+    .decision-finding {
+      font-size: 13px;
+      color: var(--lmuted);
+      line-height: 1.5;
+    }
+
+    /* === SPRINT === */
+    .sprint-box {
+      background: var(--light);
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .sprint-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .sprint-action {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ltext);
+      margin-bottom: 16px;
+    }
+    .sprint-goal {
+      font-size: 14px;
+      color: var(--ltext);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .sprint-arrow { color: var(--teal); font-weight: 700; }
+
+    /* === FOOTER === */
+    .report-footer {
+      background: var(--black);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+    }
+    .footer-method {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dmuted2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="report">
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="report-header">
+    <div class="report-eyebrow">Outbound Readiness X-RAY</div>
+    <div class="report-title">LabV</div>
+    <div class="report-url">https://labv.io/en</div>
+    <div class="header-meta">
+      <div class="meta-item">Target Buyer<strong>Head of R&D / Lab Manager</strong></div>
+      <div class="meta-item">Prepared<strong>2026-03-12</strong></div>
+      <div class="meta-item">Method<strong>X-RAY v5.3</strong></div>
+    </div>
+  </div>
+
+  <!-- ==================== 1. DIAGNOSIS ==================== -->
+  <div class="diagnosis-section">
+    <div class="diagnosis-grid">
+      <div class="score-block">
+        <div>
+          <span class="score-number low">3</span><span class="score-denominator">/10</span>
+        </div>
+        <div class="score-label">Buying Path Score</div>
+        <div class="score-interpretation">Major work needed — multiple stages breaking</div>
+        <div class="score-breakdown">
+          <div class="breakdown-line">
+            <span class="breakdown-icon green">✓</span>
+            <span class="breakdown-text">4 clear</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon yellow">△</span>
+            <span class="breakdown-text">11 partial</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon red">✗</span>
+            <span class="breakdown-text">5 missing</span>
+          </div>
+        </div>
+        <div class="depth-indicator">
+          <div class="label">Depth Content</div>
+          <div class="value weak">Weak</div>
+        </div>
+      </div>
+      <div class="diagnosis-content">
+        <div class="diagnosis-verdict red">Fix Before Outbound</div>
+        <div class="diagnosis-headline">Pain resonates, but buyers cannot place LabV, justify the switch, or take a safe first step</div>
+        <div class="diagnosis-text">Outbound will generate curiosity because "data chaos" is a recognized pain. But prospects will stall after checking the homepage: they cannot tell what category LabV belongs to, proof does not match the target buyer role, and there is no low-commitment entry point.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. OUTBOUND PREDICTION ==================== -->
+  <div class="prediction-section">
+    <div class="prediction-header">Outbound Performance Prediction</div>
+    <div class="prediction-grid">
+      <div class="prediction-item">
+        <div class="prediction-metric strong">Strong</div>
+        <div class="prediction-label">Reply Rate</div>
+        <div class="prediction-basis">Based on Q3 (pain named clearly)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric weak">Weak</div>
+        <div class="prediction-label">Demo Conversion</div>
+        <div class="prediction-basis">Based on Q1 (category unclear) + Q11-12 (proof gaps)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric weak">Weak</div>
+        <div class="prediction-label">Internal Sell</div>
+        <div class="prediction-basis">Based on Q22 (no ROI) + Q14 (role mismatch)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric weak">Slow</div>
+        <div class="prediction-label">Pipeline Speed</div>
+        <div class="prediction-basis">Based on Q5 (no urgency) + Q17 (no safe entry)</div>
+      </div>
+    </div>
+    <div class="prediction-reason">Buyers will respond to pain-based messaging but stall when evaluating fit and building internal consensus.</div>
+  </div>
+
+  <!-- ==================== 3. RECOGNITION SIGNALS ==================== -->
+  <div class="recognition-section">
+    <div class="recognition-header">Expect to hear on sales calls</div>
+    <div class="recognition-grid">
+      <div class="recognition-item">"So is this like a LIMS? How is it different?"</div>
+      <div class="recognition-item">"We already have a data management system. Why would we switch?"</div>
+      <div class="recognition-item">"This sounds like a big project. What's the minimum commitment?"</div>
+      <div class="recognition-item">"Who else in our industry uses this? Can we talk to them?"</div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN BODY ==================== -->
+  <div class="report-body">
+
+    <!-- ==================== 4. OUTBOUND RISK SIGNALS ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title">Outbound Risk Signals</div>
+      </div>
+      
+      <div class="risk-signals-grid">
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Message Priority</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q3, Q4, Q5 (Make Sense)</div>
+          <div class="risk-signal-evidence">Buyers scanning the hero see category claim first, not their pain. They must scroll to find relevance. Outbound must invert this order.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Buyer Focus</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q6, Q7 (Self-Select)</div>
+          <div class="risk-signal-evidence">"R&D teams" is broad. Buyers cannot quickly tell if this is for their industry or team size.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Why Act Now</div>
+            <div class="risk-signal-score high-risk">High Risk</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q4, Q5 (Make Sense)</div>
+          <div class="risk-signal-evidence">Pain named but no trigger moment. Buyers cannot identify when this becomes urgent. They can defer indefinitely.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Proof Relevance</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q11, Q12, Q14 (Validate)</div>
+          <div class="risk-signal-evidence">VARTA and NETZSCH named, but many testimonials anonymous. Metrics show "0%". No quotes from Head of R&D role.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Explanation Burden</div>
+            <div class="risk-signal-score high-risk">High Risk</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q1, Q2, Q10 (Land + Compare)</div>
+          <div class="risk-signal-evidence">"Material Intelligence Platform" is invented. Buyers cannot place it in a known category. Sales must explain from scratch.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Internal Sharing</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q11-Q14, Q22 (Validate + Depth)</div>
+          <div class="risk-signal-evidence">If a champion forwards this link, the next reader will struggle to understand value without context. No ROI framework visible.</div>
+        </div>
+        
+        <div class="risk-signal-card full-width">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Mixed Signals</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q15, Q19, Q20 (Enterprise + Commit)</div>
+          <div class="risk-signal-evidence">Enterprise testimonials (VARTA) but no enterprise buying path (security page, compliance badges). "Start within three months" suggests enterprise timeline but CTA is generic "Request Demo."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 5. BUYING PATH BREAKPOINT ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title">Where buyer momentum breaks</div>
+      </div>
+      
+      <div class="breakpoint-box">
+        <div class="breakpoint-eyebrow">Primary Friction</div>
+        <div class="breakpoint-stage red">Make Sense</div>
+        <div class="breakpoint-insight">Buyers understand the pain ("data chaos") but cannot connect it to their own project or urgency. The homepage describes what LabV does but never names the buyer's task or the cost of waiting.</div>
+        <div class="missing-signals">
+          <div class="missing-header">What buyers cannot find</div>
+          <div class="missing-item"><span class="missing-x">✗</span> What project this serves (e.g., "preparing for scale-up")</div>
+          <div class="missing-item"><span class="missing-x">✗</span> Cost of inaction if they wait another 6 months</div>
+          <div class="missing-item"><span class="missing-x">✗</span> Quantified results from customers like them</div>
+          <div class="missing-item"><span class="missing-x">✗</span> A safe first step with low commitment</div>
+        </div>
+      </div>
+
+      <div class="stage-flow">
+        <div class="stage-card">
+          <div class="name">Land</div>
+          <div class="verdict weak">Weak</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Make Sense</div>
+          <div class="verdict break">Break</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Self-Select</div>
+          <div class="verdict weak">Weak</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Compare</div>
+          <div class="verdict weak">Weak</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Validate</div>
+          <div class="verdict break">Break</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Commit</div>
+          <div class="verdict break">Break</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 6. DECISION GAPS ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title">Root cause: decisions unclear or missing</div>
+      </div>
+      
+      <div class="decision-grid">
+        <div class="decision-card partial">
+          <div class="decision-header">
+            <div class="decision-name">Category</div>
+            <div class="decision-status partial">Unclear</div>
+          </div>
+          <div class="decision-finding">"Material Intelligence Platform" is invented. Buyers search for "LIMS alternative" or "R&D data management."</div>
+        </div>
+        <div class="decision-card partial">
+          <div class="decision-header">
+            <div class="decision-name">Alternative</div>
+            <div class="decision-status partial">Unclear</div>
+          </div>
+          <div class="decision-finding">Excel named. LIMS never addressed. "We already have a LIMS" objection will surface on every call.</div>
+        </div>
+        <div class="decision-card missing">
+          <div class="decision-header">
+            <div class="decision-name">Why Act Now</div>
+            <div class="decision-status missing">Missing</div>
+          </div>
+          <div class="decision-finding">Pain named but cost of inaction absent. No "this costs you X hours/month" or timing pressure.</div>
+        </div>
+        <div class="decision-card missing">
+          <div class="decision-header">
+            <div class="decision-name">First Step</div>
+            <div class="decision-status missing">Missing</div>
+          </div>
+          <div class="decision-finding">"Request Demo" exists but no pilot, trial, or specifics. High-commitment CTA with no risk reversal.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 7. RECOMMENDED FIX ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div class="section-title">What should happen next</div>
+      </div>
+      
+      <div class="sprint-box">
+        <div class="sprint-eyebrow">Recommended Path</div>
+        <div class="sprint-action">Buying Path Readiness Sprint before outbound begins</div>
+        <div class="sprint-goals">
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Define Category:</strong> Position against a buyer-recognized bucket—"LIMS alternative for formulation teams" or own "R&D operating system" with clear boundaries.</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Define Alternative:</strong> Name LIMS explicitly. "Unlike traditional LIMS..." or "If you've outgrown Excel but LIMS feels like overkill..."</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Define Why Now:</strong> Quantify cost of inaction. "Every month without connected data costs X hours of repeated work."</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Define First Step:</strong> Replace "Request Demo" with lower-commitment offer. "See LabV in 15 minutes" or offer a scoped pilot.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="report-footer">
+    <div class="footer-brand">Product.Zone</div>
+    <div class="footer-method">X-RAY v5.3 · 7 Risk Signals · 20 Core Questions + 2 Depth · 6-Stage Buying Path</div>
+  </div>
+
+</div>
+
+</body>
+</html>

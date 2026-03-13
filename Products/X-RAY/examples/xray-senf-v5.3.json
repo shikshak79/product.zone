@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "company": "Senf",
+    "url": "https://senf-staging.framer.website/",
+    "target_buyer": "Project Manager / Partner at Planning Firms",
+    "date": "2026-03-12",
+    "version": "5.3"
+  },
+  "score": {
+    "value": 6,
+    "max": 10,
+    "label": "Proceed with Caution",
+    "interpretation": "Proceed with Caution — validation and urgency gaps",
+    "breakdown": {
+      "clear": 13,
+      "partial": 6,
+      "missing": 1
+    },
+    "depth": {
+      "status": "Partial",
+      "q21": "partial",
+      "q22": "partial"
+    }
+  },
+  "diagnosis": {
+    "verdict": "Proceed with Caution",
+    "verdict_class": "amber",
+    "headline": "Homepage is well-built — but urgency is missing and proof shows activity, not outcomes",
+    "text": "This is a strong homepage. Category is clear, pain is specific, alternatives are named, and there's a low-commitment entry point. The gaps are in urgency (no cost of waiting) and validation (testimonials lack role titles, metrics show activity not results). Buyers will respond but deals may drift without urgency framing, and champions will struggle to justify spend without ROI ammunition."
+  },
+  "predictions": {
+    "reply_rate": {
+      "value": "Strong",
+      "basis": "Based on Q3 (pain specific) + Q6 (ICP clear)"
+    },
+    "demo_conversion": {
+      "value": "Strong",
+      "basis": "Based on Q17 (free trial) + Q13 (process visible)"
+    },
+    "internal_sell": {
+      "value": "Moderate",
+      "basis": "Based on Q12 (vanity metrics) + Q22 (no ROI)"
+    },
+    "pipeline_speed": {
+      "value": "Moderate",
+      "basis": "Based on Q5 (no urgency) + Q20 (pricing hidden)"
+    },
+    "summary": "Buyers will respond and convert to trials. Deals may slow when partners ask 'what's the ROI?' or 'why not stick with current tools until we're busier?'"
+  },
+  "recognition": [
+    "What does this actually cost? We need to know if this fits our budget before a demo.",
+    "Our current tools work okay. What would we actually save by switching?",
+    "Do you have planning firms like us — same size, same project types?",
+    "We're not launching a project right now. Can we look at this when we win the next RFP?"
+  ],
+  "risk_signals": {
+    "message_priority": {
+      "value": "Strong",
+      "basis": "Q3, Q4, Q5 (Make Sense)",
+      "evidence": "Hero leads with outcome ('Turn digital community engagement into a competitive advantage') and pain is explicit in the Problem section. Buyers immediately see relevance."
+    },
+    "buyer_focus": {
+      "value": "Strong",
+      "basis": "Q6, Q7 (Self-Select)",
+      "evidence": "'100+ planning firms' is specific. The problem framing (fragmented tools, setup time, overengineered platforms) speaks directly to planning firm workflows."
+    },
+    "why_act_now": {
+      "value": "Weak",
+      "basis": "Q4, Q5 (Make Sense)",
+      "evidence": "Pain is named but no cost of waiting. No 'every manual project costs you X hours' or timing pressure. Buyers can defer to next quarter."
+    },
+    "proof_relevance": {
+      "value": "Weak",
+      "basis": "Q11, Q12, Q14 (Validate)",
+      "evidence": "Named testimonials exist (Dr. Julian Petrin, Michael Frehn) but no role titles. Metrics (250+ projects, 400k+ participants) show activity, not outcomes. No 'saved X hours per project.'"
+    },
+    "explanation_burden": {
+      "value": "Strong",
+      "basis": "Q1, Q2, Q10 (Land + Compare)",
+      "evidence": "'Community Engagement Platform for Planning Projects' is immediately clear. Category is recognizable. No invented terminology."
+    },
+    "internal_sharing": {
+      "value": "Weak",
+      "basis": "Q11-Q14, Q22 (Validate + Depth)",
+      "evidence": "If a project manager forwards this to a partner, the partner will see process but not ROI. No economic buyer ammunition. Pricing requires a conversation."
+    },
+    "mixed_signals": {
+      "value": "Strong",
+      "basis": "Q15, Q19, Q20 (Enterprise + Commit)",
+      "evidence": "Consistent SaaS motion throughout. 'Try for free' matches the product-led approach. GDPR and data ownership addressed in FAQ. No contradictions."
+    }
+  },
+  "stages": {
+    "land": "ok",
+    "make_sense": "weak",
+    "self_select": "ok",
+    "compare": "ok",
+    "validate": "weak",
+    "commit": "ok"
+  },
+  "breakpoint": {
+    "stage": "validate",
+    "stage_class": "amber",
+    "insight": "Buyers understand the value and want to believe, but the proof doesn't give them ammunition. Testimonials lack role titles (is Dr. Julian Petrin a partner? project manager?). Metrics show platform activity (250+ projects) not customer outcomes (hours saved, margin recovered). When the partner asks 'what will this actually save us?' the project manager has no answer.",
+    "missing_items": [
+      { "text": "Outcome metrics: hours saved per project, margin improvement, time-to-report", "status": "partial" },
+      { "text": "Role titles on testimonials: Partner vs. Project Manager vs. Planner", "status": "partial" },
+      { "text": "Indicative pricing: budget qualification without booking a call", "status": "missing" },
+      { "text": "Cost of inaction: what manual engagement actually costs", "status": "partial" }
+    ]
+  },
+  "decisions": [
+    {
+      "name": "Why Act Now",
+      "status": "partial",
+      "status_label": "Weak",
+      "finding": "Pain is clear but no cost of waiting. 'Every RFP without structured engagement is a competitive disadvantage' or 'Manual consolidation costs X hours per project' would create urgency."
+    },
+    {
+      "name": "Results Achieved",
+      "status": "partial",
+      "status_label": "Vanity",
+      "finding": "'250+ projects' and '400k+ participants' show platform scale, not customer outcomes. Where's 'saved X hours per project' or 'Y% faster from feedback to report'?"
+    },
+    {
+      "name": "Role-Matched Proof",
+      "status": "partial",
+      "status_label": "Unclear",
+      "finding": "Testimonials have names and companies but no titles. 'Dr. Julian Petrin, Partner, urbanista' would be stronger than 'Dr. Julian Petrin, urbanista'."
+    },
+    {
+      "name": "Pricing Visibility",
+      "status": "missing",
+      "status_label": "Missing",
+      "finding": "'Discuss pricing based on your project volume' means buyers can't self-qualify. Even 'Starting at €X/project' or tier names would help budget conversations."
+    }
+  ],
+  "recommendations": {
+    "eyebrow": "Light Refinement — Not a Major Rebuild",
+    "action": "This homepage is already strong. Four targeted additions would close the gaps:",
+    "goals": [
+      {
+        "label": "Add Urgency Framing",
+        "description": "Quantify the cost of manual engagement. 'Every project without structured engagement costs X hours of consolidation' or 'RFPs without digital methodology win Y% less often.'"
+      },
+      {
+        "label": "Swap Vanity for Outcome Metrics",
+        "description": "Replace '250+ projects' with customer outcomes: '60% less time from feedback to report' or 'X hours saved per project on average.'"
+      },
+      {
+        "label": "Add Role Titles to Testimonials",
+        "description": "'Dr. Julian Petrin, Partner' or 'Michael Frehn, Project Lead' — let buyers see proof from their role."
+      },
+      {
+        "label": "Show Indicative Pricing",
+        "description": "Even 'Starting at €X per project' or tier names (Starter/Professional/Enterprise) would help budget conversations happen before the demo."
+      }
+    ]
+  },
+  "evidence": [
+    { "id": "Q1", "stage": "land", "question": "What is this?", "quote": "Community Engagement Platform for Planning Projects", "inference": "Clear category. Immediately understood.", "status": "clear" },
+    { "id": "Q2", "stage": "land", "question": "What do you do?", "quote": "Run map based participation, structure feedback automatically and deliver report ready results", "inference": "Core function clear in hero.", "status": "clear" },
+    { "id": "Q3", "stage": "make_sense", "question": "Pain worth switching?", "quote": "Fragmented tools slow projects down / Setup and analysis consume too much time", "inference": "Specific pain. Recognizable to planning firms.", "status": "clear" },
+    { "id": "Q4", "stage": "make_sense", "question": "What project?", "quote": "Upload your RFP to generate a ready to use engagement platform", "inference": "Entry point tied to buyer's task (RFP response).", "status": "clear" },
+    { "id": "Q5", "stage": "make_sense", "question": "Why act now?", "quote": "Not addressed", "inference": "No cost of waiting. No timing pressure. Buyers can defer.", "status": "partial" },
+    { "id": "Q6", "stage": "self_select", "question": "For my team?", "quote": "Trusted by 100+ planning firms", "inference": "Clear ICP. Segment is specific.", "status": "clear" },
+    { "id": "Q7", "stage": "self_select", "question": "For my situation?", "quote": "Most planning firms can set up and launch their first project within hours", "inference": "Time-to-value clear. FAQ addresses various situations.", "status": "clear" },
+    { "id": "Q8", "stage": "compare", "question": "Switching from?", "quote": "Project website. Survey tool. Map software. Excel analysis. Slide reporting.", "inference": "Alternatives explicitly named.", "status": "clear" },
+    { "id": "Q9", "stage": "compare", "question": "Why alternatives fail?", "quote": "Each project becomes manual stitching / Existing platforms are overengineered", "inference": "Weaknesses of alternatives clear.", "status": "clear" },
+    { "id": "Q10", "stage": "compare", "question": "What's different?", "quote": "One platform for the entire workflow / Smart automation from setup to reporting", "inference": "Differentiation clear: integrated vs. fragmented.", "status": "clear" },
+    { "id": "Q11", "stage": "validate", "question": "Teams like mine?", "quote": "urbanista, Planersocietät, urban policy + logo bar", "inference": "Named companies. Planning firms visible.", "status": "clear" },
+    { "id": "Q12", "stage": "validate", "question": "Results achieved?", "quote": "250+ planning projects / 400k+ participants / 94% client retention rate", "inference": "Activity metrics. No outcome metrics (hours saved, margin).", "status": "partial" },
+    { "id": "Q13", "stage": "validate", "question": "How much effort?", "quote": "set up and launch their first project within hours, not weeks", "inference": "Time-to-value clear.", "status": "clear" },
+    { "id": "Q14", "stage": "validate", "question": "Proof match role?", "quote": "Dr. Julian Petrin, urbanista (no title)", "inference": "Names but no role titles. Is this a partner or project manager?", "status": "partial" },
+    { "id": "Q15", "stage": "validate", "question": "Enterprise signals?", "quote": "GDPR-compliant, German servers / Data security and privacy are fundamental", "inference": "Public sector compliance addressed in FAQ.", "status": "clear" },
+    { "id": "Q16", "stage": "commit", "question": "First step?", "quote": "Try for free / Book demo", "inference": "Multiple entry points. CTA clear.", "status": "clear" },
+    { "id": "Q17", "stage": "commit", "question": "Safe to try?", "quote": "Upload your RFP... Try for free", "inference": "Low-commitment entry. No credit card needed implied.", "status": "clear" },
+    { "id": "Q18", "stage": "commit", "question": "After I click?", "quote": "Senf generates a ready to share... platform", "inference": "Immediate value promise. What happens next is visible.", "status": "clear" },
+    { "id": "Q19", "stage": "commit", "question": "CTA match readiness?", "quote": "Try for free + Book demo", "inference": "Product-led + sales-assisted. Good coverage.", "status": "clear" },
+    { "id": "Q20", "stage": "commit", "question": "Offer match motion?", "quote": "Discuss pricing based on your project volume", "inference": "SaaS motion but no visible pricing. Buyers can't self-qualify.", "status": "partial" },
+    { "id": "Q21", "stage": "depth", "question": "Explore without sales?", "quote": "Explore the platform / 6-step workflow / video previews", "inference": "Process visible. Videos exist. No ungated guide.", "status": "partial" },
+    { "id": "Q22", "stage": "depth", "question": "ROI documentation?", "quote": "Recover margin on every project (claim, no proof)", "inference": "ROI promised but not documented. No calculator or case study.", "status": "partial" }
+  ],
+  "indicators": [
+    { "what": "'What does this cost?' asked before demo", "direction": "Should decrease after pricing visibility added" },
+    { "what": "Trial-to-paid conversion rate", "direction": "Should improve as outcome metrics replace vanity metrics" },
+    { "what": "Time from first touch to signed contract", "direction": "Should shorten with urgency framing" },
+    { "what": "Champion can explain ROI to partner", "direction": "Should improve after ROI documentation added" }
+  ]
+}

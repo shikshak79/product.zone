@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "company": "LabV",
+    "url": "https://labv.io/en",
+    "target_buyer": "Head of R&D / Lab Manager",
+    "date": "2026-03-12",
+    "version": "5.3"
+  },
+  "score": {
+    "value": 3,
+    "max": 10,
+    "label": "Major Work Needed",
+    "interpretation": "Major work needed — multiple stages breaking",
+    "breakdown": {
+      "clear": 4,
+      "partial": 11,
+      "missing": 5
+    },
+    "depth": {
+      "status": "Weak",
+      "q21": "partial",
+      "q22": "missing"
+    }
+  },
+  "diagnosis": {
+    "verdict": "Fix Before Outbound",
+    "verdict_class": "red",
+    "headline": "Pain resonates, but buyers cannot place LabV, justify the switch, or take a safe first step",
+    "text": "Outbound will generate curiosity because 'data chaos' is a recognized pain. But prospects will stall after checking the homepage: they cannot tell what category LabV belongs to, proof does not match the target buyer role, and there is no low-commitment entry point."
+  },
+  "predictions": {
+    "reply_rate": {
+      "value": "Strong",
+      "basis": "Based on Q3 (pain named clearly)"
+    },
+    "demo_conversion": {
+      "value": "Weak",
+      "basis": "Based on Q1 (category unclear) + Q11-12 (proof gaps)"
+    },
+    "internal_sell": {
+      "value": "Weak",
+      "basis": "Based on Q22 (no ROI) + Q14 (role mismatch)"
+    },
+    "pipeline_speed": {
+      "value": "Slow",
+      "basis": "Based on Q5 (no urgency) + Q17 (no safe entry)"
+    },
+    "summary": "Buyers will respond to pain-based messaging but stall when evaluating fit and building internal consensus."
+  },
+  "recognition": [
+    "So is this like a LIMS? How is it different?",
+    "We already have a data management system. Why would we switch?",
+    "This sounds like a big project. What's the minimum commitment?",
+    "Who else in our industry uses this? Can we talk to them?"
+  ],
+  "risk_signals": {
+    "message_priority": {
+      "value": "Weak",
+      "basis": "Q3, Q4, Q5 (Make Sense)",
+      "evidence": "Buyers scanning the hero see category claim first, not their pain. They must scroll to find relevance. Outbound must invert this order."
+    },
+    "buyer_focus": {
+      "value": "Weak",
+      "basis": "Q6, Q7 (Self-Select)",
+      "evidence": "'R&D teams' is broad. Buyers cannot quickly tell if this is for their industry or team size."
+    },
+    "why_act_now": {
+      "value": "High Risk",
+      "basis": "Q4, Q5 (Make Sense)",
+      "evidence": "Pain named but no trigger moment. Buyers cannot identify when this becomes urgent. They can defer indefinitely."
+    },
+    "proof_relevance": {
+      "value": "Weak",
+      "basis": "Q11, Q12, Q14 (Validate)",
+      "evidence": "VARTA and NETZSCH named, but many testimonials anonymous. Metrics show '0%'. No quotes from Head of R&D role."
+    },
+    "explanation_burden": {
+      "value": "High Risk",
+      "basis": "Q1, Q2, Q10 (Land + Compare)",
+      "evidence": "'Material Intelligence Platform' is invented. Buyers cannot place it in a known category. Sales must explain from scratch."
+    },
+    "internal_sharing": {
+      "value": "Weak",
+      "basis": "Q11-Q14, Q22 (Validate + Depth)",
+      "evidence": "If a champion forwards this link, the next reader will struggle to understand value without context. No ROI framework visible."
+    },
+    "mixed_signals": {
+      "value": "Weak",
+      "basis": "Q15, Q19, Q20 (Enterprise + Commit)",
+      "evidence": "Enterprise testimonials (VARTA) but no enterprise buying path (security page, compliance badges). 'Start within three months' suggests enterprise timeline but CTA is generic 'Request Demo.'"
+    }
+  },
+  "stages": {
+    "land": "weak",
+    "make_sense": "break",
+    "self_select": "weak",
+    "compare": "weak",
+    "validate": "break",
+    "commit": "break"
+  },
+  "breakpoint": {
+    "stage": "make_sense",
+    "stage_class": "red",
+    "insight": "Buyers understand the pain ('data chaos') but cannot connect it to their own project or urgency. The homepage describes what LabV does but never names the buyer's task or the cost of waiting.",
+    "missing_items": [
+      { "text": "What project this serves (e.g., 'preparing for scale-up')", "status": "missing" },
+      { "text": "Cost of inaction if they wait another 6 months", "status": "missing" },
+      { "text": "Quantified results from customers like them", "status": "missing" },
+      { "text": "A safe first step with low commitment", "status": "missing" }
+    ]
+  },
+  "decisions": [
+    {
+      "name": "Category",
+      "status": "partial",
+      "status_label": "Unclear",
+      "finding": "'Material Intelligence Platform' is invented. Buyers search for 'LIMS alternative' or 'R&D data management.'"
+    },
+    {
+      "name": "Alternative",
+      "status": "partial",
+      "status_label": "Unclear",
+      "finding": "Excel named. LIMS never addressed. 'We already have a LIMS' objection will surface on every call."
+    },
+    {
+      "name": "Why Act Now",
+      "status": "missing",
+      "status_label": "Missing",
+      "finding": "Pain named but cost of inaction absent. No 'this costs you X hours/month' or timing pressure."
+    },
+    {
+      "name": "First Step",
+      "status": "missing",
+      "status_label": "Missing",
+      "finding": "'Request Demo' exists but no pilot, trial, or specifics. High-commitment CTA with no risk reversal."
+    }
+  ],
+  "recommendations": {
+    "eyebrow": "Recommended Path",
+    "action": "Buying Path Readiness Sprint before outbound begins",
+    "goals": [
+      {
+        "label": "Define Category",
+        "description": "Position against a buyer-recognized bucket — 'LIMS alternative for formulation teams' or own 'R&D operating system' with clear boundaries."
+      },
+      {
+        "label": "Define Alternative",
+        "description": "Name LIMS explicitly. 'Unlike traditional LIMS...' or 'If you've outgrown Excel but LIMS feels like overkill...'"
+      },
+      {
+        "label": "Define Why Now",
+        "description": "Quantify cost of inaction. 'Every month without connected data costs X hours of repeated work.'"
+      },
+      {
+        "label": "Define First Step",
+        "description": "Replace 'Request Demo' with lower-commitment offer. 'See LabV in 15 minutes' or offer a scoped pilot."
+      }
+    ]
+  },
+  "evidence": [
+    { "id": "Q1", "stage": "land", "question": "What is this?", "quote": "Material Intelligence Platform", "inference": "Invented category. Buyers cannot file this.", "status": "partial" },
+    { "id": "Q2", "stage": "land", "question": "What do you do?", "quote": "brings formulations, processes and test data together", "inference": "Core function stated clearly.", "status": "clear" },
+    { "id": "Q3", "stage": "make_sense", "question": "Pain worth switching?", "quote": "Data chaos instead of progress", "inference": "Specific pain named. Recognizable.", "status": "clear" },
+    { "id": "Q4", "stage": "make_sense", "question": "What project?", "quote": "No project named", "inference": "Product-centric framing. No buyer task referenced.", "status": "missing" },
+    { "id": "Q5", "stage": "make_sense", "question": "Why act now?", "quote": "takes time without contributing to development", "inference": "Stakes implied but not quantified.", "status": "partial" },
+    { "id": "Q6", "stage": "self_select", "question": "For my team?", "quote": "R&D teams", "inference": "Too broad. Industries implied but not stated.", "status": "partial" },
+    { "id": "Q7", "stage": "self_select", "question": "For my situation?", "quote": "small teams as well as complex environments", "inference": "Vague. No qualifying conditions.", "status": "partial" },
+    { "id": "Q8", "stage": "compare", "question": "Switching from?", "quote": "replaces Excel chaos and disconnected tools", "inference": "Excel named explicitly.", "status": "clear" },
+    { "id": "Q9", "stage": "compare", "question": "Why alternatives fail?", "quote": "relationships...cannot be mapped in Excel", "inference": "Excel weakness stated. LIMS never addressed.", "status": "partial" },
+    { "id": "Q10", "stage": "compare", "question": "What's different?", "quote": "Material Intelligence + AI assistant", "inference": "Generic. Not tied to competitor weakness.", "status": "partial" },
+    { "id": "Q11", "stage": "validate", "question": "Teams like mine?", "quote": "VARTA, NETZSCH", "inference": "Named companies. Many testimonials anonymous.", "status": "partial" },
+    { "id": "Q12", "stage": "validate", "question": "Results achieved?", "quote": "0% Fewer repetitions", "inference": "Display bug. No real metrics.", "status": "missing" },
+    { "id": "Q13", "stage": "validate", "question": "How much effort?", "quote": "start within three months", "inference": "Vague. No resource requirements.", "status": "partial" },
+    { "id": "Q14", "stage": "validate", "question": "Proof match role?", "quote": "Development engineer, Managing Director", "inference": "Mixed roles. No Head of R&D quotes.", "status": "partial" },
+    { "id": "Q15", "stage": "validate", "question": "Enterprise signals?", "quote": "GDPR-compliant, German servers", "inference": "Some compliance. No security page visible.", "status": "partial" },
+    { "id": "Q16", "stage": "commit", "question": "First step?", "quote": "Request Demo", "inference": "CTA exists but no specifics.", "status": "partial" },
+    { "id": "Q17", "stage": "commit", "question": "Safe to try?", "quote": "No pilot mentioned", "inference": "No risk reversal. High-commitment only.", "status": "missing" },
+    { "id": "Q18", "stage": "commit", "question": "After I click?", "quote": "No explanation", "inference": "Process not visible.", "status": "missing" },
+    { "id": "Q19", "stage": "commit", "question": "CTA match readiness?", "quote": "Request Demo only", "inference": "Generic CTA. No tiered options.", "status": "partial" },
+    { "id": "Q20", "stage": "commit", "question": "Offer match motion?", "quote": "Enterprise testimonials + generic CTA", "inference": "Mixed signals. No enterprise buying path.", "status": "partial" },
+    { "id": "Q21", "stage": "depth", "question": "Explore without sales?", "quote": "Whitepaper, blog, videos", "inference": "Some content. Platform requires demo.", "status": "partial" },
+    { "id": "Q22", "stage": "depth", "question": "ROI documentation?", "quote": "No ROI calculator", "inference": "Economic buyer cannot justify spend.", "status": "missing" }
+  ],
+  "indicators": [
+    { "what": "'What is this?' asked in sales calls", "direction": "Should decrease after category clarity" },
+    { "what": "Buyer accurately restates value after homepage visit", "direction": "Should increase after message priority fix" },
+    { "what": "Demo-to-qualified conversion rate", "direction": "Should improve as proof match strengthens" },
+    { "what": "Time from first touch to internal champion", "direction": "Should shorten as internal sharing improves" }
+  ]
+}

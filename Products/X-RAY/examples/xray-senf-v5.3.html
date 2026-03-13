@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-RAY Diagnostic · Senf · Product.Zone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --light: #F5F4EF;
+      --light2: #ECEAE3;
+      --lborder: #D8D6CF;
+      --ltext: #1a1a1a;
+      --lmuted: #555555;
+      --lmuted2: #888888;
+      --teal: #33C4D9;
+      --orange: #F5A623;
+      --green: #2ECC71;
+      --yellow: #E8C85A;
+      --red: #C0392B;
+      --black: #0a0a0a;
+      --surface: #141414;
+      --dtext: #F0EFE9;
+      --dmuted: rgba(255,255,255,0.7);
+      --dmuted2: rgba(255,255,255,0.4);
+      --dborder: rgba(255,255,255,0.1);
+      --mono: 'Space Mono', monospace;
+      --display: 'Barlow Condensed', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--body); background: #333; color: var(--ltext); line-height: 1.5; }
+    
+    .report {
+      width: 900px;
+      background: var(--white);
+      margin: 40px auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+
+    /* === HEADER (DARK) === */
+    .report-header {
+      background: var(--black);
+      padding: 40px 48px 32px;
+    }
+    .report-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .report-title {
+      font-family: var(--display);
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--dtext);
+      margin-bottom: 6px;
+    }
+    .report-url {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--dmuted2);
+      margin-bottom: 20px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--dborder);
+    }
+    .meta-item {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+    }
+    .meta-item strong {
+      display: block;
+      color: var(--dtext);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+      text-transform: none;
+    }
+
+    /* === DIAGNOSIS SECTION (DARK) === */
+    .diagnosis-section {
+      background: var(--surface);
+      padding: 32px 48px;
+    }
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    
+    /* === SCORE BLOCK (1-10) === */
+    .score-block {
+      text-align: center;
+      min-width: 140px;
+    }
+    .score-number {
+      font-family: var(--display);
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .score-number.high { color: var(--green); }
+    .score-number.good { color: #7ED957; }
+    .score-number.mid { color: var(--orange); }
+    .score-number.low { color: #E67E22; }
+    .score-number.critical { color: var(--red); }
+    .score-denominator {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--dmuted2);
+      margin-left: 2px;
+    }
+    .score-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .score-interpretation {
+      font-family: var(--body);
+      font-size: 11px;
+      color: var(--dmuted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .score-breakdown {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      padding-top: 12px;
+      border-top: 1px solid var(--dborder);
+    }
+    .breakdown-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+    .breakdown-icon { width: 14px; text-align: center; }
+    .breakdown-icon.green { color: var(--green); }
+    .breakdown-icon.yellow { color: var(--yellow); }
+    .breakdown-icon.red { color: var(--red); }
+    .breakdown-text { color: var(--dmuted2); }
+    
+    .depth-indicator {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--dborder);
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dmuted2);
+      text-align: center;
+    }
+    .depth-indicator .label {
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .depth-indicator .value {
+      font-size: 11px;
+      color: var(--dtext);
+    }
+    .depth-indicator .value.partial { color: var(--orange); }
+    .depth-indicator .value.weak { color: var(--red); }
+    .depth-indicator .value.strong { color: var(--green); }
+    
+    .diagnosis-content { padding-top: 4px; }
+    .diagnosis-verdict {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .diagnosis-verdict.red { background: rgba(192,57,43,0.2); color: var(--red); }
+    .diagnosis-verdict.amber { background: rgba(245,166,35,0.2); color: var(--orange); }
+    .diagnosis-verdict.green { background: rgba(46,204,113,0.2); color: var(--green); }
+    .diagnosis-headline {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--dtext);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      margin-top: 12px;
+    }
+    .diagnosis-text {
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--dmuted);
+    }
+
+    /* === PREDICTION SECTION (DARK) === */
+    .prediction-section {
+      background: var(--black);
+      padding: 24px 48px;
+      border-top: 1px solid var(--dborder);
+    }
+    .prediction-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 16px;
+    }
+    .prediction-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .prediction-item {
+      background: var(--surface);
+      border: 1px solid var(--dborder);
+      border-radius: 6px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .prediction-metric {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prediction-metric.strong { color: var(--green); }
+    .prediction-metric.moderate { color: var(--orange); }
+    .prediction-metric.weak { color: var(--red); }
+    .prediction-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .prediction-basis {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--dmuted2);
+      line-height: 1.4;
+      border-top: 1px solid var(--dborder);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .prediction-reason {
+      font-size: 13px;
+      color: var(--dmuted);
+      font-style: italic;
+    }
+
+    /* === RECOGNITION SECTION (DARK) === */
+    .recognition-section {
+      background: var(--surface);
+      padding: 24px 48px;
+      border-top: 1px solid var(--dborder);
+    }
+    .recognition-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 12px;
+    }
+    .recognition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .recognition-item {
+      background: var(--black);
+      border: 1px solid var(--dborder);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--dtext);
+      font-style: italic;
+    }
+
+    /* === MAIN CONTENT (LIGHT) === */
+    .report-body { padding: 32px 48px 48px; }
+
+    .section { margin-bottom: 32px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-number {
+      width: 28px;
+      height: 28px;
+      background: var(--black);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+
+    /* === RISK SIGNALS === */
+    .risk-signals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .risk-signal-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .risk-signal-card.full-width {
+      grid-column: 1 / -1;
+    }
+    .risk-signal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .risk-signal-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    .risk-signal-score {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+    .risk-signal-score.strong { background: rgba(46,204,113,0.12); color: var(--green); }
+    .risk-signal-score.weak { background: rgba(245,166,35,0.12); color: var(--orange); }
+    .risk-signal-score.high-risk { background: rgba(192,57,43,0.12); color: var(--red); }
+    .risk-signal-basis {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      color: var(--lmuted2);
+      margin-bottom: 8px;
+    }
+    .risk-signal-evidence {
+      font-size: 13px;
+      color: var(--lmuted);
+      line-height: 1.5;
+    }
+
+    /* === BREAKPOINT === */
+    .breakpoint-box {
+      background: var(--black);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .breakpoint-eyebrow {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 6px;
+    }
+    .breakpoint-stage {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .breakpoint-stage.red { color: var(--red); }
+    .breakpoint-stage.amber { color: var(--orange); }
+    .breakpoint-stage.green { color: var(--green); }
+    .breakpoint-insight {
+      font-size: 15px;
+      color: var(--dmuted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .missing-signals {
+      border-top: 1px solid var(--dborder);
+      padding-top: 16px;
+    }
+    .missing-header {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dmuted2);
+      margin-bottom: 10px;
+    }
+    .missing-item {
+      color: var(--dtext);
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .missing-x { color: var(--red); }
+    .missing-partial { color: var(--orange); }
+
+    /* === STAGE FLOW === */
+    .stage-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+    .stage-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .stage-card .name {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 6px;
+    }
+    .stage-card .verdict {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 6px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .stage-card .verdict.ok { background: rgba(46,204,113,0.15); color: var(--green); }
+    .stage-card .verdict.weak { background: rgba(245,166,35,0.15); color: var(--orange); }
+    .stage-card .verdict.break { background: rgba(192,57,43,0.15); color: var(--red); }
+
+    /* === DECISIONS === */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .decision-card {
+      background: var(--light);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .decision-card.missing {
+      border-left: 3px solid var(--red);
+    }
+    .decision-card.partial {
+      border-left: 3px solid var(--orange);
+    }
+    .decision-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .decision-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ltext);
+    }
+    .decision-status {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .decision-status.missing { background: rgba(192,57,43,0.12); color: var(--red); }
+    .decision-status.partial { background: rgba(245,166,35,0.12); color: var(--orange); }
+    .decision-finding {
+      font-size: 13px;
+      color: var(--lmuted);
+      line-height: 1.5;
+    }
+
+    /* === SPRINT === */
+    .sprint-box {
+      background: var(--light);
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .sprint-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .sprint-action {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ltext);
+      margin-bottom: 16px;
+    }
+    .sprint-goal {
+      font-size: 14px;
+      color: var(--ltext);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .sprint-arrow { color: var(--teal); font-weight: 700; }
+
+    /* === APPENDIX === */
+    .appendix {
+      background: var(--light);
+      padding: 32px 48px;
+      border-top: 4px solid var(--lborder);
+    }
+    .appendix-header {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--lborder);
+    }
+    .appendix-title {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ltext);
+      margin-bottom: 16px;
+    }
+    .appendix-subtitle {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 12px;
+      margin-top: 32px;
+    }
+
+    /* === SCORING REFERENCE === */
+    .scoring-reference {
+      background: var(--white);
+      border: 1px solid var(--lborder);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .scoring-reference-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      margin-bottom: 12px;
+    }
+    .scoring-scale {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .scale-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 8px;
+      background: var(--light);
+      border-radius: 4px;
+    }
+    .scale-item .num {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .scale-item .num.high { color: var(--green); }
+    .scale-item .num.good { color: #7ED957; }
+    .scale-item .num.mid { color: var(--orange); }
+    .scale-item .num.low { color: #E67E22; }
+    .scale-item .num.critical { color: var(--red); }
+    .scale-item .desc {
+      color: var(--lmuted);
+      font-size: 10px;
+    }
+
+    /* === EVIDENCE TABLE === */
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .evidence-table thead {
+      background: var(--white);
+    }
+    .evidence-table th {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--lborder);
+    }
+    .evidence-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--light2);
+      vertical-align: top;
+      background: var(--white);
+    }
+    .stage-label-inline {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(51,196,217,0.12);
+      color: var(--teal);
+      padding: 3px 6px;
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+    .question-text {
+      color: var(--ltext);
+      font-weight: 500;
+    }
+    .finding-quote {
+      color: var(--lmuted);
+      font-style: italic;
+    }
+    .finding-arrow {
+      color: var(--lmuted2);
+      margin: 0 6px;
+    }
+    .finding-inference {
+      color: var(--ltext);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .status-badge.clear { background: rgba(46,204,113,0.12); color: var(--green); }
+    .status-badge.partial { background: rgba(245,166,35,0.12); color: var(--orange); }
+    .status-badge.missing { background: rgba(192,57,43,0.12); color: var(--red); }
+
+    /* === INDICATORS TABLE === */
+    .indicators-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .indicators-table thead {
+      background: var(--white);
+    }
+    .indicators-table th {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--lmuted2);
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--lborder);
+    }
+    .indicators-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--light2);
+      font-size: 13px;
+      background: var(--white);
+    }
+
+    /* === FOOTER === */
+    .report-footer {
+      background: var(--black);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+    }
+    .footer-method {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dmuted2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="report">
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="report-header">
+    <div class="report-eyebrow">Outbound Readiness X-RAY</div>
+    <div class="report-title">Senf</div>
+    <div class="report-url">https://senf-staging.framer.website/</div>
+    <div class="header-meta">
+      <div class="meta-item">Target Buyer<strong>Project Manager / Partner at Planning Firms</strong></div>
+      <div class="meta-item">Prepared<strong>2026-03-12</strong></div>
+      <div class="meta-item">Method<strong>X-RAY v5.3</strong></div>
+    </div>
+  </div>
+
+  <!-- ==================== 1. DIAGNOSIS ==================== -->
+  <div class="diagnosis-section">
+    <div class="diagnosis-grid">
+      <div class="score-block">
+        <div>
+          <span class="score-number mid">6</span><span class="score-denominator">/10</span>
+        </div>
+        <div class="score-label">Buying Path Score</div>
+        <div class="score-interpretation">Proceed with Caution — validation and urgency gaps</div>
+        <div class="score-breakdown">
+          <div class="breakdown-line">
+            <span class="breakdown-icon green">✓</span>
+            <span class="breakdown-text">13 clear</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon yellow">△</span>
+            <span class="breakdown-text">6 partial</span>
+          </div>
+          <div class="breakdown-line">
+            <span class="breakdown-icon red">✗</span>
+            <span class="breakdown-text">1 missing</span>
+          </div>
+        </div>
+        <div class="depth-indicator">
+          <div class="label">Depth Content</div>
+          <div class="value partial">Partial</div>
+        </div>
+      </div>
+      <div class="diagnosis-content">
+        <div class="diagnosis-verdict amber">Proceed with Caution</div>
+        <div class="diagnosis-headline">Homepage is well-built — but urgency is missing and proof shows activity, not outcomes</div>
+        <div class="diagnosis-text">This is a strong homepage. Category is clear, pain is specific, alternatives are named, and there's a low-commitment entry point. The gaps are in urgency (no cost of waiting) and validation (testimonials lack role titles, metrics show activity not results). Buyers will respond but deals may drift without urgency framing, and champions will struggle to justify spend without ROI ammunition.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. OUTBOUND PREDICTION ==================== -->
+  <div class="prediction-section">
+    <div class="prediction-header">Outbound Performance Prediction</div>
+    <div class="prediction-grid">
+      <div class="prediction-item">
+        <div class="prediction-metric strong">Strong</div>
+        <div class="prediction-label">Reply Rate</div>
+        <div class="prediction-basis">Based on Q3 (pain specific) + Q6 (ICP clear)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric strong">Strong</div>
+        <div class="prediction-label">Demo Conversion</div>
+        <div class="prediction-basis">Based on Q17 (free trial) + Q13 (process visible)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric moderate">Moderate</div>
+        <div class="prediction-label">Internal Sell</div>
+        <div class="prediction-basis">Based on Q12 (vanity metrics) + Q22 (no ROI)</div>
+      </div>
+      <div class="prediction-item">
+        <div class="prediction-metric moderate">Moderate</div>
+        <div class="prediction-label">Pipeline Speed</div>
+        <div class="prediction-basis">Based on Q5 (no urgency) + Q20 (pricing hidden)</div>
+      </div>
+    </div>
+    <div class="prediction-reason">Buyers will respond and convert to trials. Deals may slow when partners ask "what's the ROI?" or "why not stick with current tools until we're busier?"</div>
+  </div>
+
+  <!-- ==================== 3. RECOGNITION SIGNALS ==================== -->
+  <div class="recognition-section">
+    <div class="recognition-header">Expect to hear on sales calls</div>
+    <div class="recognition-grid">
+      <div class="recognition-item">"What does this actually cost? We need to know if this fits our budget before a demo."</div>
+      <div class="recognition-item">"Our current tools work okay. What would we actually save by switching?"</div>
+      <div class="recognition-item">"Do you have planning firms like us — same size, same project types?"</div>
+      <div class="recognition-item">"We're not launching a project right now. Can we look at this when we win the next RFP?"</div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN BODY ==================== -->
+  <div class="report-body">
+
+    <!-- ==================== 4. OUTBOUND RISK SIGNALS ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title">Outbound Risk Signals</div>
+      </div>
+      
+      <div class="risk-signals-grid">
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Message Priority</div>
+            <div class="risk-signal-score strong">Strong</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q3, Q4, Q5 (Make Sense)</div>
+          <div class="risk-signal-evidence">Hero leads with outcome ("Turn digital community engagement into a competitive advantage") and pain is explicit in the Problem section. Buyers immediately see relevance.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Buyer Focus</div>
+            <div class="risk-signal-score strong">Strong</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q6, Q7 (Self-Select)</div>
+          <div class="risk-signal-evidence">"100+ planning firms" is specific. The problem framing (fragmented tools, setup time, overengineered platforms) speaks directly to planning firm workflows.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Why Act Now</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q4, Q5 (Make Sense)</div>
+          <div class="risk-signal-evidence">Pain is named but no cost of waiting. No "every manual project costs you X hours" or timing pressure. Buyers can defer to next quarter.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Proof Relevance</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q11, Q12, Q14 (Validate)</div>
+          <div class="risk-signal-evidence">Named testimonials exist (Dr. Julian Petrin, Michael Frehn) but no role titles. Metrics (250+ projects, 400k+ participants) show activity, not outcomes. No "saved X hours per project."</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Explanation Burden</div>
+            <div class="risk-signal-score strong">Strong</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q1, Q2, Q10 (Land + Compare)</div>
+          <div class="risk-signal-evidence">"Community Engagement Platform for Planning Projects" is immediately clear. Category is recognizable. No invented terminology.</div>
+        </div>
+        
+        <div class="risk-signal-card">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Internal Sharing</div>
+            <div class="risk-signal-score weak">Weak</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q11-Q14, Q22 (Validate + Depth)</div>
+          <div class="risk-signal-evidence">If a project manager forwards this to a partner, the partner will see process but not ROI. No economic buyer ammunition. Pricing requires a conversation.</div>
+        </div>
+        
+        <div class="risk-signal-card full-width">
+          <div class="risk-signal-header">
+            <div class="risk-signal-name">Mixed Signals</div>
+            <div class="risk-signal-score strong">Strong</div>
+          </div>
+          <div class="risk-signal-basis">Based on Q15, Q19, Q20 (Enterprise + Commit)</div>
+          <div class="risk-signal-evidence">Consistent SaaS motion throughout. "Try for free" matches the product-led approach. GDPR and data ownership addressed in FAQ. No contradictions.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 5. BUYING PATH BREAKPOINT ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title">Where buyer momentum slows</div>
+      </div>
+      
+      <div class="breakpoint-box">
+        <div class="breakpoint-eyebrow">Primary Friction</div>
+        <div class="breakpoint-stage amber">Validate</div>
+        <div class="breakpoint-insight">Buyers understand the value and want to believe, but the proof doesn't give them ammunition. Testimonials lack role titles (is Dr. Julian Petrin a partner? project manager?). Metrics show platform activity (250+ projects) not customer outcomes (hours saved, margin recovered). When the partner asks "what will this actually save us?" the project manager has no answer.</div>
+        <div class="missing-signals">
+          <div class="missing-header">What buyers cannot easily find</div>
+          <div class="missing-item"><span class="missing-partial">△</span> Outcome metrics: hours saved per project, margin improvement, time-to-report</div>
+          <div class="missing-item"><span class="missing-partial">△</span> Role titles on testimonials: Partner vs. Project Manager vs. Planner</div>
+          <div class="missing-item"><span class="missing-x">✗</span> Indicative pricing: budget qualification without booking a call</div>
+          <div class="missing-item"><span class="missing-partial">△</span> Cost of inaction: what manual engagement actually costs</div>
+        </div>
+      </div>
+
+      <div class="stage-flow">
+        <div class="stage-card">
+          <div class="name">Land</div>
+          <div class="verdict ok">OK</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Make Sense</div>
+          <div class="verdict weak">Weak</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Self-Select</div>
+          <div class="verdict ok">OK</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Compare</div>
+          <div class="verdict ok">OK</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Validate</div>
+          <div class="verdict weak">Weak</div>
+        </div>
+        <div class="stage-card">
+          <div class="name">Commit</div>
+          <div class="verdict ok">OK</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 6. DECISION GAPS ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title">Decisions that could be sharper</div>
+      </div>
+      
+      <div class="decision-grid">
+        <div class="decision-card partial">
+          <div class="decision-header">
+            <div class="decision-name">Why Act Now</div>
+            <div class="decision-status partial">Weak</div>
+          </div>
+          <div class="decision-finding">Pain is clear but no cost of waiting. "Every RFP without structured engagement is a competitive disadvantage" or "Manual consolidation costs X hours per project" would create urgency.</div>
+        </div>
+        <div class="decision-card partial">
+          <div class="decision-header">
+            <div class="decision-name">Results Achieved</div>
+            <div class="decision-status partial">Vanity</div>
+          </div>
+          <div class="decision-finding">"250+ projects" and "400k+ participants" show platform scale, not customer outcomes. Where's "saved X hours per project" or "Y% faster from feedback to report"?</div>
+        </div>
+        <div class="decision-card partial">
+          <div class="decision-header">
+            <div class="decision-name">Role-Matched Proof</div>
+            <div class="decision-status partial">Unclear</div>
+          </div>
+          <div class="decision-finding">Testimonials have names and companies but no titles. "Dr. Julian Petrin, Partner, urbanista" would be stronger than "Dr. Julian Petrin, urbanista".</div>
+        </div>
+        <div class="decision-card missing">
+          <div class="decision-header">
+            <div class="decision-name">Pricing Visibility</div>
+            <div class="decision-status missing">Missing</div>
+          </div>
+          <div class="decision-finding">"Discuss pricing based on your project volume" means buyers can't self-qualify. Even "Starting at €X/project" or tier names would help budget conversations.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 7. RECOMMENDED FIX ==================== -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div class="section-title">Opportunities to strengthen</div>
+      </div>
+      
+      <div class="sprint-box">
+        <div class="sprint-eyebrow">Light Refinement — Not a Major Rebuild</div>
+        <div class="sprint-action">This homepage is already strong. Four targeted additions would close the gaps:</div>
+        <div class="sprint-goals">
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Add Urgency Framing:</strong> Quantify the cost of manual engagement. "Every project without structured engagement costs X hours of consolidation" or "RFPs without digital methodology win Y% less often."</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Swap Vanity for Outcome Metrics:</strong> Replace "250+ projects" with customer outcomes: "60% less time from feedback to report" or "X hours saved per project on average."</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Add Role Titles to Testimonials:</strong> "Dr. Julian Petrin, Partner" or "Michael Frehn, Project Lead" — let buyers see proof from their role.</div>
+          <div class="sprint-goal"><span class="sprint-arrow">→</span> <strong>Show Indicative Pricing:</strong> Even "Starting at €X per project" or tier names (Starter/Professional/Enterprise) would help budget conversations happen before the demo.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== APPENDIX ==================== -->
+  <div class="appendix">
+    <div class="appendix-header">Appendix: Method &amp; Evidence</div>
+    
+    <!-- Scoring Reference -->
+    <div class="scoring-reference">
+      <div class="scoring-reference-title">Scoring Scale</div>
+      <div class="scoring-scale">
+        <div class="scale-item"><span class="num high">10</span><span class="desc">Ready to Scale</span></div>
+        <div class="scale-item"><span class="num high">9</span><span class="desc">Strong</span></div>
+        <div class="scale-item"><span class="num high">8</span><span class="desc">Solid</span></div>
+        <div class="scale-item"><span class="num good">7</span><span class="desc">Good</span></div>
+        <div class="scale-item"><span class="num mid">6</span><span class="desc">Proceed with Caution</span></div>
+        <div class="scale-item"><span class="num mid">5</span><span class="desc">Gaps to Address</span></div>
+        <div class="scale-item"><span class="num low">4</span><span class="desc">Fix Before Outbound</span></div>
+        <div class="scale-item"><span class="num low">3</span><span class="desc">Major Work Needed</span></div>
+        <div class="scale-item"><span class="num critical">2</span><span class="desc">Broken</span></div>
+        <div class="scale-item"><span class="num critical">1</span><span class="desc">Fundamentally Broken</span></div>
+      </div>
+    </div>
+    
+    <div class="appendix-title">Evidence Table: 20 Core Buying Path Questions</div>
+    
+    <table class="evidence-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Question</th>
+          <th style="width: 52%;">What the Homepage Shows</th>
+          <th style="width: 20%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- LAND -->
+        <tr>
+          <td><span class="stage-label-inline">Land</span><span class="question-text">Q1: What is this?</span></td>
+          <td><span class="finding-quote">"Community Engagement Platform for Planning Projects"</span><span class="finding-arrow">→</span><span class="finding-inference">Clear category. Immediately understood.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Land</span><span class="question-text">Q2: What do you do?</span></td>
+          <td><span class="finding-quote">"Run map based participation, structure feedback automatically and deliver report ready results"</span><span class="finding-arrow">→</span><span class="finding-inference">Core function clear in hero.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <!-- MAKE SENSE -->
+        <tr>
+          <td><span class="stage-label-inline">Make Sense</span><span class="question-text">Q3: Pain worth switching?</span></td>
+          <td><span class="finding-quote">"Fragmented tools slow projects down" / "Setup and analysis consume too much time"</span><span class="finding-arrow">→</span><span class="finding-inference">Specific pain. Recognizable to planning firms.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Make Sense</span><span class="question-text">Q4: What project?</span></td>
+          <td><span class="finding-quote">"Upload your RFP to generate a ready to use engagement platform"</span><span class="finding-arrow">→</span><span class="finding-inference">Entry point tied to buyer's task (RFP response).</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Make Sense</span><span class="question-text">Q5: Why act now?</span></td>
+          <td><span class="finding-quote">Not addressed</span><span class="finding-arrow">→</span><span class="finding-inference">No cost of waiting. No timing pressure. Buyers can defer.</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+        <!-- SELF-SELECT -->
+        <tr>
+          <td><span class="stage-label-inline">Self-Select</span><span class="question-text">Q6: For my team?</span></td>
+          <td><span class="finding-quote">"Trusted by 100+ planning firms"</span><span class="finding-arrow">→</span><span class="finding-inference">Clear ICP. Segment is specific.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Self-Select</span><span class="question-text">Q7: For my situation?</span></td>
+          <td><span class="finding-quote">"Most planning firms can set up and launch their first project within hours"</span><span class="finding-arrow">→</span><span class="finding-inference">Time-to-value clear. FAQ addresses various situations.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <!-- COMPARE -->
+        <tr>
+          <td><span class="stage-label-inline">Compare</span><span class="question-text">Q8: Switching from?</span></td>
+          <td><span class="finding-quote">"Project website. Survey tool. Map software. Excel analysis. Slide reporting."</span><span class="finding-arrow">→</span><span class="finding-inference">Alternatives explicitly named.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Compare</span><span class="question-text">Q9: Why alternatives fail?</span></td>
+          <td><span class="finding-quote">"Each project becomes manual stitching" / "Existing platforms are overengineered"</span><span class="finding-arrow">→</span><span class="finding-inference">Weaknesses of alternatives clear.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Compare</span><span class="question-text">Q10: What's different?</span></td>
+          <td><span class="finding-quote">"One platform for the entire workflow" / "Smart automation from setup to reporting"</span><span class="finding-arrow">→</span><span class="finding-inference">Differentiation clear: integrated vs. fragmented.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <!-- VALIDATE -->
+        <tr>
+          <td><span class="stage-label-inline">Validate</span><span class="question-text">Q11: Teams like mine?</span></td>
+          <td><span class="finding-quote">"urbanista, Planersocietät, urban policy" + logo bar</span><span class="finding-arrow">→</span><span class="finding-inference">Named companies. Planning firms visible.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Validate</span><span class="question-text">Q12: Results achieved?</span></td>
+          <td><span class="finding-quote">"250+ planning projects" / "400k+ participants" / "94% client retention rate"</span><span class="finding-arrow">→</span><span class="finding-inference">Activity metrics. No outcome metrics (hours saved, margin).</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Validate</span><span class="question-text">Q13: How much effort?</span></td>
+          <td><span class="finding-quote">"set up and launch their first project within hours, not weeks"</span><span class="finding-arrow">→</span><span class="finding-inference">Time-to-value clear.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Validate</span><span class="question-text">Q14: Proof match role?</span></td>
+          <td><span class="finding-quote">"Dr. Julian Petrin, urbanista" (no title)</span><span class="finding-arrow">→</span><span class="finding-inference">Names but no role titles. Is this a partner or project manager?</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Validate</span><span class="question-text">Q15: Enterprise signals?</span></td>
+          <td><span class="finding-quote">"GDPR-compliant, German servers" / "Data security and privacy are fundamental"</span><span class="finding-arrow">→</span><span class="finding-inference">Public sector compliance addressed in FAQ.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <!-- COMMIT -->
+        <tr>
+          <td><span class="stage-label-inline">Commit</span><span class="question-text">Q16: First step?</span></td>
+          <td><span class="finding-quote">"Try for free" / "Book demo"</span><span class="finding-arrow">→</span><span class="finding-inference">Multiple entry points. CTA clear.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Commit</span><span class="question-text">Q17: Safe to try?</span></td>
+          <td><span class="finding-quote">"Upload your RFP... Try for free"</span><span class="finding-arrow">→</span><span class="finding-inference">Low-commitment entry. No credit card needed implied.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Commit</span><span class="question-text">Q18: After I click?</span></td>
+          <td><span class="finding-quote">"Senf generates a ready to share... platform"</span><span class="finding-arrow">→</span><span class="finding-inference">Immediate value promise. What happens next is visible.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Commit</span><span class="question-text">Q19: CTA match readiness?</span></td>
+          <td><span class="finding-quote">"Try for free" + "Book demo"</span><span class="finding-arrow">→</span><span class="finding-inference">Product-led + sales-assisted. Good coverage.</span></td>
+          <td><span class="status-badge clear">Clear</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Commit</span><span class="question-text">Q20: Offer match motion?</span></td>
+          <td><span class="finding-quote">"Discuss pricing based on your project volume"</span><span class="finding-arrow">→</span><span class="finding-inference">SaaS motion but no visible pricing. Buyers can't self-qualify.</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Depth Questions (separate) -->
+    <div class="appendix-subtitle">Depth Content Assessment (Not included in core score)</div>
+    <table class="evidence-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Question</th>
+          <th style="width: 52%;">What the Homepage Shows</th>
+          <th style="width: 20%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stage-label-inline">Depth</span><span class="question-text">Q21: Explore without sales?</span></td>
+          <td><span class="finding-quote">"Explore the platform" / 6-step workflow / video previews</span><span class="finding-arrow">→</span><span class="finding-inference">Process visible. Videos exist. No ungated guide.</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+        <tr>
+          <td><span class="stage-label-inline">Depth</span><span class="question-text">Q22: ROI documentation?</span></td>
+          <td><span class="finding-quote">"Recover margin on every project" (claim, no proof)</span><span class="finding-arrow">→</span><span class="finding-inference">ROI promised but not documented. No calculator or case study.</span></td>
+          <td><span class="status-badge partial">Partial</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Leading Indicators -->
+    <div class="appendix-subtitle">Progress Indicators to Track</div>
+    <table class="indicators-table">
+      <thead>
+        <tr>
+          <th>What to track</th>
+          <th>Direction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"What does this cost?" asked before demo</td>
+          <td>Should decrease after pricing visibility added</td>
+        </tr>
+        <tr>
+          <td>Trial-to-paid conversion rate</td>
+          <td>Should improve as outcome metrics replace vanity metrics</td>
+        </tr>
+        <tr>
+          <td>Time from first touch to signed contract</td>
+          <td>Should shorten with urgency framing</td>
+        </tr>
+        <tr>
+          <td>Champion can explain ROI to partner</td>
+          <td>Should improve after ROI documentation added</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="report-footer">
+    <div class="footer-brand">Product.Zone</div>
+    <div class="footer-method">X-RAY v5.3 · 7 Risk Signals · 20 Core Questions + 2 Depth · 6-Stage Buying Path</div>
+  </div>
+
+</div>
+
+</body>
+</html>
