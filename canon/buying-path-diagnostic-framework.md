@@ -1,10 +1,10 @@
-# Buying Path X-RAY Architecture v5.0
+# Buying Path X-RAY Architecture v5.1
 
 ## Surface-First Outside-In Diagnostic System
 
 **Purpose:** Systematic GTM diagnostic for B2B ventures  
 **Design:** Surface audit → Decision inference → Indicator validation → Results proof  
-**Version:** 5.0 — March 2026
+**Version:** 5.1 — March 2026
 
 ---
 
@@ -66,7 +66,7 @@ The buyer journey through Getting to Yes.
 
 # LAYER 2: DECISIONS
 
-29 decisions organized by TYPE (build sequence), not zone.
+31 decisions organized by TYPE (build sequence), not zone.
 
 ## TYPE A: POSITIONING
 
@@ -80,6 +80,7 @@ The buyer journey through Getting to Yes.
 | A4   | **Difference**     | Why buyer chooses this over alternative                                 | Make Sense, Compare |
 | A5   | **Outcome**        | What buyer can now do that they couldn't                                | Make Sense          |
 | A6   | **Wedge Use Case** | The narrow entry point buyer would start with — specific enough to visualize Week 1 | Self-Select         |
+| A7   | **Market Bet**     | Which market wedge is prioritized first — the vertical or segment you lead with | Self-Select         |
 
 ### Scoring Criteria
 
@@ -118,6 +119,12 @@ The buyer journey through Getting to Yes.
 - 🟢 LOCKED: Specific entry point visible ("Start by connecting your Notion workspace — first insights in 10 minutes")
 - 🟡 FUZZY: Generic starting point ("Get started easily")
 - 🔴 MISSING: No entry point visible, buyer can't visualize Week 1
+
+**Market Bet:**
+
+- 🟢 LOCKED: One vertical explicitly prioritized with rationale ("We're starting with biotech because they have the most acute version of this problem and we have 3 case studies there")
+- 🟡 FUZZY: 2-3 markets mentioned with slight priority implied, but no clear commitment ("We work mostly with healthcare and finance")
+- 🔴 MISSING: 4+ verticals listed equally ("We serve healthcare, finance, manufacturing, retail, and education") or no vertical specificity at all ("For teams that want to...")
 
 ---
 
@@ -169,6 +176,7 @@ The buyer journey through Getting to Yes.
 | C1   | **First Step**    | Smallest move that feels safe to buyer                       | Commit        |
 | C2   | **Start Recipe**  | What happens after they book/buy (steps 1-3)                 | Commit        |
 | C3   | **Risk Reversal** | What makes commit feel safe (pilot, guarantee, phased rollout) | Commit        |
+| C4   | **Entry Motion**  | Commercial foot-in-the-door offer — smaller first step before full commitment | Commit        |
 
 ### Scoring Criteria
 
@@ -189,6 +197,12 @@ The buyer journey through Getting to Yes.
 - 🟢 LOCKED: Explicit risk mitigation ("14-day trial, cancel anytime" or "Pilot with 3 users, expand if it works")
 - 🟡 FUZZY: Implied low risk but not stated
 - 🔴 MISSING: No risk reversal, buyer must commit blind
+
+**Entry Motion:**
+
+- 🟢 LOCKED: Smaller offer packaged and visible — pilot program, diagnostic, audit, entry tier with price, or phased rollout option. Clear path beyond "Request demo."
+- 🟡 FUZZY: Entry mentioned but not packaged ("We can start small" or "Flexible engagement models" without specifics)
+- 🔴 MISSING: Only "Request demo" or "Contact sales" visible. No pilot, trial, or entry option. Big-bang transformation only.
 
 ---
 
@@ -278,38 +292,38 @@ Buyer won't commit unless they can visualize what happens after "yes." These are
 
 *Parallel track. How they find you.*
 
-| #    | Decision                    | What It Locks                                   |
-| ---- | --------------------------- | ----------------------------------------------- |
-| F1   | **Where Buyer Searches**    | Channels buyer uses when they have this problem |
-| F2   | **What Buyer Searches For** | Keywords, questions, phrases buyer types        |
-| F3   | **Trigger Events**          | What causes buyer to search NOW (not "someday") |
-| F4   | **Channel Selection**       | Where you show up (based on buyer behavior)     |
+| #    | Decision              | What It Locks                                       |
+| ---- | --------------------- | --------------------------------------------------- |
+| F1   | **Channel Strategy**  | Where buyers discover you (inbound, outbound, PLG)  |
+| F2   | **Trigger Events**    | What happens in buyer's world that creates urgency  |
+| F3   | **Entry Point**       | First touch (content, referral, outbound, product)  |
+| F4   | **Qualification**     | How to quickly identify fit vs. misfit              |
 
 ### Scoring Criteria
 
-**Where Buyer Searches:**
+**Channel Strategy:**
 
-- 🟢 LOCKED: Validated channels ("Our buyers search on G2, ask peers in Slack communities, and Google specific error messages")
-- 🟡 FUZZY: Assumed channels without validation
-- 🔴 MISSING: No idea where buyers look
-
-**What Buyer Searches For:**
-
-- 🟢 LOCKED: Validated search terms from actual buyers or search data
-- 🟡 FUZZY: Assumed keywords
-- 🔴 MISSING: No search term research
+- 🟢 LOCKED: Primary channel identified with rationale, secondary channels mapped
+- 🟡 FUZZY: Multiple channels, no priority or data on which works
+- 🔴 MISSING: "We do everything" or no channel thinking
 
 **Trigger Events:**
 
-- 🟢 LOCKED: Specific events that create urgency ("New funding round," "Regulatory deadline," "Key person leaves")
-- 🟡 FUZZY: General pain without trigger
-- 🔴 MISSING: No trigger defined
+- 🟢 LOCKED: Specific moments named ("When they hire their 10th rep" or "When their data exceeds 1M rows")
+- 🟡 FUZZY: General awareness ("When they feel pain")
+- 🔴 MISSING: No trigger events identified
 
-**Channel Selection:**
+**Entry Point:**
 
-- 🟢 LOCKED: Channels matched to buyer behavior with economics validated
-- 🟡 FUZZY: Active on channels without validation
-- 🔴 MISSING: No channel strategy, opportunistic only
+- 🟢 LOCKED: Clear first touch designed (e.g., "They read our comparison guide, then request demo")
+- 🟡 FUZZY: Multiple entry points, no dominant path
+- 🔴 MISSING: No designed entry point
+
+**Qualification:**
+
+- 🟢 LOCKED: Clear fit criteria that sales can apply in 2 minutes
+- 🟡 FUZZY: Qualification exists but inconsistent
+- 🔴 MISSING: No qualification criteria, every lead treated equally
 
 ---
 
@@ -356,16 +370,16 @@ Buyer won't commit unless they can visualize what happens after "yes." These are
 
 | Type                  | Count  | Build Sequence |
 | --------------------- | ------ | -------------- |
-| A: Positioning        | 6      | Lock first     |
+| A: Positioning        | 7      | Lock first     |
 | B: Trust              | 4      | Lock second    |
-| C: Movement           | 3      | Lock third     |
+| C: Movement           | 4      | Lock third     |
 | D: Activation         | 3      | Lock last      |
-| **Core Total**        | **16** | —              |
+| **Core Total**        | **18** | —              |
 | E: Economic           | 5      | Parallel track |
 | F: Discovery          | 4      | Parallel track |
 | G: Approval           | 4      | Parallel track |
 | **Operational Total** | **13** | —              |
-| **TOTAL**             | **29** | —              |
+| **TOTAL**             | **31** | —              |
 
 ---
 
@@ -379,19 +393,17 @@ Lenses are filters, not buckets. Apply them to decisions and surfaces.
 | **Travelability** | Can champion answer without founder present?      | Core decisions A-D on deck, one-pager, demo recording |
 | **Viability**     | Do economics work for buyer AND seller?           | Economic decisions E                                  |
 | **Reachability**  | Can you find the right buyers systematically?     | Discovery decisions F                                 |
-| **Closability**   | Can deal pass approval and get signed?            | Approval decisions G                                  |
+| **Closability**   | Can deal navigate approval process?               | Approval decisions G                                  |
 
-### Travelability Test
+### Travelability Checklist
 
-For each surface that must travel (deck, one-pager, demo recording, champion materials):
-
-| Test                                            | Pass                                      | Fail                               |
-| ----------------------------------------------- | ----------------------------------------- | ---------------------------------- |
-| Can slide 1 be understood without voiceover?    | Category + customer clear from text alone | Requires explanation               |
-| Can champion repeat the problem slide?          | Problem is specific and memorable         | Problem is generic or jargon-heavy |
-| Can champion answer "why this vs alternatives?" | Alternative named + difference clear      | Alternatives not mentioned         |
-| Does proof work for THIS buyer's context?       | Case study matches ICP                    | Proof is mismatched industry/size  |
-| Is the ask clear and safe?                      | Specific next step with low commitment    | Vague or high-commitment ask       |
+| Check                                               | Pass                                      | Fail                               |
+| --------------------------------------------------- | ----------------------------------------- | ---------------------------------- |
+| Can buyer retell this to their boss?                | One sentence they can borrow              | Requires founder to explain        |
+| Is the problem statement specific and memorable?    | Problem is specific and memorable         | Problem is generic or jargon-heavy |
+| Can champion answer "why this vs alternatives?"     | Alternative named + difference clear      | Alternatives not mentioned         |
+| Does proof work for THIS buyer's context?           | Case study matches ICP                    | Proof is mismatched industry/size  |
+| Is the ask clear and safe?                          | Specific next step with low commitment    | Vague or high-commitment ask       |
 
 **Travelability Score:** ___/5 pass
 
@@ -432,21 +444,22 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 
 # LAYER 5: QUESTION SETS
 
-## HOMEPAGE: 18 Questions
+## HOMEPAGE: 20 Questions
 
 | Stage           | #    | Buyer Question                                 | Tests                    | Explicit                                           | Partial                                 | Missing                              |
 | --------------- | ---- | ---------------------------------------------- | ------------------------ | -------------------------------------------------- | --------------------------------------- | ------------------------------------ |
-| **LAND**        | Q1   | Do I see my project here?                      | Project / JTBD           | Hero names a task I recognize as mine              | Names general area, not specific project | Starts with product, not my task     |
-|                 | Q2   | What is this? (3-second read)                  | Above-fold clarity       | Can parse in 3 seconds                             | Requires re-reading                     | Confused after 10 seconds            |
-|                 | Q3   | What category is this in?                      | Mental shelf             | Bucket clear ("replaces X")                        | Category implied, not named             | Can't place this                     |
-| **MAKE SENSE**  | Q4   | What pain is worth a switch?                   | Pain                     | Specific pain stated                               | Generic pain ("better decisions")       | No pain mentioned                    |
-|                 | Q5   | What does this cost me if I don't fix it?      | Stakes                   | Quantified cost ("10 hrs/week wasted")             | Cost implied, not stated                | Friction only, no stakes             |
-|                 | Q6   | What trigger makes this unavoidable now?       | Urgency                  | Specific trigger named                             | Vague urgency ("don't get left behind") | No reason to act today               |
-| **SELECT**      | Q7   | Is this for my team?                           | ICP boundary             | Role + company type named                          | Too broad ("for companies")             | No ICP mentioned                     |
-|                 | Q8   | Do I see where I'd start?                      | Wedge entry point        | Specific first use case shown                      | Generic starting point                  | No entry point visible               |
-| **COMPARE**     | Q9   | What alternatives am I comparing this to?      | Look                     | Names specific alternatives                        | Generic reference ("legacy tools")      | No alternatives named                |
-|                 | Q10  | Why do those alternatives fall short?          | Lacking                  | Specific failure mode articulated                  | Vague inadequacy                        | No articulation of why current fails |
-|                 | Q11  | Do I understand the approach?                  | Mechanism                | Mechanism clear                                    | Capability list only                    | No approach explanation              |
+| **LAND**        | Q1   | Do I see my project here?                      | PULL (Project)           | Buyer's task/project named                         | Generic problem                         | Product-centric only                 |
+|                 | Q2   | What is this?                                  | Category                 | Category clear in 3 seconds                        | Descriptive but no anchor               | No category frame                    |
+|                 | Q3   | What do you do?                                | Function                 | Core function in one sentence                      | Function scattered                      | Only abstract benefits               |
+| **MAKE SENSE**  | Q4   | Pain worth switching?                          | Alternative, Outcome     | Specific pain named                                | Pain generic or buried                  | No pain named                        |
+|                 | Q5   | Why act now?                                   | Cost of Alternative      | Cost of waiting quantified or trigger named        | Pain acknowledged, no cost              | No urgency                           |
+|                 | Q6   | What triggers this?                            | Trigger Events           | Specific trigger moment named                      | General awareness                       | No trigger                           |
+| **SELF-SELECT** | Q7   | For my team?                                   | Customer, Champion       | Role + company type visible                        | Multiple personas, no priority          | Generic "teams"                      |
+|                 | Q8   | For my situation?                              | Wedge Use Case           | Qualifying conditions clear                        | Conditions implied                      | No qualification visible             |
+|                 | Q23  | Market bet prioritized?                        | Market Bet               | One vertical prioritized, case studies cluster there | 2-3 segments with priority implied      | No prioritization, 4+ verticals equally |
+| **COMPARE**     | Q9   | What do you replace?                           | Alternative (Look)       | Current alternative explicitly named               | Alternative implied                     | No alternative named                 |
+|                 | Q10  | Why alternatives fail?                         | Alternative (Lacking)    | Specific failure mode of alternative               | Generic weakness                        | No competitive frame                 |
+|                 | Q11  | What's different?                              | Difference               | Mechanism clear in 1 sentence                      | Capability list only                    | No approach explanation              |
 |                 | Q12  | What result do I get?                          | Outcome                  | Measurable result stated                           | Aspiration only                         | No outcome stated                    |
 | **VALIDATE**    | Q13  | Does it work for real teams?                   | Proof                    | Customer case with metrics                         | Logo only, no story                     | No proof                             |
 |                 | Q14  | Can I trust the decision?                      | Trust                    | Risk addressed ("SOC 2")                           | Generic trust signal                    | No trust elements                    |
@@ -454,6 +467,7 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | **COMMIT**      | Q16  | How do we start, exactly?                      | First step               | Safe first step clear                              | CTA exists but unclear                  | No clear next step                   |
 |                 | Q17  | What happens after I book?                     | Activation preview       | Post-booking path clear                            | Vague onboarding                        | No activation preview                |
 |                 | Q18  | Does this feel low-risk to try?                | Risk reversal            | Risk reversal clear                                | Low commitment implied                  | No risk mitigation                   |
+|                 | Q24  | Entry motion visible?                          | Entry Motion             | Smaller first step packaged (pilot, diagnostic, entry tier) | Entry mentioned but not packaged        | Only "Request demo" or "Contact sales" |
 
 ### Homepage Scoring
 
@@ -463,11 +477,11 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | 🟡 **Partial**  | Answer present but vague, requires inference | +0.5  |
 | 🔴 **Missing**  | Question not answered                        | 0     |
 
-**Thresholds:**
+**Thresholds (20 questions):**
 
-- 🟢 GREEN: 14+ explicit, <4 missing
-- 🟡 YELLOW: 10-13 explicit, 4-8 missing
-- 🔴 RED: <10 explicit, >8 missing
+- 🟢 GREEN: 16+ explicit, <4 missing
+- 🟡 YELLOW: 11-15 explicit, 4-9 missing
+- 🔴 RED: <11 explicit, >9 missing
 
 ### PULL Diagnostic Pattern
 
@@ -495,6 +509,8 @@ When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all Missing → surface is *
 | Q16 First step | First Step | — |
 | Q17 Activation | Start Recipe | — |
 | Q18 Low-risk | Risk Reversal | — |
+| Q23 Market bet | Market Bet | — |
+| Q24 Entry motion | Entry Motion | — |
 
 ---
 
@@ -517,124 +533,50 @@ When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all Missing → surface is *
 
 Same scoring as homepage (Explicit / Partial / Missing).
 
-**Thresholds:**
-
-- 🟢 GREEN: 8+ explicit, <2 missing
-- 🟡 YELLOW: 5-7 explicit, 2-4 missing
-- 🔴 RED: <5 explicit, >4 missing
-
-### Deck Travelability Check
-
-Beyond question scoring, apply travelability test:
-
-- Can slide 1 be understood without voiceover?
-- Can champion repeat the problem slide?
-- Can champion answer "why this vs alternatives?"
-- Does proof work for THIS buyer's context?
-- Is the ask clear and safe?
-
-**Deck Travelability:** ___/5 pass
-
 ---
 
 ## OUTBOUND: 5 Questions
 
-Outbound has a fundamentally different job: **interruptive, cold, must earn attention first.**
-
-| Stage    | #    | Buyer Question                           | Decision Tested      | What "Explicit" Looks Like                                |
-| -------- | ---- | ---------------------------------------- | -------------------- | --------------------------------------------------------- |
-| **FIND** | O1   | Is this reaching the right person?       | Customer             | Sent to ICP-matched role/company                          |
-| **LAND** | O2   | Is the trigger relevant to me right now? | Trigger Events       | References specific trigger buyer might have              |
-|          | O3   | Is there a credible hook?                | Proof Type, Category | Social proof or category anchor in first line             |
-|          | O4   | Is value hinted (not explained)?         | Outcome              | One-line value hint, curiosity not explanation            |
-|          | O5   | Is the ask safe and clear?               | First Step           | Specific low-commitment ask ("15 min to see if relevant") |
-
-### Outbound Scoring
-
-| Status         | Definition                            |
-| -------------- | ------------------------------------- |
-| 🟢 **Explicit** | Element clearly present and effective |
-| 🟡 **Partial**  | Element present but weak or generic   |
-| 🔴 **Missing**  | Element absent                        |
-
-**Thresholds:**
-
-- 🟢 GREEN: 4-5 explicit
-- 🟡 YELLOW: 2-3 explicit
-- 🔴 RED: <2 explicit
-
-### Outbound Inference
-
-| Outbound Gap | Decision Inference           |
-| ------------ | ---------------------------- |
-| O1 weak      | Customer (ICP) FUZZY         |
-| O2 weak      | Trigger Events MISSING       |
-| O3 weak      | Category or Proof Type FUZZY |
-| O4 weak      | Outcome FUZZY                |
-| O5 weak      | First Step FUZZY             |
+| #    | Buyer Question                      | Decision Tested        | Explicit                              |
+| ---- | ----------------------------------- | ---------------------- | ------------------------------------- |
+| O1   | Is this for me specifically?        | Customer, Champion     | Role + environment named              |
+| O2   | Why now?                            | Trigger Events         | Trigger or urgency clear              |
+| O3   | What is this?                       | Category, Proof        | Category + one proof point            |
+| O4   | What do I get?                      | Outcome                | Specific result stated                |
+| O5   | What do you want me to do?          | First Step             | Clear, safe ask                       |
 
 ---
 
 ## DEMO OPENING: 7 Questions
 
-Demo has a specific job: **prove value in 5 minutes, not explain features.**
-
-The first 3 minutes determine whether buyer stays engaged for the remaining time.
-
-| Stage          | #    | Buyer Question                          | Decision Tested          | What "Explicit" Looks Like                            |
-| -------------- | ---- | --------------------------------------- | ------------------------ | ----------------------------------------------------- |
-| **MAKE SENSE** | M1   | Is expectation set in first 30 seconds? | Category, Outcome        | "In the next 5 minutes, you'll see X"                 |
-|                | M2   | Is the pain mirrored?                   | Alternative              | Buyer's current frustration acknowledged specifically |
-| **COMPARE**    | M3   | Is mechanism shown, not told?           | Difference               | Demo shows HOW, doesn't just describe                 |
-|                | M4   | Is result demonstrated?                 | Outcome                  | Live or realistic output visible                      |
-| **VALIDATE**   | M5   | Is proof embedded?                      | Proof Type               | Reference to similar customer or use case             |
-|                | M6   | Is doubt handled?                       | Primary Risk             | Common objection addressed proactively                |
-| **COMMIT**     | M7   | Is next step clear?                     | First Step, Start Recipe | "Here's what we'd do next" explicit                   |
-
-### Demo Scoring
-
-| Status         | Definition                           |
-| -------------- | ------------------------------------ |
-| 🟢 **Explicit** | Moment clearly present and effective |
-| 🟡 **Partial**  | Attempted but weak                   |
-| 🔴 **Missing**  | Not present                          |
-
-**Thresholds:**
-
-- 🟢 GREEN: 6-7 explicit
-- 🟡 YELLOW: 4-5 explicit
-- 🔴 RED: <4 explicit
-
-### Demo Inference
-
-| Demo Gap   | Decision Inference             |
-| ---------- | ------------------------------ |
-| M1 weak    | Category, Outcome FUZZY        |
-| M2 weak    | Alternative FUZZY              |
-| M3-M4 weak | Difference, Outcome FUZZY      |
-| M5-M6 weak | Proof Type, Primary Risk FUZZY |
-| M7 weak    | First Step, Start Recipe FUZZY |
+| #    | Buyer Question                      | Decision Tested        | Explicit                              |
+| ---- | ----------------------------------- | ---------------------- | ------------------------------------- |
+| M1   | What will I see in next 5 min?      | Category, Outcome      | Preview stated                        |
+| M2   | How is this different from X?       | Alternative            | Alternative named + defeated          |
+| M3   | Why should I care?                  | Difference             | Mechanism connected to pain           |
+| M4   | What result does this create?       | Outcome                | Measurable result shown               |
+| M5   | Does this work for teams like mine? | Proof Type             | Relevant proof surfaced               |
+| M6   | What's the risk?                    | Primary Risk           | Risk named + mitigated                |
+| M7   | What happens if I want to proceed?  | First Step, Start Recipe | Clear next step stated               |
 
 ---
 
-# DIAGNOSTIC FLOW
+# LAYER 6: DIAGNOSTIC PROCESS
 
-## Session Structure (90 minutes)
-
-### OPENING (5 min)
-
-Situation recognition: "Which of these sounds closest to where you are?"
+## Diagnostic Flow
 
 ### STEP 1: Surface Audit (30 min)
 
-- Pull up homepage, score 18 questions
-- Pull up deck slides 1-5, score 10 questions
-- Review outbound sample, score 5 questions
-- If demo exists, review opening 3 min, score 7 questions
+Score all primary surfaces against question sets.
+- Homepage: 20 questions
+- Deck: 10 questions
+- Outbound: 5 questions
+- Demo: 7 questions
 
-### STEP 2: Decision Inference (15 min)
+### STEP 2: Decision Inference (20 min)
 
-Map surface gaps to decision gaps using inference tables.
+Based on surface evidence, infer decision status (LOCKED / FUZZY / MISSING).
+Cross-reference patterns across surfaces.
 
 ### STEP 3: Indicator Validation (20 min)
 
@@ -663,7 +605,7 @@ Date: ___
 
 SURFACE AUDIT
 
-Homepage:      __/18 explicit   Status: 🟢/🟡/🔴
+Homepage:      __/20 explicit   Status: 🟢/🟡/🔴
 Pitch Deck:    __/10 explicit   Status: 🟢/🟡/🔴
 Outbound:      __/5 explicit    Status: 🟢/🟡/🔴
 Demo Opening:  __/7 explicit    Status: 🟢/🟡/🔴
@@ -684,6 +626,7 @@ POSITIONING (A):
   Difference:     🟢/🟡/🔴
   Outcome:        🟢/🟡/🔴
   Wedge Use Case: 🟢/🟡/🔴
+  Market Bet:     🟢/🟡/🔴
 
 TRUST (B):
   Owner/Champ:  🟢/🟡/🔴
@@ -695,13 +638,14 @@ MOVEMENT (C):
   First Step:    🟢/🟡/🔴
   Start Recipe:  🟢/🟡/🔴
   Risk Reversal: 🟢/🟡/🔴
+  Entry Motion:  🟢/🟡/🔴
 
 ACTIVATION (D):
   Activation Moment: 🟢/🟡/🔴
   First Value Path:  🟢/🟡/🔴
   Time to Value:     🟢/🟡/🔴
 
-Core Decisions Locked: __/16
+Core Decisions Locked: __/18
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -743,6 +687,7 @@ Quick reference: which questions test which decisions.
 | **Difference**        | Q11            | D5     | —          | M3     |
 | **Outcome**           | Q4, Q12        | D3, D6 | O4         | M1, M4 |
 | **Wedge Use Case**    | Q8             | —      | —          | —      |
+| **Market Bet**        | Q23            | —      | —          | —      |
 | **Owner/Champion**    | Q7             | D2, D7 | O1         | —      |
 | **Proof Type**        | Q13, Q14       | D7, D8 | O3         | M5     |
 | **Effort Shape**      | Q15            | —      | —          | —      |
@@ -750,6 +695,7 @@ Quick reference: which questions test which decisions.
 | **First Step**        | Q16            | D9     | O5         | M7     |
 | **Start Recipe**      | Q17            | D10    | —          | M7     |
 | **Risk Reversal**     | Q18            | —      | —          | —      |
+| **Entry Motion**      | Q24            | —      | —          | —      |
 | **Activation Moment** | Q17            | D10    | —          | —      |
 | **First Value Path**  | Q17            | D10    | —          | —      |
 | **Time to Value**     | Q15            | —      | —          | —      |
@@ -771,6 +717,104 @@ When multiple surfaces show the same gap, confidence in decision inference incre
 | Q13-14 weak + D7-8 weak + M5-6 weak        | Proof Type FUZZY                | HIGH       |
 | Q16-18 weak + D9-10 weak + M7 weak         | First Step + Start Recipe FUZZY | HIGH       |
 | Q8 missing                                 | Wedge Use Case MISSING          | HIGH       |
+| Q23 missing + no vertical focus            | Market Bet MISSING              | HIGH       |
+| Q24 missing + only "Request demo"          | Entry Motion MISSING            | HIGH       |
+
+---
+
+# APPENDIX: OUTBOUND READINESS SIGNALS
+
+For partner diagnostics (e.g., lead gen qualification), a subset of questions feed 6 weighted signals that determine outbound readiness.
+
+## Signal Definitions
+
+| Signal | What It Tests | Sources | Weight |
+|--------|---------------|---------|--------|
+| **priority_market_focus** | Has company prioritized one market wedge? | Q6, Q23 | 1.5 |
+| **champion_clarity** | Is there a clear champion to target? | Q6, Q7 | 1.5 |
+| **problem_specificity** | Is the pain concrete enough for cold outreach? | Q3, Q4, Q5 | 1.0 |
+| **differentiation** | Will buyers understand why this vs. alternatives? | Q1, Q2, Q8, Q10 | 1.0 |
+| **entry_offer** | Does cold interest have somewhere safe to land? | Q16, Q17, Q24 | 1.5 |
+| **trust_support** | Can champions defend the choice internally? | Q11, Q12, Q14 | 0.5 |
+
+## Signal Status Calculation
+
+For each signal, calculate status from source question scores:
+
+```python
+def calculate_signal_status(source_questions, evidence):
+    """
+    source_questions: list of question IDs (e.g., ["Q6", "Q23"])
+    evidence: dict of {question_id: score} where score is 0/1/2
+    returns: "locked" / "forming" / "not_yet"
+    """
+    scores = [evidence[q] for q in source_questions]
+    max_possible = len(scores) * 2
+    raw_ratio = sum(scores) / max_possible
+    
+    if raw_ratio >= 0.75:
+        return "locked"      # Strong enough for outbound
+    elif raw_ratio >= 0.45:
+        return "forming"     # Still forming, will create friction
+    else:
+        return "not_yet"     # Not yet locked, significant barrier
+```
+
+## Outbound Readiness Score
+
+```python
+def calculate_outbound_score(signals, weights):
+    """
+    signals: dict of {signal_name: status}
+    weights: dict of {signal_name: weight}
+    returns: 1-10 internal score
+    """
+    status_to_num = {"locked": 2, "forming": 1, "not_yet": 0}
+    
+    weighted_sum = sum(status_to_num[signals[s]] * weights[s] for s in signals)
+    max_possible = sum(2 * w for w in weights.values())  # = 14
+    
+    return round((weighted_sum / max_possible) * 10)
+```
+
+## Stage Mapping
+
+| Internal Score | Stage | Title | Recommendation |
+|----------------|-------|-------|----------------|
+| 1-4 | clarify | Clarify before outbound | Fix foundations first |
+| 5-7 | sharpen | Sharpen before ramping | Tighten, then launch |
+| 8-10 | launch | Ready to run focused outbound | Proceed with execution |
+
+## Status Display
+
+| Status | Display Badge | Color |
+|--------|---------------|-------|
+| locked | Strong enough | Green |
+| forming | Still forming | Amber |
+| not_yet | Not yet locked | Gray |
+
+## Application
+
+This signal layer is used for:
+
+1. **Partner qualification** — Lead gen agencies assessing whether prospects are ready for outbound
+2. **Self-assessment** — Founders checking readiness before investing in outbound
+3. **Routing decisions** — Determining whether to fix foundations or start execution
+
+## Outbound Consequence by Signal
+
+| Signal | If forming/not_yet | Outbound Impact |
+|--------|-------------------|-----------------|
+| priority_market_focus | No clear first market | Sequences stay generic, SDRs can't research deeply |
+| champion_clarity | No clear champion | Replies from non-buyers, longer qualification |
+| problem_specificity | Pain not concrete | Must educate before selling, high explanation burden |
+| differentiation | Why-us not sharp | Buyers need convincing on why switch now |
+| entry_offer | No safe landing | Cold interest stalls, lower reply-to-meeting |
+| trust_support | No proof ammunition | Champions struggle to defend choice internally |
+
+---
+
+See: `xray-outbound-standalone-spec.md` for full implementation details including report templates, buyer reactions, and routing logic.
 
 ---
 
@@ -780,9 +824,21 @@ When multiple surfaces show the same gap, confidence in decision inference incre
 | ------- | ---------- | ------- |
 | 4.0     | March 2026 | Initial architecture document |
 | 5.0     | March 2026 | PULL framework integration, Homepage 15→18 questions (added Q1 Project, Q5 Stakes, split Q9 into Look+Lacking), Added A6 Wedge Use Case decision, Updated scoring thresholds, Added PULL diagnostic pattern |
+| 5.1     | March 2026 | Added Q23 (Market Bet) + Q24 (Entry Motion) to homepage questions. Added A7 (Market Bet) + C4 (Entry Motion) to decisions. Added Outbound Readiness Signals appendix. Core decisions 16→18. Homepage questions 18→20. |
 
 ---
 
-**Version 5.0 — March 2026**  
+# APPENDIX: QUEUED FOR v5.2
+
+The following decision areas have been identified but not yet integrated:
+
+| Decision Area | What It Might Lock | Status |
+|---------------|-------------------|--------|
+| **Category Maturity** | Whether to lead with problem education vs. differentiation | Identified, needs framework |
+| **Offering Architecture** | How products/sprints relate, entry points, expansion paths | Identified, needs framework |
+
+---
+
+**Version 5.1 — March 2026**  
 **Product.Zone — Buying Path X-RAY Architecture**  
 **Stages → Decisions → Lenses → Surfaces → Questions**
