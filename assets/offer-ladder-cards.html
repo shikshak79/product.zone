@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product.Zone — Offer Ladder</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #FFFFFF;
+  --light: #F5F4EF;
+  --light2: #ECEAE3;
+  --lborder: #D8D6CF;
+  --ltext: #1a1a1a;
+  --lmuted: #555555;
+  --lmuted2: #888888;
+  --teal: #33C4D9;
+  --orange: #F5A623;
+  --green: #2ECC71;
+  --red: #C0392B;
+  --black: #0a0a0a;
+  --surface: #141414;
+  --dtext: #F0EFE9;
+  --dmuted: rgba(255,255,255,0.7);
+  --dmuted2: rgba(255,255,255,0.4);
+  --dborder: rgba(255,255,255,0.1);
+  --mono: 'Space Mono', monospace;
+  --display: 'Barlow Condensed', sans-serif;
+  --body: 'Barlow', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #2a2a2a;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+/* ─── CARD LABEL ─── */
+.card-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ════════════════════════════════════════════
+   CARD 1 — OVERVIEW LADDER (1920×1080)
+════════════════════════════════════════════ */
+.overview-card {
+  width: 1920px;
+  height: 1080px;
+  background: var(--light);
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.overview-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.overview-title {
+  font-family: var(--display);
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--ltext);
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+
+.overview-subtitle {
+  font-family: var(--body);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--lmuted);
+  margin-bottom: 56px;
+}
+
+.ladder {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  align-items: stretch;
+}
+
+.tier {
+  flex: 1;
+  border-radius: 8px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-free {
+  background: var(--white);
+  border: 1px solid var(--lborder);
+}
+
+.tier-entry {
+  background: var(--white);
+  border: 2px solid var(--teal);
+}
+
+.tier-sprint {
+  background: var(--black);
+  border: 2px solid var(--orange);
+}
+
+.tier-retainer {
+  background: var(--white);
+  border: 1px solid var(--lborder);
+}
+
+.tier-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.badge-free { background: rgba(51,196,217,0.12); color: var(--teal); }
+.badge-entry { background: rgba(51,196,217,0.12); color: var(--teal); }
+.badge-sprint { background: rgba(245,166,35,0.15); color: var(--orange); }
+.badge-retainer { background: rgba(46,204,113,0.12); color: var(--green); }
+
+.tier-price {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.0;
+  margin-bottom: 6px;
+}
+
+.tier-free .tier-price { font-size: 52px; color: var(--teal); }
+.tier-entry .tier-price { font-size: 52px; color: var(--ltext); }
+.tier-sprint .tier-price { font-size: 52px; color: var(--dtext); }
+.tier-retainer .tier-price { font-size: 52px; color: var(--ltext); }
+
+.tier-name {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tier-free .tier-name, .tier-entry .tier-name, .tier-retainer .tier-name { color: var(--ltext); }
+.tier-sprint .tier-name { color: var(--dtext); }
+
+.tier-duration {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+}
+
+.tier-free .tier-duration, .tier-entry .tier-duration, .tier-retainer .tier-duration { color: var(--lmuted2); }
+.tier-sprint .tier-duration { color: var(--dmuted2); }
+
+.tier-divider {
+  height: 1px;
+  margin-bottom: 24px;
+}
+
+.tier-free .tier-divider, .tier-entry .tier-divider, .tier-retainer .tier-divider { background: var(--lborder); }
+.tier-sprint .tier-divider { background: var(--dborder); }
+
+.tier-purpose {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.tier-free .tier-purpose, .tier-entry .tier-purpose, .tier-retainer .tier-purpose { color: var(--ltext); }
+.tier-sprint .tier-purpose { color: var(--dtext); }
+
+.tier-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.tier-item {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.tier-free .tier-item, .tier-entry .tier-item, .tier-retainer .tier-item { color: var(--lmuted); }
+.tier-sprint .tier-item { color: var(--dmuted); }
+
+.tier-item::before {
+  content: '–';
+  font-family: var(--mono);
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tier-free .tier-item::before { color: var(--teal); }
+.tier-entry .tier-item::before { color: var(--teal); }
+.tier-sprint .tier-item::before { color: var(--orange); }
+.tier-retainer .tier-item::before { color: var(--green); }
+
+.tier-outcome {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.tier-free .tier-outcome {
+  background: rgba(51,196,217,0.08);
+  color: var(--teal);
+  border: 1px solid rgba(51,196,217,0.2);
+}
+.tier-entry .tier-outcome {
+  background: rgba(51,196,217,0.06);
+  color: var(--teal);
+  border: 1px solid rgba(51,196,217,0.2);
+}
+.tier-sprint .tier-outcome {
+  background: rgba(245,166,35,0.1);
+  color: var(--orange);
+  border: 1px solid rgba(245,166,35,0.2);
+}
+.tier-retainer .tier-outcome {
+  background: rgba(46,204,113,0.06);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.2);
+}
+
+.arrow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+  padding-top: 40px;
+}
+
+.arrow-connector svg {
+  color: var(--lmuted2);
+}
+
+.overview-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--lborder);
+  padding-top: 24px;
+}
+
+.footer-principle {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--lmuted2);
+}
+
+.footer-principle strong {
+  color: var(--lmuted);
+}
+
+.footer-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lmuted2);
+}
+
+/* ════════════════════════════════════════════
+   CARDS 2–5 — PRODUCT DETAIL CARDS (1200×1500)
+════════════════════════════════════════════ */
+.detail-row {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.detail-card {
+  width: 1200px;
+  height: 1500px;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.detail-card.light { background: var(--light); }
+.detail-card.dark { background: var(--black); }
+
+.detail-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.detail-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.detail-price {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 1.0;
+}
+
+.light .detail-price { color: var(--ltext); }
+.dark .detail-price { color: var(--dtext); }
+.free-price { color: var(--teal) !important; }
+
+.detail-price-sub {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--lmuted);
+}
+
+.dark .detail-price-sub { color: var(--dmuted); }
+
+.detail-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.light .detail-name { color: var(--ltext); }
+.dark .detail-name { color: var(--dtext); }
+
+.detail-tagline {
+  font-family: var(--body);
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.light .detail-tagline { color: var(--lmuted); }
+.dark .detail-tagline { color: var(--dmuted); }
+
+.detail-divider {
+  height: 1px;
+  margin-bottom: 40px;
+}
+
+.light .detail-divider { background: var(--lborder); }
+.dark .detail-divider { background: var(--dborder); }
+
+.detail-section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.light .detail-section-label { color: var(--lmuted2); }
+.dark .detail-section-label { color: var(--dmuted2); }
+
+.detail-duration-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.duration-pill {
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.duration-pill.standard {
+  background: var(--white);
+  border: 1px solid var(--lborder);
+}
+.dark .duration-pill.standard {
+  background: var(--surface);
+  border: 1px solid var(--dborder);
+}
+
+.duration-pill.fast {
+  background: rgba(245,166,35,0.08);
+  border: 1px solid rgba(245,166,35,0.3);
+}
+
+.duration-pill-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.light .duration-pill.standard .duration-pill-label { color: var(--lmuted2); }
+.dark .duration-pill.standard .duration-pill-label { color: var(--dmuted2); }
+.duration-pill.fast .duration-pill-label { color: var(--orange); }
+
+.duration-pill-value {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.light .duration-pill.standard .duration-pill-value { color: var(--ltext); }
+.dark .duration-pill.standard .duration-pill-value { color: var(--dtext); }
+.duration-pill.fast .duration-pill-value { color: var(--orange); }
+
+.deliverables-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex: 1;
+}
+
+.deliverable-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.light .deliverable-item {
+  background: var(--white);
+  border: 1px solid var(--lborder);
+  color: var(--ltext);
+}
+
+.dark .deliverable-item {
+  background: var(--surface);
+  border: 1px solid var(--dborder);
+  color: var(--dtext);
+}
+
+.deliverable-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.teal-dot { background: var(--teal); }
+.orange-dot { background: var(--orange); }
+.green-dot { background: var(--green); }
+
+.detail-outcome-box {
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 0;
+}
+
+.teal-outcome {
+  background: rgba(51,196,217,0.08);
+  border: 1px solid rgba(51,196,217,0.25);
+}
+
+.orange-outcome {
+  background: rgba(245,166,35,0.08);
+  border: 1px solid rgba(245,166,35,0.25);
+}
+
+.green-outcome {
+  background: rgba(46,204,113,0.08);
+  border: 1px solid rgba(46,204,113,0.25);
+}
+
+.detail-outcome-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.teal-outcome .detail-outcome-label { color: var(--teal); }
+.orange-outcome .detail-outcome-label { color: var(--orange); }
+.green-outcome .detail-outcome-label { color: var(--green); }
+
+.detail-outcome-text {
+  font-family: var(--body);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.teal-outcome .detail-outcome-text { color: var(--ltext); }
+.orange-outcome .detail-outcome-text { color: var(--dtext); }
+.green-outcome .detail-outcome-text { color: var(--ltext); }
+
+.dark .teal-outcome .detail-outcome-text { color: var(--dtext); }
+
+.detail-brand {
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.light .detail-brand { border-top: 1px solid var(--lborder); }
+.dark .detail-brand { border-top: 1px solid var(--dborder); }
+
+.detail-brand-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.light .detail-brand-name { color: var(--lmuted2); }
+.dark .detail-brand-name { color: var(--dmuted2); }
+
+.detail-brand-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.light .detail-brand-tag { color: var(--lmuted2); }
+.dark .detail-brand-tag { color: var(--dmuted2); }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     CARD 1 — OVERVIEW LADDER
+══════════════════════════════════════════════ -->
+<div class="card-label">Card 1 · Overview Ladder · 1920×1080</div>
+<div class="overview-card">
+
+  <div class="overview-eyebrow">Product.Zone · Offer Architecture · v1.0</div>
+  <div class="overview-title">The Product Ladder</div>
+  <div class="overview-subtitle">Fixed scope. Weekly cadence. Decisions first, surfaces second.</div>
+
+  <div class="ladder">
+
+    <!-- FREE -->
+    <div class="tier tier-free">
+      <div class="tier-badge badge-free">Lead generator</div>
+      <div class="tier-price">Free</div>
+      <div class="tier-name">X-RAY Diagnostic</div>
+      <div class="tier-duration">Self-serve · No session required</div>
+      <div class="tier-divider"></div>
+      <div class="tier-purpose">Find exactly where your buying path breaks.</div>
+      <ul class="tier-items">
+        <li class="tier-item">Surface audit against 18 buyer questions</li>
+        <li class="tier-item">Decision gap map</li>
+        <li class="tier-item">Fix-first recommendation</li>
+        <li class="tier-item">Routing to right entry point</li>
+      </ul>
+      <div class="tier-outcome">Exit: You know what's broken and what to fix first.</div>
+    </div>
+
+    <div class="arrow-connector">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </div>
+
+    <!-- ENTRY -->
+    <div class="tier tier-entry">
+      <div class="tier-badge badge-entry">Entry product</div>
+      <div class="tier-price">€5K</div>
+      <div class="tier-name">Positioning &amp; Messaging Sprint</div>
+      <div class="tier-duration">3 sessions · 3 weeks standard · 2 weeks fast track</div>
+      <div class="tier-divider"></div>
+      <div class="tier-purpose">Lock the positioning decisions all surfaces depend on.</div>
+      <ul class="tier-items">
+        <li class="tier-item">Buying path diagnostic report</li>
+        <li class="tier-item">Positioning strategy (3 options, 1 chosen)</li>
+        <li class="tier-item">18 core decisions locked in decision ledger</li>
+        <li class="tier-item">Messaging spine + homepage spine draft</li>
+        <li class="tier-item">Notion workspace delivered</li>
+      </ul>
+      <div class="tier-outcome">Exit: Decisions locked. Messaging spine ready. Full Sprint gap visible.</div>
+    </div>
+
+    <div class="arrow-connector">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </div>
+
+    <!-- FULL SPRINT -->
+    <div class="tier tier-sprint">
+      <div class="tier-badge badge-sprint">Core product</div>
+      <div class="tier-price" style="color: var(--dtext);">€10K</div>
+      <div class="tier-name">Buyability &amp; Sales Motion Sprint</div>
+      <div class="tier-duration" style="color: var(--dmuted2);">6 sessions · 6 weeks standard · 4 weeks fast track</div>
+      <div class="tier-divider"></div>
+      <div class="tier-purpose" style="color: var(--dtext);">Build the complete surface set and sales motion.</div>
+      <ul class="tier-items">
+        <li class="tier-item">Full homepage copy (all sections)</li>
+        <li class="tier-item">Pitch deck — built and rehearsed</li>
+        <li class="tier-item">Sales brief + demo script</li>
+        <li class="tier-item">Objection → asset map</li>
+        <li class="tier-item">Handoff-ready Notion + Figma workspace</li>
+      </ul>
+      <div class="tier-outcome">Exit: Complete motion installed. Team can run without founder.</div>
+    </div>
+
+    <div class="arrow-connector">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </div>
+
+    <!-- RETAINER -->
+    <div class="tier tier-retainer">
+      <div class="tier-badge badge-retainer">After sprint</div>
+      <div class="tier-price">€2K<span style="font-size: 28px; color: var(--lmuted); font-weight: 600;">/mo</span></div>
+      <div class="tier-name">Stabilisation Retainer</div>
+      <div class="tier-duration">6 weeks · Bi-weekly sessions + async</div>
+      <div class="tier-divider"></div>
+      <div class="tier-purpose">Test, adjust, and stabilise positioning in the real world.</div>
+      <ul class="tier-items">
+        <li class="tier-item">Test plan for new surfaces and messaging</li>
+        <li class="tier-item">Signal interpretation (qual + quant)</li>
+        <li class="tier-item">Targeted asset adjustments</li>
+        <li class="tier-item">Readiness assessment for next Sprint</li>
+      </ul>
+      <div class="tier-outcome">Exit: Positioning stable. Clear hypothesis for next Sprint.</div>
+    </div>
+
+  </div>
+
+  <div class="overview-footer">
+    <div class="footer-principle"><strong>Fixed scope</strong> is the signature — no retainers disguised as projects, no scope negotiation mid-engagement</div>
+    <div class="footer-principle"><strong>Prerequisite:</strong> Full Sprint requires Entry Product completed first</div>
+    <div class="footer-principle"><strong>Benchmark:</strong> Fletch PMM charges $10K for equivalent entry scope</div>
+    <div class="footer-brand">Product.Zone · Offer Definitions v1.0 · March 2026</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     CARDS 2–3 — ENTRY + FULL SPRINT DETAIL
+══════════════════════════════════════════════ -->
+<div class="card-label">Cards 2–3 · Product Detail · 1200×1500 each</div>
+<div class="detail-row">
+
+  <!-- ENTRY PRODUCT -->
+  <div class="detail-card light">
+    <div class="detail-eyebrow">Entry Product · Positioning &amp; Messaging Sprint</div>
+
+    <div class="detail-price-row">
+      <div class="detail-price">€5K</div>
+    </div>
+    <div class="detail-name">Lock the decisions.<br>Build the spine.</div>
+    <div class="detail-tagline">Fixed scope. 3 sessions. Decisions first — no surfaces built until they're locked.</div>
+
+    <div class="detail-divider"></div>
+
+    <div class="detail-section-label">Duration options</div>
+    <div class="detail-duration-row">
+      <div class="duration-pill standard">
+        <div class="duration-pill-label">Standard</div>
+        <div class="duration-pill-value">3 weeks · 1 session/week</div>
+      </div>
+      <div class="duration-pill fast">
+        <div class="duration-pill-label">Fast track</div>
+        <div class="duration-pill-value">2 weeks · compressed</div>
+      </div>
+    </div>
+
+    <div class="detail-section-label">Sessions &amp; deliverables</div>
+    <ul class="deliverables-list">
+      <li class="deliverable-item">
+        <div class="deliverable-dot teal-dot"></div>
+        <div><strong>Session 1 — Diagnose.</strong> Surface audit against 18 buyer questions. Decision gap map. Buying path break identified.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot teal-dot"></div>
+        <div><strong>Session 2 — Position.</strong> Segment prioritisation. 3 positioning options ranked by risk. Bet selected.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot teal-dot"></div>
+        <div><strong>Session 3 — Decide.</strong> 18 core decisions locked. Messaging spine complete. Homepage spine draft.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot teal-dot"></div>
+        <div><strong>Handover session.</strong> Notion workspace walkthrough. Decision ledger. Messaging repository. Asset library.</div>
+      </li>
+    </ul>
+
+    <div class="detail-outcome-box teal-outcome">
+      <div class="detail-outcome-label">Exit state</div>
+      <div class="detail-outcome-text">Positioning locked. Messaging spine in hand. Clear view of what surfaces still need to be built — the natural entry point for the Full Sprint conversation.</div>
+    </div>
+
+    <div class="detail-brand">
+      <span class="detail-brand-name">Product.Zone</span>
+      <span class="detail-brand-tag">Offer Definitions v1.0</span>
+    </div>
+  </div>
+
+  <!-- FULL SPRINT -->
+  <div class="detail-card dark">
+    <div class="detail-eyebrow" style="color: var(--orange);">Full Sprint · Buyability &amp; Sales Motion</div>
+
+    <div class="detail-price-row">
+      <div class="detail-price">€10K</div>
+    </div>
+    <div class="detail-name" style="color: var(--dtext);">Build the motion.<br>Hand it off.</div>
+    <div class="detail-tagline">Takes locked decisions. Builds the complete surface set. Installs a motion others can run.</div>
+
+    <div class="detail-divider"></div>
+
+    <div class="detail-section-label">Prerequisite</div>
+    <div style="font-family: var(--mono); font-size: 11px; color: var(--orange); background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2); border-radius: 6px; padding: 12px 16px; margin-bottom: 28px; letter-spacing: 0.04em;">
+      Entry Product completed — decisions must be locked before surfaces are built
+    </div>
+
+    <div class="detail-section-label">Duration options</div>
+    <div class="detail-duration-row">
+      <div class="duration-pill standard">
+        <div class="duration-pill-label">Standard</div>
+        <div class="duration-pill-value" style="color: var(--dtext);">6 weeks · 1 session/week</div>
+      </div>
+      <div class="duration-pill fast">
+        <div class="duration-pill-label">Fast track</div>
+        <div class="duration-pill-value">4 weeks · compressed</div>
+      </div>
+    </div>
+
+    <div class="detail-section-label">Sessions &amp; deliverables</div>
+    <ul class="deliverables-list">
+      <li class="deliverable-item">
+        <div class="deliverable-dot orange-dot"></div>
+        <div><strong style="color: var(--dtext);">Session 4 — Buyability.</strong> Full homepage architecture. All 18 buyer questions answered. Production-ready copy.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot orange-dot"></div>
+        <div><strong style="color: var(--dtext);">Session 5 — Sales pitch.</strong> Pitch deck built. Founder practices delivery. Revised until it lands.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot orange-dot"></div>
+        <div><strong style="color: var(--dtext);">Session 6 — Motion.</strong> Sales brief. Demo script (5-min arc). Objection → asset map. Full handover.</div>
+      </li>
+      <li class="deliverable-item">
+        <div class="deliverable-dot orange-dot"></div>
+        <div><strong style="color: var(--dtext);">Handover session.</strong> 60 min. All assets in Notion + Figma. Version-controlled. Usage instructions. What to test next.</div>
+      </li>
+    </ul>
+
+    <div class="detail-outcome-box orange-outcome">
+      <div class="detail-outcome-label">Exit state</div>
+      <div class="detail-outcome-text">Complete, aligned surface set. Documented sales motion. A rep, agency, or co-founder can operate independently. Reps sell. Agencies execute. Decks travel.</div>
+    </div>
+
+    <div class="detail-brand">
+      <span class="detail-brand-name" style="color: var(--dmuted2);">Product.Zone</span>
+      <span class="detail-brand-tag" style="color: var(--dmuted2);">Offer Definitions v1.0</span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     CARD 4 — STABILISATION RETAINER
+══════════════════════════════════════════════ -->
+<div class="card-label">Card 4 · Stabilisation Retainer · 1200×1500</div>
+<div class="detail-card light" style="width: 1200px;">
+  <div class="detail-eyebrow">After the Sprint · Stabilisation Retainer</div>
+
+  <div class="detail-price-row">
+    <div class="detail-price">€2K</div>
+    <div class="detail-price-sub">/month</div>
+  </div>
+  <div class="detail-name">Test. Adjust.<br>Stabilise.</div>
+  <div class="detail-tagline">After the Sprint, founders need time to test new positioning in the real world. This is structured support for that period.</div>
+
+  <div class="detail-divider"></div>
+
+  <div class="detail-section-label">Format</div>
+  <div class="detail-duration-row">
+    <div class="duration-pill standard" style="flex: 2;">
+      <div class="duration-pill-label">Standard duration</div>
+      <div class="duration-pill-value">6 weeks (2 billing months)</div>
+    </div>
+    <div class="duration-pill standard">
+      <div class="duration-pill-label">Cadence</div>
+      <div class="duration-pill-value">Bi-weekly sessions + async</div>
+    </div>
+  </div>
+
+  <div class="detail-section-label">What's included</div>
+  <ul class="deliverables-list">
+    <li class="deliverable-item">
+      <div class="deliverable-dot green-dot"></div>
+      <div><strong>Test plan.</strong> Structured approach to testing new messaging and surfaces with real buyers.</div>
+    </li>
+    <li class="deliverable-item">
+      <div class="deliverable-dot green-dot"></div>
+      <div><strong>Signal interpretation.</strong> Read qualitative and quantitative signals from live conversations and surfaces.</div>
+    </li>
+    <li class="deliverable-item">
+      <div class="deliverable-dot green-dot"></div>
+      <div><strong>Asset adjustments.</strong> Targeted revisions to existing assets as signal comes in. Not new builds.</div>
+    </li>
+    <li class="deliverable-item">
+      <div class="deliverable-dot green-dot"></div>
+      <div><strong>Decision ledger updates.</strong> Refine locked decisions as real-world feedback improves them.</div>
+    </li>
+    <li class="deliverable-item">
+      <div class="deliverable-dot green-dot"></div>
+      <div><strong>Sprint readiness assessment.</strong> Clear hypothesis for what the next Sprint should address.</div>
+    </li>
+  </ul>
+
+  <div style="background: var(--white); border: 1px solid var(--lborder); border-radius: 8px; padding: 20px 24px; margin-bottom: 28px;">
+    <div class="detail-section-label" style="margin-bottom: 10px;">Not included</div>
+    <div style="font-family: var(--body); font-size: 14px; color: var(--lmuted); line-height: 1.6;">
+      New surface builds (homepage rebuild, new deck) · Lead generation or outbound execution · Weekly sessions (bi-weekly is standard)
+    </div>
+  </div>
+
+  <div class="detail-outcome-box green-outcome">
+    <div class="detail-outcome-label">Exit state</div>
+    <div class="detail-outcome-text">Positioning stable. Key signals positive. Clear hypothesis for what the next Sprint should address and when.</div>
+  </div>
+
+  <div class="detail-brand">
+    <span class="detail-brand-name">Product.Zone</span>
+    <span class="detail-brand-tag">Offer Definitions v1.0</span>
+  </div>
+</div>
+
+</body>
+</html>
