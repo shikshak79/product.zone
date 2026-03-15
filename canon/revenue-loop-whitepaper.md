@@ -2,7 +2,7 @@
 ## A System for B2B Growth That Compounds
 
 **Product.Zone — Framework Document**  
-**Version 1.1 · February 2026**
+**Version 1.2 · March 2026**
 
 ---
 
@@ -304,10 +304,10 @@ Every stage has specific decisions that unlock it.
 |-------|------------------------------|
 | Land | Category, Customer |
 | Make Sense | Alternative, Difference, Outcome |
-| Self-Select | ICP boundary, Disqualifiers |
+| Self-Select | ICP boundary, Disqualifiers, **Market Bet** |
 | Compare | Alternative (named), Mechanism |
 | Validate | Proof type, Decision risks, Value formula |
-| Commit | First step offer, Risk reversal, Start recipe |
+| Commit | First step offer, Risk reversal, Start recipe, **Entry Motion** |
 | Activate | Activation moment, First value path |
 | Embed | Habit loop, Renewal proof |
 | Expand | Value metric, Expansion trigger |
@@ -427,9 +427,11 @@ Every broken stage traces back to a missing or fuzzy decision. Category not lock
 | "Wrong people book calls" | Land | Customer, ICP boundary |
 | "Can't explain it to their boss" | Make Sense | Outcome, Difference |
 | "Everyone says maybe" | Self-Select | Disqualifiers |
+| "Sequences stay generic" | Self-Select | Market Bet |
 | "No urgency, deals drag" | Compare | Alternative (named) |
 | "Sounds good but..." | Validate | Proof type, Decision risks |
 | "Come back next quarter" | Commit | First step offer, Risk reversal |
+| "Cold interest stalls" | Commit | Entry Motion |
 | "Signed but not using" | Activate | Activation moment, First value path |
 | "Using but easy to cancel" | Embed | Habit loop |
 | "Flat revenue per account" | Expand | Expansion trigger |
@@ -487,4 +489,4 @@ Growth is pulling you.
 ---
 
 *The Revenue Loop — Product.Zone*  
-*Framework Version 1.1 · February 2026*
+*Framework Version 1.2 · March 2026*
