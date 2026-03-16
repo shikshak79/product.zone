@@ -1,10 +1,10 @@
-# Buying Path X-RAY Architecture v5.1
+# Buying Path X-RAY Architecture v5.2
 
 ## Surface-First Outside-In Diagnostic System
 
 **Purpose:** Systematic GTM diagnostic for B2B ventures  
 **Design:** Surface audit → Decision inference → Indicator validation → Results proof  
-**Version:** 5.1 — March 2026
+**Version:** 5.2 — March 2026
 
 ---
 
@@ -42,9 +42,24 @@ PULL exists independent of your product. The buyer has a project whether you exi
 - **L = Look** — What options they're actively considering
 - **L = Lacking** — Why those options are inadequate
 
-When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all missing from a surface, it signals a **product-centric surface** — a PULL problem, not a copy problem.
+When Q1 (Project), Q9 (Look), Q10 (Lacking), and Q26 (Trigger) are all missing from a surface, it signals a **product-centric surface** with no demand-side framing at all — a PULL problem, not a copy problem. Fix requires building the buyer's world into the surface before any copy work begins.
 
 **Demand intensity test:** "Hell yes, where have you been?" (intense) vs. "I can see how this would be useful" (lukewarm). If lukewarm, diagnose upstream — wrong project, not unavoidable, or lacking not acute enough.
+
+### The JTBD Distinction
+
+PULL tells you *how* the buyer is thinking (project, unavoidable, look, lacking). JTBD names *what they are trying to accomplish* — the job they have whether you exist or not.
+
+These are related but distinct:
+
+- **PULL** is a demand diagnostic — it tests whether the buyer has active, specific demand right now.
+- **JTBD** is a positioning anchor — it names the job that makes your product relevant before the buyer has even heard of you.
+
+For B2B software, the most powerful JTBD framing describes the job as a **commercial capability gap**: something a team must eventually build to achieve repeatable growth, regardless of what they currently use to try to solve it.
+
+Example: "Install commercial foundation before the next move breaks the same way" describes a JTBD that is upstream of ~80 commercial capability projects (hiring a rep, building outbound, entering a new market, briefing an agency). Naming this job correctly positions your product as prerequisite infrastructure rather than one option among many.
+
+**Test:** If the buyer would still need to accomplish this job in a world where your product doesn't exist, you have a JTBD. If the job only exists because your product is available, you have a feature.
 
 ---
 
@@ -86,15 +101,18 @@ The buyer journey through Getting to Yes.
 
 **Category:**
 
-- 🟢 LOCKED: Buyer can place you in known bucket in 3 seconds ("AI copilot for R&D teams")
-- 🟡 FUZZY: Descriptive but no anchor ("intelligent platform for science")
-- 🔴 MISSING: No category frame, just product name
+- 🟢 LOCKED: Buyer can place you in known bucket in 3 seconds ("AI copilot for R&D teams"). For new-category products: both levels present — Level 1 borrowed shelf ("go-to-market strategy & sales enablement") AND Level 2 own language ("we design and install commercial buying paths for B2B software"). Both levels required; Level 1 without Level 2 = FUZZY, Level 2 without Level 1 = FUZZY.
+- 🟡 FUZZY: Descriptive but no anchor ("intelligent platform for science"). Or: own language present but no borrowed shelf entry point, creating explanation burden.
+- 🔴 MISSING: No category frame, just product name.
 
 **Customer:**
 
-- 🟢 LOCKED: Role + company type + environment specific ("R&D leads at biotech companies with 50+ researchers")
-- 🟡 FUZZY: Too broad ("R&D teams") or too narrow (one company description)
-- 🔴 MISSING: "Anyone who needs better data"
+- 🟢 LOCKED: Role + company type + environment specific ("R&D leads at biotech companies with 50+ researchers") — OR — situation-based frame that covers multiple role types without requiring them to adopt a single identity ("responsible for making a new software product convert in a market where the buying path hasn't been built yet"). Also LOCKED when explicit disqualifiers are present — who this is NOT for is as important as who it is for.
+- 🟡 FUZZY: Too broad ("R&D teams") or too narrow (one company description). Also FUZZY when the ICP defaults to a single role label that excludes equivalent profiles with the same problem (e.g., "founders only" when corporate venture commercial leads and SME product owners have the identical need). Also FUZZY when disqualifiers are absent — vague or absent disqualifiers signal insufficient ICP confidence even when the positive ICP looks specific.
+- 🔴 MISSING: "Anyone who needs better data" / no role, no situation, no qualification criteria.
+
+**Four-profile pattern (when applicable):**  
+Some products serve multiple profiles with identical needs but different role identities. In these cases, situation-based ICP framing outperforms role-based framing because it covers all profiles without asking anyone to adopt an identity that isn't theirs. Test: "Does this buyer personally own the commercial outcome — and does the story only work when they explain it?" If yes across multiple role types, use situation framing.
 
 **Alternative:**
 
@@ -421,6 +439,8 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | **Pitch Deck (slides 1-5)**    | Land → Commit         | Champion enablement              | 60-90 seconds attention |
 | **First Outbound**             | Find → Land           | Earn attention from right person | 3 seconds scan          |
 | **Demo Opening (first 3 min)** | Make Sense → Validate | Prove value in 5 minutes         | 3 minutes to hook       |
+| **Triage Call**                | Find → Land, Self-Select | Qualification + constraint naming | 30 minutes           |
+| **LinkedIn Profile**           | Find → Land           | Category priming pre-contact     | 10s headline + 30s summary |
 
 ## Secondary Surfaces (Audit If Exists)
 
@@ -429,7 +449,7 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | Pricing Page              | Buyer economics self-serve   | When Zone 2 indicators are red       |
 | One-pager / Champion Deck | Internal travel document     | When travelability is failing        |
 | Proposal / SOW            | Approval support             | When deals stall at close            |
-| LinkedIn Profile          | Pre-contact credibility      | When outbound response is low        |
+| LinkedIn Profile          | Pre-contact credibility, category priming | When outbound response is low — run L1-L6 audit before changing the outbound message |
 | Security / Compliance Doc | Risk handling for enterprise | When enterprise deals stall at legal |
 
 ## Evidence Sources (Diagnostic Inputs)
@@ -444,7 +464,7 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 
 # LAYER 5: QUESTION SETS
 
-## HOMEPAGE: 20 Questions
+## HOMEPAGE: 22 Questions
 
 | Stage           | #    | Buyer Question                                 | Tests                    | Explicit                                           | Partial                                 | Missing                              |
 | --------------- | ---- | ---------------------------------------------- | ------------------------ | -------------------------------------------------- | --------------------------------------- | ------------------------------------ |
@@ -456,7 +476,7 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 |                 | Q6   | What triggers this?                            | Trigger Events           | Specific trigger moment named                      | General awareness                       | No trigger                           |
 | **SELF-SELECT** | Q7   | For my team?                                   | Customer, Champion       | Role + company type visible                        | Multiple personas, no priority          | Generic "teams"                      |
 |                 | Q8   | For my situation?                              | Wedge Use Case           | Qualifying conditions clear                        | Conditions implied                      | No qualification visible             |
-|                 | Q23  | Market bet prioritized?                        | Market Bet               | One vertical prioritized, case studies cluster there | 2-3 segments with priority implied      | No prioritization, 4+ verticals equally |
+|                 | Q23  | Market bet prioritized?                        | Market Bet               | One vertical prioritized, case studies cluster there | 2-3 segments with priority implied    | No prioritization, 4+ verticals equally |
 | **COMPARE**     | Q9   | What do you replace?                           | Alternative (Look)       | Current alternative explicitly named               | Alternative implied                     | No alternative named                 |
 |                 | Q10  | Why alternatives fail?                         | Alternative (Lacking)    | Specific failure mode of alternative               | Generic weakness                        | No competitive frame                 |
 |                 | Q11  | What's different?                              | Difference               | Mechanism clear in 1 sentence                      | Capability list only                    | No approach explanation              |
@@ -467,7 +487,9 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | **COMMIT**      | Q16  | How do we start, exactly?                      | First step               | Safe first step clear                              | CTA exists but unclear                  | No clear next step                   |
 |                 | Q17  | What happens after I book?                     | Activation preview       | Post-booking path clear                            | Vague onboarding                        | No activation preview                |
 |                 | Q18  | Does this feel low-risk to try?                | Risk reversal            | Risk reversal clear                                | Low commitment implied                  | No risk mitigation                   |
-|                 | Q24  | Entry motion visible?                          | Entry Motion             | Smaller first step packaged (pilot, diagnostic, entry tier) | Entry mentioned but not packaged        | Only "Request demo" or "Contact sales" |
+|                 | Q24  | Entry motion visible?                          | Entry Motion             | Smaller first step packaged (pilot, diagnostic, entry tier) | Entry mentioned but not packaged   | Only "Request demo" or "Contact sales" |
+|                 | Q25  | Does the buyer see the financial case in their terms? | ROI Framework (E3)  | Buyer's own cost/ROI calculation visible ("here's what staying with the alternative costs you") | Value claim in seller language, no buyer cost anchor | Price stated with no financial justification — buyer must invent the case themselves |
+|                 | Q26  | Do I recognise my specific commercial moment here? | JTBD, Trigger Events (F2) | Specific trigger moment named matching buyer's situation ("about to hire first rep" / "just lost third deal" / "entering new market") | Pain named but generic, no specific trigger moment | Product-centric surface — describes what the product does, not when/why buyers look for it |
 
 ### Homepage Scoring
 
@@ -477,15 +499,15 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | 🟡 **Partial**  | Answer present but vague, requires inference | +0.5  |
 | 🔴 **Missing**  | Question not answered                        | 0     |
 
-**Thresholds (20 questions):**
+**Thresholds (22 questions):**
 
-- 🟢 GREEN: 16+ explicit, <4 missing
-- 🟡 YELLOW: 11-15 explicit, 4-9 missing
-- 🔴 RED: <11 explicit, >9 missing
+- 🟢 GREEN: 18+ explicit, <4 missing
+- 🟡 YELLOW: 12-17 explicit, 4-10 missing
+- 🔴 RED: <12 explicit, >10 missing
 
 ### PULL Diagnostic Pattern
 
-When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all Missing → surface is **product-centric**, not buyer-centric. Root cause is PULL, not copy. Fix requires structural reframe, not wordsmithing.
+When Q1 (Project), Q9 (Look), Q10 (Lacking), and Q26 (Trigger) are all Missing → surface is **product-centric** with no demand-side framing. Root cause is PULL, not copy. Fix requires structural reframe, not wordsmithing.
 
 ### Question → Decision Mapping (Homepage)
 
@@ -507,14 +529,16 @@ When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all Missing → surface is *
 | Q14 Trust | Primary Risk | — |
 | Q15 Effort | Time to Value | First Value Path |
 | Q16 First step | First Step | — |
-| Q17 Activation | Start Recipe | — |
+| Q17 Activation | Start Recipe | Activation Moment |
 | Q18 Low-risk | Risk Reversal | — |
 | Q23 Market bet | Market Bet | — |
 | Q24 Entry motion | Entry Motion | — |
+| Q25 ROI Framework | ROI Framework (E3) | Cost of Alternative |
+| Q26 Trigger recognition | Trigger Events (F2) | JTBD |
 
 ---
 
-## PITCH DECK: 10 Questions
+## PITCH DECK: 12 Questions
 
 | Stage          | #    | Buyer Question                            | Decision Tested                | What "Explicit" Looks Like                         |
 | -------------- | ---- | ----------------------------------------- | ------------------------------ | -------------------------------------------------- |
@@ -528,10 +552,18 @@ When Q1 (Project), Q9 (Look), and Q10 (Lacking) are all Missing → surface is *
 |                | D8   | Can I trust this claim?                   | Proof Type, Primary Risk       | Verification path clear                            |
 | **COMMIT**     | D9   | What's the first step?                    | First Step                     | Specific, low-risk ask                             |
 |                | D10  | What happens after I say yes?             | Start Recipe, First Value Path | Post-yes path clear (Week 1-2)                     |
+|                | D11  | Does this deck work without the founder explaining it? | Travelability lens  | Every key claim self-evident — buyer can understand and share without a call. A champion could forward this and the recipient would understand the pitch. | Deck works with founder voiceover but standalone is unclear | Deck functions as presentation tool only — requires founder narration to make sense |
+|                | D12  | Is there a safe, lower-commitment first step visible? | Risk Reversal (C3), Entry Motion (C4) | Entry tier, triage call, or pilot explicitly packaged — buyer knows the safe path in | "We can start small" without specifics | Only "Contact us" or full engagement visible — no entry motion |
 
 ### Deck Scoring
 
 Same scoring as homepage (Explicit / Partial / Missing).
+
+**Thresholds (12 questions):**
+
+- 🟢 GREEN: 10+ explicit, <2 missing
+- 🟡 YELLOW: 7-9 explicit, 2-5 missing
+- 🔴 RED: <7 explicit, >5 missing
 
 ---
 
@@ -561,6 +593,77 @@ Same scoring as homepage (Explicit / Partial / Missing).
 
 ---
 
+## TRIAGE CALL: 7 Questions
+
+The triage call is a designed surface with two jobs: (1) qualify the prospect in or out, and (2) deliver immediate value — the buyer leaves with a named constraint they didn't have words for before the call. Both jobs happen in 30 minutes.
+
+| Phase       | #   | Question                                          | Tests                        | Pass                                                          | Fail                                                    |
+| ----------- | --- | ------------------------------------------------- | ---------------------------- | ------------------------------------------------------------- | ------------------------------------------------------- |
+| **QUALIFY** | T1  | Is there a specific, named commercial project right now? | PULL (Project), JTBD    | Founder names a specific project: "about to hire first rep" / "prepping for funding" / "lost three deals for the same reason" | "Want to improve GTM" — vague ambition, no specific project |
+|             | T2  | Is this genuinely urgent right now — not theoretical? | PULL (Unavoidable)        | Recent forcing event: "just lost the deal", "rep starts in 3 weeks", "board wants commercial plan by Q2" | "We should do this at some point" — no forcing event |
+|             | T3  | What have they already tried?                    | PULL (Look), Alternative      | Can name 2+ things tried with specific failure: "hired a coach but it didn't install anything" / "rewrote the deck 4 times" | "Haven't really tried anything specific yet" — too early stage |
+|             | T4  | Why has that failed?                             | PULL (Lacking), Primary Risk  | Names the gap: "story only works when I explain it" / "agency produced something but it doesn't reflect our real situation" | Circular answer — blames execution of the fix, not the root cause |
+| **DIAGNOSE**| T5  | Can you name the primary constraint in their buying path? | Diagnostic output        | By end of call: constraint named and specific ("Your primary break is at Self-Select — buyers can't tell if this is specifically for them") | Constraint still vague: "you need better messaging" |
+|             | T6  | Are they personally accountable for the commercial outcome? | Owner/Champion (B1)     | Yes — owns revenue, pipeline, or commercial conversion. In every session themselves. | Delegating the engagement: "my head of marketing will be the main contact" |
+| **ROUTE**   | T7  | Is the decision theirs to make?                  | Stakeholder Map (G1)          | Can commit without further approval, or has clear path to approval with timeline | "I'll need to take this to the board / investors / CFO" with no clear path or timeline |
+
+### Triage Call Scoring
+
+Unlike homepage/deck, the triage call is scored pass/fail per question — not Explicit/Partial/Missing.
+
+**Strong fit (proceed to entry product):**  
+T1 ✓ + T2 ✓ + T3 ✓ + T4 ✓ + T6 ✓ + T7 ✓ — qualify in. Named constraint (T5) becomes the opening line of the follow-up.
+
+**Weak fit (explore before proceeding):**  
+T1 or T2 fail — timing is wrong. T3 or T4 vague — not enough diagnostic material. Probe deeper before recommending.
+
+**Out of scope (redirect honestly):**  
+T6 fails (not accountable), or problem is demand generation ("we need more leads"), or pre-product/pre-offer stage.
+
+### Triage Call — PULL Check
+
+Run the four PULL elements as a rapid filter before minute 10:
+
+- **P** (T1): Is there a named project? If no → timing is wrong
+- **U** (T2): Is it unavoidable right now? If no → theoretical, not a buyer
+- **L** (T3): What have they tried? If vague → not deep enough in the problem
+- **L** (T4): Why has that failed? If circular → may be looking for execution help, not the foundation fix
+
+When all four are clear and specific → demand intensity is high. Proceed with confidence.  
+When P or U is missing → do not pitch. Acknowledge the situation honestly: "I don't think now is the right moment — here's what I'd suggest instead."
+
+---
+
+## LINKEDIN PROFILE: 6 Questions
+
+LinkedIn Profile's job: prime the buyer's mental model before any contact lands. A prospect who looks up the founder's LinkedIn after receiving an outbound message should leave with: category placed, problem recognised, credibility established, and curiosity triggered.
+
+Audit conducted in 10 seconds (headline scan) + 30 seconds (summary + recent posts).
+
+| Stage           | #   | Buyer Question                                    | Tests              | Explicit                                                       | Partial                                       | Missing                                     |
+| --------------- | --- | ------------------------------------------------- | ------------------ | -------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------- |
+| **LAND**        | L1  | What does this person do — in 5 words?            | Category (A1)      | Category name in headline ("Buying Path Builder for B2B SaaS" / "GTM & Sales Motion for European Software Founders") | Job title only ("Founder at Product.Zone") | Personal brand language with no category ("Helping companies grow") |
+|                 | L2  | Is this relevant to someone like me?              | Customer (A2)      | ICP visible in headline or summary ("for post-MVP B2B software teams") | "Helping founders" — too broad             | No ICP signal, universal language           |
+| **MAKE SENSE**  | L3  | What problem do they solve — specifically?        | Alternative (A3), JTBD | Named problem with alternative framing: "story only works when founder explains it" / "sales motion that stops when you step back" | Generic pain ("GTM is hard") without specific failure mode | No problem named, only capabilities listed |
+|                 | L4  | Does their recent content match their claim?      | Market Bet (A7), Category (A1) | Recent posts use consistent language, address the ICP's problems, demonstrate the methodology — category claim reinforced | Post topics varied, some relevant | Posts disconnected from profile claim — creates cognitive dissonance |
+| **VALIDATE**    | L5  | Can I trust this person knows what they're talking about? | Proof Type (B2) | Specific client results, before/after stories, or methodology demonstrations visible in posts or featured section | Testimonials/logos only, no specifics | No proof, only claims                       |
+| **COMMIT**      | L6  | Is there a natural next step if I want to engage? | First Step (C1), Entry Motion (C4) | Clear CTA in summary or featured section: "Schedule a Buying Path Triage" / "Take the free X-RAY diagnostic" — specific, low-commitment | "DM me" or "Book a call" — vague, no promise | No CTA, passive presence only              |
+
+### LinkedIn Profile Scoring
+
+**Thresholds (6 questions):**
+
+- 🟢 GREEN: 5-6 explicit — profile is doing pre-contact work, warms buyer before outreach lands
+- 🟡 YELLOW: 3-4 explicit — profile is present but neutral, not pulling weight
+- 🔴 RED: <3 explicit — profile creates confusion or is invisible; outbound lands cold regardless of message quality
+
+**Key diagnostic signal:**  
+When L1 is Missing and L4 shows inconsistent posts → the LinkedIn channel is not warming the market bet. Every outbound message arrives as if the prospect has never heard of you, regardless of how good the message is.
+
+When L3 is Missing → profile describes the seller's capabilities but not the buyer's problem. This is the product-centric surface pattern — and it appears in outbound performance data as low reply rates from qualified prospects.
+
+---
+
 # LAYER 6: DIAGNOSTIC PROCESS
 
 ## Diagnostic Flow
@@ -568,10 +671,12 @@ Same scoring as homepage (Explicit / Partial / Missing).
 ### STEP 1: Surface Audit (30 min)
 
 Score all primary surfaces against question sets.
-- Homepage: 20 questions
-- Deck: 10 questions
+- Homepage: 22 questions
+- Deck: 12 questions
 - Outbound: 5 questions
 - Demo: 7 questions
+- Triage Call: 7 pass/fail
+- LinkedIn Profile: 6 questions
 
 ### STEP 2: Decision Inference (20 min)
 
@@ -605,15 +710,17 @@ Date: ___
 
 SURFACE AUDIT
 
-Homepage:      __/20 explicit   Status: 🟢/🟡/🔴
-Pitch Deck:    __/10 explicit   Status: 🟢/🟡/🔴
-Outbound:      __/5 explicit    Status: 🟢/🟡/🔴
-Demo Opening:  __/7 explicit    Status: 🟢/🟡/🔴
+Homepage:       __/22 explicit   Status: 🟢/🟡/🔴
+Pitch Deck:     __/12 explicit   Status: 🟢/🟡/🔴
+Outbound:       __/5 explicit    Status: 🟢/🟡/🔴
+Demo Opening:   __/7 explicit    Status: 🟢/🟡/🔴
+Triage Call:    __/7 pass        Status: 🟢/🟡/🔴
+LinkedIn:       __/6 explicit    Status: 🟢/🟡/🔴
 
 Earliest break: _________ stage
 
-PULL Diagnostic: Q1 __ Q9 __ Q10 __
-[If all three Missing → Product-centric surface, PULL problem]
+PULL Diagnostic: Q1 __ Q9 __ Q10 __ Q26 __
+[If all four Missing → Product-centric surface, PULL problem]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -677,30 +784,34 @@ What to fix this week:
 
 # APPENDIX: DECISION → QUESTION MAPPING
 
-Quick reference: which questions test which decisions.
+Quick reference: which questions test which decisions across all six surfaces.
 
-| Decision              | Homepage Q     | Deck Q | Outbound Q | Demo Q |
-| --------------------- | -------------- | ------ | ---------- | ------ |
-| **Category**          | Q2, Q3         | D1     | O3         | M1     |
-| **Customer**          | Q7             | D2     | O1         | —      |
-| **Alternative**       | Q4, Q9, Q10    | D3, D4 | —          | M2     |
-| **Difference**        | Q11            | D5     | —          | M3     |
-| **Outcome**           | Q4, Q12        | D3, D6 | O4         | M1, M4 |
-| **Wedge Use Case**    | Q8             | —      | —          | —      |
-| **Market Bet**        | Q23            | —      | —          | —      |
-| **Owner/Champion**    | Q7             | D2, D7 | O1         | —      |
-| **Proof Type**        | Q13, Q14       | D7, D8 | O3         | M5     |
-| **Effort Shape**      | Q15            | —      | —          | —      |
-| **Primary Risk**      | Q14, Q18       | D8     | —          | M6     |
-| **First Step**        | Q16            | D9     | O5         | M7     |
-| **Start Recipe**      | Q17            | D10    | —          | M7     |
-| **Risk Reversal**     | Q18            | —      | —          | —      |
-| **Entry Motion**      | Q24            | —      | —          | —      |
-| **Activation Moment** | Q17            | D10    | —          | —      |
-| **First Value Path**  | Q17            | D10    | —          | —      |
-| **Time to Value**     | Q15            | —      | —          | —      |
-| **Trigger Events**    | Q6             | D4     | O2         | —      |
-| **Cost of Alt**       | Q5             | —      | —          | —      |
+| Decision              | Homepage Q         | Deck Q   | Outbound Q | Demo Q  | Triage  | LinkedIn |
+| --------------------- | ------------------ | -------- | ---------- | ------- | ------- | -------- |
+| **Category**          | Q2, Q3             | D1       | O3         | M1      | —       | L1       |
+| **Customer**          | Q7                 | D2       | O1         | —       | T6      | L2       |
+| **Alternative**       | Q4, Q9, Q10        | D3, D4   | —          | M2      | T3, T4  | L3       |
+| **Difference**        | Q11                | D5       | —          | M3      | —       | —        |
+| **Outcome**           | Q4, Q12            | D3, D6   | O4         | M1, M4  | —       | —        |
+| **Wedge Use Case**    | Q8                 | —        | —          | —       | T1      | —        |
+| **Market Bet**        | Q23                | —        | —          | —       | —       | L4       |
+| **Owner/Champion**    | Q7                 | D2, D7   | O1         | —       | T6      | —        |
+| **Proof Type**        | Q13, Q14           | D7, D8   | O3         | M5      | —       | L5       |
+| **Effort Shape**      | Q15                | —        | —          | —       | —       | —        |
+| **Primary Risk**      | Q14, Q18           | D8, D12  | —          | M6      | —       | —        |
+| **First Step**        | Q16                | D9       | O5         | M7      | —       | L6       |
+| **Start Recipe**      | Q17                | D10      | —          | M7      | —       | —        |
+| **Risk Reversal**     | Q18                | D12      | —          | —       | —       | —        |
+| **Entry Motion**      | Q24                | D12      | —          | —       | —       | L6       |
+| **Activation Moment** | Q17                | D10      | —          | —       | —       | —        |
+| **First Value Path**  | Q17                | D10      | —          | —       | —       | —        |
+| **Time to Value**     | Q15                | —        | —          | —       | —       | —        |
+| **Trigger Events**    | Q6, Q26            | D4       | O2         | —       | T2      | —        |
+| **JTBD**              | Q26                | —        | —          | —       | T1      | L3       |
+| **ROI Framework**     | Q25                | —        | —          | —       | —       | —        |
+| **Cost of Alt**       | Q5, Q25            | —        | —          | —       | —       | —        |
+| **Travelability**     | —                  | D11      | —          | —       | —       | —        |
+| **Stakeholder Map**   | —                  | —        | —          | —       | T7      | —        |
 
 ---
 
@@ -713,12 +824,16 @@ When multiple surfaces show the same gap, confidence in decision inference incre
 | Q2-3 partial + D1 partial                  | Category FUZZY                  | HIGH       |
 | Q7 missing + D2 missing + O1 weak          | Customer MISSING                | HIGH       |
 | Q9-10 missing + no alternative on any surface | Alternative MISSING          | HIGH       |
-| Q1 + Q9 + Q10 all missing                  | PULL problem — product-centric  | HIGH       |
+| Q1 + Q9 + Q10 + Q26 all missing            | PULL problem — product-centric  | HIGH       |
 | Q13-14 weak + D7-8 weak + M5-6 weak        | Proof Type FUZZY                | HIGH       |
 | Q16-18 weak + D9-10 weak + M7 weak         | First Step + Start Recipe FUZZY | HIGH       |
 | Q8 missing                                 | Wedge Use Case MISSING          | HIGH       |
 | Q23 missing + no vertical focus            | Market Bet MISSING              | HIGH       |
 | Q24 missing + only "Request demo"          | Entry Motion MISSING            | HIGH       |
+| Q25 missing + price stated without ROI     | ROI Framework MISSING           | HIGH       |
+| Q26 missing + L3 missing + T1 fails        | JTBD not defined                | HIGH       |
+| D11 RED + founder required on every call   | Travelability FAILING           | HIGH       |
+| L1 missing + L4 inconsistent posts         | LinkedIn not warming market     | HIGH       |
 
 ---
 
@@ -753,11 +868,11 @@ def calculate_signal_status(source_questions, evidence):
     raw_ratio = sum(scores) / max_possible
     
     if raw_ratio >= 0.75:
-        return "locked"      # Strong enough for outbound
+        return "locked"
     elif raw_ratio >= 0.45:
-        return "forming"     # Still forming, will create friction
+        return "forming"
     else:
-        return "not_yet"     # Not yet locked, significant barrier
+        return "not_yet"
 ```
 
 ## Outbound Readiness Score
@@ -795,8 +910,6 @@ def calculate_outbound_score(signals, weights):
 
 ## Application
 
-This signal layer is used for:
-
 1. **Partner qualification** — Lead gen agencies assessing whether prospects are ready for outbound
 2. **Self-assessment** — Founders checking readiness before investing in outbound
 3. **Routing decisions** — Determining whether to fix foundations or start execution
@@ -825,20 +938,47 @@ See: `xray-outbound-standalone-spec.md` for full implementation details includin
 | 4.0     | March 2026 | Initial architecture document |
 | 5.0     | March 2026 | PULL framework integration, Homepage 15→18 questions (added Q1 Project, Q5 Stakes, split Q9 into Look+Lacking), Added A6 Wedge Use Case decision, Updated scoring thresholds, Added PULL diagnostic pattern |
 | 5.1     | March 2026 | Added Q23 (Market Bet) + Q24 (Entry Motion) to homepage questions. Added A7 (Market Bet) + C4 (Entry Motion) to decisions. Added Outbound Readiness Signals appendix. Core decisions 16→18. Homepage questions 18→20. |
+| 5.2     | March 2026 | Added JTBD Distinction paragraph to Framework Philosophy. Expanded A2 Customer scoring with four-profile/situation-based pattern and disqualifier discipline. Expanded A1 Category scoring with two-level frame. Homepage 20→22 questions (Q25 ROI Framework, Q26 Trigger recognition). Deck 10→12 questions (D11 Travelability, D12 Risk Reversal + Entry Motion). Added Triage Call surface (T1–T7). Added LinkedIn Profile surface (L1–L6). Updated PULL pattern to include Q26. Updated inference patterns. Expanded decision→question mapping table to 6 surfaces. Total questions: 42→59. Resolved two queued v5.2 items: Category Maturity, Offering Architecture. |
 
 ---
 
-# APPENDIX: QUEUED FOR v5.2
+# APPENDIX: RESOLVED v5.2 ITEMS
 
-The following decision areas have been identified but not yet integrated:
+## Resolved: Category Maturity
+
+**Resolution:** Category Maturity maps to a two-level frame for new-category products:
+
+**Level 1 — Borrowed shelf:** Use an existing category name the buyer already holds. This is the recognition layer — tells the buyer which shelf to put you on in 3 seconds without requiring education.
+
+**Level 2 — Own language:** Immediately sharpen with your specific category frame. This is the contrast layer — separates you from everything else on the same shelf.
+
+**Scoring implication:** A product in a new category scores FUZZY (not LOCKED) on A1 if it only has Level 1 or only has Level 2. Both levels must be present and sequenced (Level 1 first, Level 2 immediately after) for LOCKED.
+
+## Resolved: Offering Architecture
+
+**Resolution:** Offering Architecture maps to C4 (Entry Motion) and the decisions-first build sequence. The pattern that recurs across successful offering designs:
+
+```
+FREE / DIAGNOSTIC  → Self-qualify, build urgency, route to entry
+ENTRY PRODUCT      → Lock positioning decisions (Types A-B), produce messaging spine
+CORE PRODUCT       → Build surfaces from locked decisions (Types C-D), install motion
+RETAINER           → Stabilise, test, embed, next path
+```
+
+**Critical constraint:** Surfaces must not be built before decisions are locked. Teams that jump to building homepage, deck, or demo script before Types A-B decisions are clear produce surfaces that look complete but answer no buyer questions.
+
+---
+
+# APPENDIX: QUEUED FOR v5.3
 
 | Decision Area | What It Might Lock | Status |
 |---------------|-------------------|--------|
-| **Category Maturity** | Whether to lead with problem education vs. differentiation | Identified, needs framework |
-| **Offering Architecture** | How products/sprints relate, entry points, expansion paths | Identified, needs framework |
+| **Evidence Confidence Layer** | Second status dimension alongside Locked/Fuzzy/Missing — distinguishing Assumed / Observed / Validated / Proven | Identified, needs framework |
+| **Smallest Viable Wedge** | Given a diagnostic, which 3 decisions to lock first to unblock movement | Identified, needs framework |
+| **Sector Door Adaptations** | How the 18 core decisions adapt per sector door (space/geo, corporate venture, deep-tech, etc.) | Identified, needs framework |
 
 ---
 
-**Version 5.1 — March 2026**  
+**Version 5.2 — March 2026**  
 **Product.Zone — Buying Path X-RAY Architecture**  
 **Stages → Decisions → Lenses → Surfaces → Questions**
