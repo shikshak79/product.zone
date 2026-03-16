@@ -97,6 +97,7 @@ The buyer journey through Getting to Yes.
 | A6   | **Wedge Use Case** | The narrow entry point buyer would start with — specific enough to visualize Week 1 | Self-Select         |
 | A7   | **Market Bet**     | Which market wedge is prioritized first — the vertical or segment you lead with | Self-Select         |
 | A8   | **Category Maturity** | Whether market is educated (differentiate) or emerging (educate first)  | Land, Make Sense    |
+| A0   | **Client-Side JTBD** | The job buyers think they are hiring for — in their own words, before meeting you | Land, Make Sense, Self-Select |
 
 ### Scoring Criteria
 
@@ -161,6 +162,28 @@ Some products serve multiple profiles with identical needs but different role id
 Pattern to watch: If A3 (Alternative) is MISSING but founder insists "everyone knows the problem" — likely Category Maturity mismatch. Market may be less educated than founder believes.
 
 Pattern to watch: If surfaces lead with problem education but buyer already uses a competitor — likely over-educating an educated market. Wastes buyer attention, feels condescending.
+
+**Client-Side JTBD:**
+
+- 🟢 LOCKED: Surfaces speak the buyer's job in the buyer's own language. At least one of the three transition JTBDs is explicitly visible: "enable others to carry the story without me" / "make the rep hire work" / "stop being in every call." T2 (Bringing Others In) is visible as the primary entry JTBD. The three-transition self-selection structure is present so every buyer can place themselves.
+- 🟡 FUZZY: Supplier framing present ("install buying path", "commercial foundation") without translation into buyer job language. Or: one transition visible but the three-fold recognition structure is missing — some buyers can't place themselves.
+- 🔴 MISSING: Surface only describes the product or methodology. No buyer job is named anywhere. Buyer must figure out whether this is relevant to their situation without any recognition cues.
+
+**Three-layer JTBD model (diagnostic reference):**
+
+| Layer | T1 — First Sales | T2 — Bringing Others In (PRIMARY) | T3 — Scaling Beyond You |
+|-------|-----------------|-----------------------------------|-------------------------|
+| **Unavoidable projects** | Make first sales work / define buyer and wedge / sharpen pitch / package first offer | Hire and onboard first commercial lead / make story transferable / build repeatable sales surfaces / grow through outbound | Defend price / create proof / systemize motion / scale beyond founder / choose next focus |
+| **Observable pattern** | Pitching every call, deck different every time, interest but no conversions | About to hire rep, briefing agencies badly, deck needs voiceover, board can't be answered from surfaces | Stepped back once, conversion dropped, stepped back in — every rep tells a different story |
+| **Surface language** | "First sales become repeatable" | "Others can now carry it" | "The system runs without you" |
+
+**Why T2 is primary entry JTBD:** The rep hire moment is the most concrete, most time-pressured, and creates the clearest before/after story (advocate story: "rep closes first deal solo"). T1 tends to be too early — founders unsure they need this. T3 tends to be too late — already burned out. T2 has urgency, specificity, and a clear forcing event.
+
+All three JTBDs lead to the same Sprint. The three-transition self-selection structure (S02) exists to catch all three — no buyer should reach it without recognising their moment.
+
+Pattern to watch: If Q27 is MISSING and outbound reply rates are low from qualified prospects — surfaces are speaking the vendor's framing, not the buyer's job. Fix requires rewriting around buyer job language before any other copy work.
+
+Pattern to watch: If T1 and T3 buyers self-select but T2 does not — primary JTBD is not prominently visible on the surface. Check homepage hero and primary CTA language.
 
 ---
 
@@ -428,16 +451,16 @@ Pattern to watch: If pricing conversations always feel custom — Offering Archi
 
 | Type                  | Count  | Build Sequence |
 | --------------------- | ------ | -------------- |
-| A: Positioning        | 8      | Lock first     |
+| A: Positioning        | 9      | Lock first     |
 | B: Trust              | 4      | Lock second    |
 | C: Movement           | 4      | Lock third     |
 | D: Activation         | 3      | Lock last      |
-| **Core Total**        | **19** | —              |
+| **Core Total**        | **20** | —              |
 | E: Economic           | 6      | Parallel track |
 | F: Discovery          | 4      | Parallel track |
 | G: Approval           | 4      | Parallel track |
 | **Operational Total** | **14** | —              |
-| **TOTAL**             | **33** | —              |
+| **TOTAL**             | **34** | —              |
 
 ---
 
@@ -530,6 +553,7 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 |                 | Q24  | Entry motion visible?                          | Entry Motion             | Smaller first step packaged (pilot, diagnostic, entry tier) | Entry mentioned but not packaged   | Only "Request demo" or "Contact sales" |
 |                 | Q25  | Does the buyer see the financial case in their terms? | ROI Framework (E3)  | Buyer's own cost/ROI calculation visible ("here's what staying with the alternative costs you") | Value claim in seller language, no buyer cost anchor | Price stated with no financial justification — buyer must invent the case themselves |
 |                 | Q26  | Do I recognise my specific commercial moment here? | JTBD, Trigger Events (F2) | Specific trigger moment named matching buyer's situation ("about to hire first rep" / "just lost third deal" / "entering new market") | Pain named but generic, no specific trigger moment | Product-centric surface — describes what the product does, not when/why buyers look for it |
+|                 | Q27  | Does this surface speak my job — not the vendor's framing of it? | Client-Side JTBD (A0) | Buyer's own job visible in surface language: "enable others to carry the story" / "make the rep hire work" / "stop being in every call" — language the buyer would use themselves | Surface uses supplier framing ("install buying path", "commercial foundation") without translating to buyer job language | Surface only describes the product or methodology — no buyer job visible anywhere |
 
 ### Homepage Scoring
 
@@ -539,11 +563,11 @@ If <3 pass → materials require founder on every call. Travelability is RED.
 | 🟡 **Partial**  | Answer present but vague, requires inference | +0.5  |
 | 🔴 **Missing**  | Question not answered                        | 0     |
 
-**Thresholds (22 questions):**
+**Thresholds (23 questions):**
 
-- 🟢 GREEN: 18+ explicit, <4 missing
-- 🟡 YELLOW: 12-17 explicit, 4-10 missing
-- 🔴 RED: <12 explicit, >10 missing
+- 🟢 GREEN: 19+ explicit, <4 missing
+- 🟡 YELLOW: 13-18 explicit, 4-10 missing
+- 🔴 RED: <13 explicit, >10 missing
 
 ### PULL Diagnostic Pattern
 
@@ -575,6 +599,7 @@ When Q1 (Project), Q9 (Look), Q10 (Lacking), and Q26 (Trigger) are all Missing �
 | Q24 Entry motion | Entry Motion | — |
 | Q25 ROI Framework | ROI Framework (E3) | Cost of Alternative |
 | Q26 Trigger recognition | Trigger Events (F2) | JTBD |
+| Q27 Client-side JTBD | Client-Side JTBD (A0) | Trigger Events |
 
 ---
 
@@ -854,6 +879,7 @@ Quick reference: which questions test which decisions across all six surfaces.
 | **Stakeholder Map**   | —                  | —        | —          | —       | T7      | —        |
 | **Category Maturity** | Q2, Q3, Q4, Q9     | D1, D3   | O3         | M2      | —       | —        |
 | **Offering Architecture** | Q24            | —        | —          | —       | —       | —        |
+| **Client-Side JTBD**  | Q26, Q27           | —        | O2         | —       | T1      | L3       |
 
 ---
 
@@ -985,7 +1011,7 @@ See: `xray-outbound-standalone-spec.md` for full implementation details includin
 | 4.0     | March 2026 | Initial architecture document |
 | 5.0     | March 2026 | PULL framework integration, Homepage 15→18 questions (added Q1 Project, Q5 Stakes, split Q9 into Look+Lacking), Added A6 Wedge Use Case decision, Updated scoring thresholds, Added PULL diagnostic pattern |
 | 5.1     | March 2026 | Added Q23 (Market Bet) + Q24 (Entry Motion) to homepage questions. Added A7 (Market Bet) + C4 (Entry Motion) to decisions. Added Outbound Readiness Signals appendix. Core decisions 16→18. Homepage questions 18→20. |
-| 5.2     | March 2026 | Added JTBD Distinction paragraph to Framework Philosophy. Expanded A1 Category scoring with two-level frame. Expanded A2 Customer scoring with four-profile/situation-based pattern and disqualifier discipline. Added A8 (Category Maturity) — locks whether market is educated vs. emerging. Added E6 (Offering Architecture) — locks how products/tiers relate and create expansion paths. Homepage 20→22 questions (Q25 ROI Framework, Q26 Trigger recognition). Deck 10→12 questions (D11 Travelability, D12 Risk Reversal + Entry Motion). Added Triage Call surface (T1–T7, pass/fail). Added LinkedIn Profile surface (L1–L6). Updated PULL pattern to include Q26. Expanded decision→question mapping to 6 surfaces. Added 9 new inference patterns. Core decisions 18→19. Total decisions 31→33. Total questions 42→59 across 6 surfaces. |
+| 5.2     | March 2026 | Added JTBD Distinction paragraph to Framework Philosophy. Expanded A1 Category scoring with two-level frame. Expanded A2 Customer scoring with four-profile/situation-based pattern and disqualifier discipline. Added A8 (Category Maturity) — locks whether market is educated vs. emerging. Added E6 (Offering Architecture) — locks how products/tiers relate and create expansion paths. Added A0 (Client-Side JTBD) — locks the three jobs buyers think they are hiring for in their own words, including three-layer model (unavoidable projects / observable patterns / surface language) and T2 as primary entry JTBD. Homepage 20→23 questions (Q25 ROI visibility, Q26 trigger recognition, Q27 client-side JTBD). Deck 10→12 questions (D11 Travelability, D12 Risk Reversal + Entry Motion). Added Triage Call surface (T1–T7, pass/fail). Added LinkedIn Profile surface (L1–L6). Updated PULL pattern to include Q26. Expanded decision→question mapping to 6 surfaces. Added inference patterns. Core decisions 18→20. Total decisions 31→34. Total questions 42→60 across 6 surfaces. |
 
 ---
 
