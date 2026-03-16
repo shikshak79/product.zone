@@ -96,6 +96,7 @@ The buyer journey through Getting to Yes.
 | A5   | **Outcome**        | What buyer can now do that they couldn't                                | Make Sense          |
 | A6   | **Wedge Use Case** | The narrow entry point buyer would start with — specific enough to visualize Week 1 | Self-Select         |
 | A7   | **Market Bet**     | Which market wedge is prioritized first — the vertical or segment you lead with | Self-Select         |
+| A8   | **Category Maturity** | Whether market is educated (differentiate) or emerging (educate first)  | Land, Make Sense    |
 
 ### Scoring Criteria
 
@@ -143,6 +144,23 @@ Some products serve multiple profiles with identical needs but different role id
 - 🟢 LOCKED: One vertical explicitly prioritized with rationale ("We're starting with biotech because they have the most acute version of this problem and we have 3 case studies there")
 - 🟡 FUZZY: 2-3 markets mentioned with slight priority implied, but no clear commitment ("We work mostly with healthcare and finance")
 - 🔴 MISSING: 4+ verticals listed equally ("We serve healthcare, finance, manufacturing, retail, and education") or no vertical specificity at all ("For teams that want to...")
+
+**Category Maturity:**
+
+- 🟢 LOCKED: Clear read on market awareness — either (a) educated market with named competitors and established category, messaging leads with differentiation, OR (b) emerging market where problem education comes first, alternative is "doing nothing" or workarounds
+- 🟡 FUZZY: Mixed signals — some problem education, some differentiation, unclear which market state is assumed. Messaging oscillates between "here's why we're better than X" and "here's why you need this category at all"
+- 🔴 MISSING: No awareness of market state. Assumes buyer understands category when they don't, or over-explains to buyers who already get it. Mismatch between messaging strategy and actual market education level
+
+**Diagnostic implications:**
+
+| Market State | Alternative Expression | Difference Expression | Messaging Lead |
+|--------------|------------------------|----------------------|----------------|
+| **Educated** | Named competitor ("vs. Salesforce") | Competitive advantage ("faster, cheaper, integrated") | Differentiation |
+| **Emerging** | "Doing nothing" / manual workaround | "Why this approach works" | Problem education |
+
+Pattern to watch: If A3 (Alternative) is MISSING but founder insists "everyone knows the problem" — likely Category Maturity mismatch. Market may be less educated than founder believes.
+
+Pattern to watch: If surfaces lead with problem education but buyer already uses a competitor — likely over-educating an educated market. Wastes buyer attention, feels condescending.
 
 ---
 
@@ -271,6 +289,7 @@ Buyer won't commit unless they can visualize what happens after "yes." These are
 | E3   | **ROI Framework**       | How buyer justifies spend internally (formula, benchmarks) |
 | E4   | **Price Point**         | What you charge (aligned with buyer WTP)                   |
 | E5   | **Value Metric**        | How buyer measures success / expansion trigger             |
+| E6   | **Offering Architecture** | How products/tiers relate — entry points, expansion paths, bundle logic |
 
 ### Scoring Criteria
 
@@ -303,6 +322,27 @@ Buyer won't commit unless they can visualize what happens after "yes." These are
 - 🟢 LOCKED: Measurable trigger for expansion ("When usage exceeds X" or "When they save Y hours")
 - 🟡 FUZZY: Has metric but not tied to expansion
 - 🔴 MISSING: No value metric defined
+
+**Offering Architecture:**
+
+- 🟢 LOCKED: Clear map of how offerings relate — entry tier leads to core product, core product has natural expansion trigger, tiers are priced to the decision-maker at each level. Buyer can visualize: "I'd start here, then expand to there"
+- 🟡 FUZZY: Multiple products exist but relationship unclear. Entry Motion (C4) exists but expansion path is vague. Buyer can get in but can't see what's next — or next step feels like starting over
+- 🔴 MISSING: Single monolithic offering with no entry point, OR multiple products that feel disconnected (separate sales conversations, separate value props, no upgrade logic). Buyer must choose big-bang transformation or walk away
+
+**Relationship to Entry Motion (C4):**
+
+| Decision | What It Locks | Scope |
+|----------|---------------|-------|
+| **C4 Entry Motion** | The specific foot-in-the-door offer | Single entry point |
+| **E6 Offering Architecture** | The map Entry Motion fits into | Full product/tier structure |
+
+Entry Motion answers: "What's the safe first step?" Offering Architecture answers: "Where does that first step lead?" Without E6, C4 is a dead end — entry converts but expansion stalls because there's no clear "what's next."
+
+Pattern to watch: If C4 (Entry Motion) is LOCKED but deals don't expand — likely Offering Architecture gap.
+
+Pattern to watch: If buyer asks "what's the full picture?" early — Offering Architecture isn't visible enough.
+
+Pattern to watch: If pricing conversations always feel custom — Offering Architecture probably MISSING.
 
 ---
 
@@ -388,16 +428,16 @@ Buyer won't commit unless they can visualize what happens after "yes." These are
 
 | Type                  | Count  | Build Sequence |
 | --------------------- | ------ | -------------- |
-| A: Positioning        | 7      | Lock first     |
+| A: Positioning        | 8      | Lock first     |
 | B: Trust              | 4      | Lock second    |
 | C: Movement           | 4      | Lock third     |
 | D: Activation         | 3      | Lock last      |
-| **Core Total**        | **18** | —              |
-| E: Economic           | 5      | Parallel track |
+| **Core Total**        | **19** | —              |
+| E: Economic           | 6      | Parallel track |
 | F: Discovery          | 4      | Parallel track |
 | G: Approval           | 4      | Parallel track |
-| **Operational Total** | **13** | —              |
-| **TOTAL**             | **31** | —              |
+| **Operational Total** | **14** | —              |
+| **TOTAL**             | **33** | —              |
 
 ---
 
@@ -812,6 +852,8 @@ Quick reference: which questions test which decisions across all six surfaces.
 | **Cost of Alt**       | Q5, Q25            | —        | —          | —       | —       | —        |
 | **Travelability**     | —                  | D11      | —          | —       | —       | —        |
 | **Stakeholder Map**   | —                  | —        | —          | —       | T7      | —        |
+| **Category Maturity** | Q2, Q3, Q4, Q9     | D1, D3   | O3         | M2      | —       | —        |
+| **Offering Architecture** | Q24            | —        | —          | —       | —       | —        |
 
 ---
 
@@ -834,6 +876,11 @@ When multiple surfaces show the same gap, confidence in decision inference incre
 | Q26 missing + L3 missing + T1 fails        | JTBD not defined                | HIGH       |
 | D11 RED + founder required on every call   | Travelability FAILING           | HIGH       |
 | L1 missing + L4 inconsistent posts         | LinkedIn not warming market     | HIGH       |
+| Problem education on educated market       | Category Maturity FUZZY         | HIGH       |
+| Differentiation messaging on emerging market | Category Maturity FUZZY       | HIGH       |
+| C4 locked but deals don't expand           | Offering Architecture MISSING   | HIGH       |
+| Every deal feels custom / bespoke pricing  | Offering Architecture MISSING   | MEDIUM     |
+| Buyer asks "what's the full picture?" early | Offering Architecture FUZZY    | MEDIUM     |
 
 ---
 
@@ -938,7 +985,7 @@ See: `xray-outbound-standalone-spec.md` for full implementation details includin
 | 4.0     | March 2026 | Initial architecture document |
 | 5.0     | March 2026 | PULL framework integration, Homepage 15→18 questions (added Q1 Project, Q5 Stakes, split Q9 into Look+Lacking), Added A6 Wedge Use Case decision, Updated scoring thresholds, Added PULL diagnostic pattern |
 | 5.1     | March 2026 | Added Q23 (Market Bet) + Q24 (Entry Motion) to homepage questions. Added A7 (Market Bet) + C4 (Entry Motion) to decisions. Added Outbound Readiness Signals appendix. Core decisions 16→18. Homepage questions 18→20. |
-| 5.2     | March 2026 | Added JTBD Distinction paragraph to Framework Philosophy. Expanded A2 Customer scoring with four-profile/situation-based pattern and disqualifier discipline. Expanded A1 Category scoring with two-level frame. Homepage 20→22 questions (Q25 ROI Framework, Q26 Trigger recognition). Deck 10→12 questions (D11 Travelability, D12 Risk Reversal + Entry Motion). Added Triage Call surface (T1–T7). Added LinkedIn Profile surface (L1–L6). Updated PULL pattern to include Q26. Updated inference patterns. Expanded decision→question mapping table to 6 surfaces. Total questions: 42→59. Resolved two queued v5.2 items: Category Maturity, Offering Architecture. |
+| 5.2     | March 2026 | Added JTBD Distinction paragraph to Framework Philosophy. Expanded A1 Category scoring with two-level frame. Expanded A2 Customer scoring with four-profile/situation-based pattern and disqualifier discipline. Added A8 (Category Maturity) — locks whether market is educated vs. emerging. Added E6 (Offering Architecture) — locks how products/tiers relate and create expansion paths. Homepage 20→22 questions (Q25 ROI Framework, Q26 Trigger recognition). Deck 10→12 questions (D11 Travelability, D12 Risk Reversal + Entry Motion). Added Triage Call surface (T1–T7, pass/fail). Added LinkedIn Profile surface (L1–L6). Updated PULL pattern to include Q26. Expanded decision→question mapping to 6 surfaces. Added 9 new inference patterns. Core decisions 18→19. Total decisions 31→33. Total questions 42→59 across 6 surfaces. |
 
 ---
 
