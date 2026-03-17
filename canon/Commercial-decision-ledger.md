@@ -1,5 +1,5 @@
 # Commercial Decision Ledger
-## Product.Zone · Hurozo
+## Product.Zone
 
 **Purpose:** Canonical record of all locked commercial decisions. Human-readable, version-controlled.  
 **Operational layer:** Notion K&D database (queryable by client, status, leverage).  
