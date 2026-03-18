@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<!-- 
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║  SITUATION LIBRARY CARD · Template v1.0                      ║
+  ║  Schema: schema.md · Reference: situation-library-card-pz-v1 ║
+  ║  Canvas: 1200 × 1500px · Light register                     ║
+  ║  Design system: Product.Zone Visual System v1                ║
+  ║                                                              ║
+  ║  HANDLEBARS SLOTS:                                           ║
+  ║  {{slot}}         = single value                             ║
+  ║  {{#each array}}  = repeating block                          ║
+  ║  {{#if cond}}     = conditional block                        ║
+  ║                                                              ║
+  ║  Score thresholds (adjust per client):                       ║
+  ║  high = 13-15 · mid = 10-12 · low = 1-9                     ║
+  ╚═══════════════════════════════════════════════════════════════╝
+-->
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM TOKENS — DO NOT MODIFY
+   Source: Product.Zone Visual System v1
+═══════════════════════════════════════════════════ */
+:root {
+  --white: #FFFFFF;
+  --light: #F5F4EF;
+  --light2: #ECEAE3;
+  --lborder: #D8D6CF;
+  --ltext: #1a1a1a;
+  --lmuted: #555555;
+  --lmuted2: #888888;
+  --teal: #33C4D9;
+  --orange: #F5A623;
+  --green: #2ECC71;
+  --red: #C0392B;
+  --black: #0a0a0a;
+  --surface: #141414;
+  --dtext: #F0EFE9;
+  --dmuted: rgba(255,255,255,0.7);
+  --dmuted2: rgba(255,255,255,0.4);
+  --dborder: rgba(255,255,255,0.1);
+  --mono: 'Space Mono', monospace;
+  --display: 'Barlow Condensed', sans-serif;
+  --body: 'Barlow', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT — LOCKED STRUCTURE
+═══════════════════════════════════════════════════ */
+body {
+  width: 1200px;
+  height: 1500px;
+  background: var(--light);
+  color: var(--ltext);
+  overflow: hidden;
+}
+
+.card {
+  width: 1200px;
+  height: 1500px;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── HEADER ─── */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--display);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--ltext);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--lmuted);
+  line-height: 1.5;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+/* ─── LEGEND ─── */
+.legend {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* Type badge colors — extend if client needs more than 3 */
+.legend-badge.a { background: rgba(51,196,217,0.1); color: var(--teal); }
+.legend-badge.b { background: rgba(245,166,35,0.1); color: var(--orange); }
+.legend-badge.c { background: rgba(192,57,43,0.1); color: #e74c3c; }
+.legend-badge.d { background: rgba(139,92,246,0.1); color: #8B5CF6; }
+
+.legend-text {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--lmuted2);
+}
+
+/* ─── TIERS ─── */
+.tier {
+  margin-bottom: 24px;
+}
+
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.tier-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.tier-badge.t1 { background: rgba(46,204,113,0.15); color: var(--green); }
+.tier-badge.t2 { background: rgba(245,166,35,0.15); color: var(--orange); }
+.tier-badge.t3 { background: rgba(192,57,43,0.15); color: var(--red); }
+
+.tier-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ltext);
+}
+
+.tier-desc {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--lmuted2);
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+/* ─── SITUATION TABLE ─── */
+.table-header {
+  display: grid;
+  grid-template-columns: 28px 1fr 280px 120px 80px;
+  padding: 0 16px 8px;
+  gap: 12px;
+}
+
+.th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lmuted2);
+}
+
+.th-right { text-align: right; }
+
+.situations {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ─── SITUATION ROW ─── */
+.sit-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 280px 120px 80px;
+  align-items: start;
+  background: var(--white);
+  border: 1px solid var(--lborder);
+  border-radius: 6px;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.sit-num {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--teal);
+  opacity: 0.5;
+  line-height: 1.2;
+}
+
+.sit-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sit-name {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ltext);
+  line-height: 1.3;
+}
+
+.sit-what {
+  font-family: var(--body);
+  font-size: 12px;
+  color: var(--lmuted);
+  line-height: 1.4;
+}
+
+/* ─── SIGNALS ─── */
+.sit-signals {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.signal-item {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--lmuted2);
+  line-height: 1.35;
+  padding-left: 10px;
+  position: relative;
+}
+
+.signal-item::before {
+  content: '◇';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-size: 8px;
+  top: 1px;
+}
+
+/* ─── TYPE + LOOP ─── */
+.sit-type {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.type-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(51,196,217,0.1);
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.sit-loop {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--lmuted2);
+  line-height: 1.4;
+}
+
+/* ─── SCORE ─── */
+.sit-score {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.score-high { color: var(--green); }
+.score-mid { color: var(--orange); }
+.score-low { color: var(--red); }
+
+/* ─── FOOTER ─── */
+.footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--lborder);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lmuted2);
+}
+
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--lmuted2);
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">{{eyebrow}}</div>
+  <div class="title">{{title}}</div>
+  <div class="subtitle">{{subtitle}}</div>
+
+  <!-- LEGEND — one item per situation type -->
+  <div class="legend">
+    {{#each types}}
+    <div class="legend-item">
+      <div class="legend-badge {{css_class}}">{{code}} — {{label}}</div>
+      <div class="legend-text">{{description}}</div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- TABLE HEADER (shown once before Tier 1) -->
+  <div class="table-header">
+    <div class="th">#</div>
+    <div class="th">Situation</div>
+    <div class="th">Signals</div>
+    <div class="th">Type</div>
+    <div class="th th-right">Score</div>
+  </div>
+
+  <!-- TIERS — repeat block per tier -->
+  {{#each tiers}}
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-badge {{badge_class}}">{{label}}</div>
+      <div class="tier-title">{{title}}</div>
+    </div>
+    <div class="tier-desc">{{description}}</div>
+
+    <div class="situations">
+      {{#each situations}}
+      <div class="sit-row">
+        <div class="sit-num">{{num}}</div>
+        <div class="sit-main">
+          <div class="sit-name">{{name}}</div>
+          <div class="sit-what">{{what}}</div>
+        </div>
+        <div class="sit-signals">
+          {{#each signals}}
+          <div class="signal-item">{{this}}</div>
+          {{/each}}
+        </div>
+        <div class="sit-type">
+          <div class="type-badge">{{type_code}}</div>
+          <div class="sit-loop">{{loop_ref}}</div>
+        </div>
+        <div class="sit-score score-{{score_class}}">{{score}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/each}}
+
+  <div class="footer">
+    <span class="brand-name">{{brand_name}}</span>
+    <span class="brand-tag">{{version_tag}}</span>
+  </div>
+</div>
+</body>
+</html>
