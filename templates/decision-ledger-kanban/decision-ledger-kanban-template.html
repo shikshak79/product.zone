@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║  DECISION LEDGER KANBAN · Template v1.0                      ║
+  ║  Schema: schema.md · Reference: decision-ledger-kanban-pz-v1 ║
+  ║  Canvas: 2400px+ wide · Mixed register                      ║
+  ║  Design system: Product.Zone Visual System v1                ║
+  ║                                                              ║
+  ║  STRUCTURE:                                                  ║
+  ║  - Columns 1–5: Light register, decision cards               ║
+  ║  - Column 6: Dark register, session summary                  ║
+  ║  - Cards: 4 types (locked/validated/future/open)             ║
+  ║  - North Star: special dark card, always first in Col 1      ║
+  ║                                                              ║
+  ║  HANDLEBARS:                                                 ║
+  ║  {{slot}}              = single value                        ║
+  ║  {{#each array}}       = repeating block                     ║
+  ║  {{#if condition}}     = conditional block                   ║
+  ║  {{{html_slot}}}       = unescaped HTML (for <br>, <strong>) ║
+  ╚═══════════════════════════════════════════════════════════════╝
+-->
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM TOKENS — DO NOT MODIFY
+   Source: Product.Zone Visual System v1
+═══════════════════════════════════════════════════ */
+:root {
+  --white:#FFFFFF; --light:#F5F4EF; --light2:#ECEAE3; --lborder:#D8D6CF;
+  --ltext:#1a1a1a; --lmuted:#555555; --lmuted2:#888888;
+  --teal:#33C4D9; --orange:#F5A623; --green:#2ECC71; --red:#C0392B;
+  --black:#0a0a0a; --surface:#141414;
+  --dtext:#F0EFE9; --dmuted:rgba(255,255,255,0.7); --dmuted2:rgba(255,255,255,0.4);
+  --dborder:rgba(255,255,255,0.1);
+  --purple:#8B5CF6; --blue:#3B82F6;
+  --mono:'Space Mono',monospace; --display:'Barlow Condensed',sans-serif; --body:'Barlow',sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--light); width:2400px; }
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT — LOCKED STRUCTURE
+═══════════════════════════════════════════════════ */
+
+/* ── HEADER ── */
+.hdr {
+  background:var(--white); border-bottom:2px solid var(--lborder);
+  padding:28px 48px 24px; display:flex; justify-content:space-between; align-items:center;
+}
+.hdr-eyebrow { font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--lmuted2); margin-bottom:8px; }
+.hdr-title { font-family:var(--display); font-size:60px; font-weight:800; color:var(--ltext); line-height:1; }
+.hdr-sub { font-family:var(--body); font-size:13px; color:var(--lmuted); margin-top:6px; }
+.legend { display:flex; gap:20px; align-items:center; }
+.leg { display:flex; align-items:center; gap:7px; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--lmuted); }
+.leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.ld-locked { background:var(--green); }
+.ld-validated { background:var(--teal); }
+.ld-future { background:var(--purple); }
+.ld-open { background:var(--orange); }
+
+/* ── BOARD ── */
+.board { display:grid; grid-template-columns:repeat(6,1fr); align-items:start; }
+
+/* ── COLUMN ── */
+.col { border-right:1px solid var(--lborder); padding:20px 18px 32px; }
+.col:last-child { border-right:none; }
+.col-header { margin-bottom:18px; padding-bottom:14px; border-bottom:2px solid var(--lborder); }
+.col-accent { height:4px; border-radius:2px; margin-bottom:10px; width:32px; }
+.col-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--lmuted2); margin-bottom:4px; }
+.col-title { font-family:var(--display); font-size:24px; font-weight:800; color:var(--ltext); line-height:1.05; }
+.col-count { font-family:var(--mono); font-size:9px; color:var(--lmuted2); margin-top:4px; }
+
+/* ── DECISION CARD ── */
+.dc {
+  background:var(--white); border:1px solid var(--lborder);
+  border-radius:8px; padding:0; margin-bottom:10px; overflow:hidden; position:relative;
+}
+.dc.locked  { border-left:3px solid var(--green); }
+.dc.validated { border-left:3px solid var(--teal); }
+.dc.future  { border-left:3px solid var(--purple); }
+.dc.open-item { border-left:3px solid var(--orange); }
+.dc-inner { padding:12px 13px 11px; }
+.dc-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.dc-left-meta { display:flex; align-items:center; gap:8px; }
+.dc-status { font-family:var(--mono); font-size:8px; letter-spacing:.08em; font-weight:700; padding:2px 6px; border-radius:3px; text-transform:uppercase; }
+.ds-locked   { background:rgba(46,204,113,.12); color:var(--green); }
+.ds-validated{ background:rgba(51,196,217,.12); color:var(--teal); }
+.ds-future   { background:rgba(139,92,246,.1);  color:var(--purple); }
+.ds-open     { background:rgba(245,166,35,.1);  color:var(--orange); }
+.leverage { display:flex; gap:2px; }
+.lev-dot { width:7px; height:7px; border-radius:50%; }
+.lf { background:var(--orange); }
+.le { background:var(--light2); }
+.dc-code { font-family:var(--mono); font-size:9px; color:var(--lmuted2); font-weight:700; }
+.dc-name { font-family:var(--display); font-size:19px; font-weight:800; color:var(--ltext); line-height:1.1; margin-bottom:5px; }
+.dc-answer { font-family:var(--body); font-size:12px; font-weight:600; color:var(--lmuted); line-height:1.4; margin-bottom:5px; }
+.dc-detail { font-family:var(--body); font-size:11px; color:var(--lmuted2); line-height:1.5; }
+.section-break { height:1px; background:var(--lborder); margin:12px 0 10px; }
+.section-label { font-family:var(--mono); font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--lmuted2); margin-bottom:8px; }
+
+/* ── NORTH STAR CARD (dark) ── */
+.dc-ns {
+  background:var(--black); border-radius:8px; padding:0; margin-bottom:10px; overflow:hidden;
+}
+.dc-ns .dc-inner { padding:14px; }
+.dc-ns .dc-name  { color:var(--dtext); font-size:20px; }
+.dc-ns .dc-answer { color:var(--dmuted); font-weight:400; }
+.dc-ns .dc-detail { color:var(--dmuted2); }
+.dc-ns .dc-code  { color:var(--dmuted2); }
+.dc-ns .le { background:rgba(255,255,255,.15); }
+.ns-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--orange); margin-bottom:10px; }
+
+/* ── SUMMARY COLUMN (dark) ── */
+.sum-col { background:var(--black); padding:20px 18px 32px; }
+.sum-col .col-title  { color:var(--dtext); }
+.sum-col .col-eyebrow { color:var(--dmuted2); }
+.sum-col .col-header { border-bottom-color:var(--dborder); }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.stat-box { background:rgba(255,255,255,.05); border:1px solid var(--dborder); border-radius:6px; padding:10px 12px; }
+.stat-val { font-family:var(--display); font-size:32px; font-weight:800; color:var(--dtext); line-height:1; }
+.stat-lbl { font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--dmuted2); margin-top:3px; }
+.sum-section { margin-bottom:18px; }
+.sum-label { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:9px; }
+.sum-item { display:flex; gap:8px; align-items:flex-start; margin-bottom:7px; }
+.sum-bullet { font-family:var(--mono); font-size:9px; color:var(--green); flex-shrink:0; margin-top:1px; }
+.sum-bullet.arrow { color:var(--orange); }
+.sum-text { font-family:var(--body); font-size:12px; color:var(--dmuted); line-height:1.5; }
+.sum-text strong { color:var(--dtext); font-weight:600; }
+.sum-divider { border:none; border-top:1px solid var(--dborder); margin:14px 0; }
+.val-table { width:100%; border-collapse:collapse; font-family:var(--body); font-size:11px; }
+.val-table th { font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); text-align:left; padding:4px 0; border-bottom:1px solid var(--dborder); }
+.val-table td { color:var(--dmuted); padding:5px 0; border-bottom:1px solid rgba(255,255,255,.05); vertical-align:top; }
+.val-table td:first-child { color:var(--dtext); font-weight:600; padding-right:10px; }
+.badge-open { background:rgba(245,166,35,.15); color:var(--orange); font-family:var(--mono); font-size:8px; padding:2px 6px; border-radius:3px; }
+.badge-ok   { background:rgba(46,204,113,.12); color:var(--green); font-family:var(--mono); font-size:8px; padding:2px 6px; border-radius:3px; }
+
+/* ── FOOTER ── */
+.footer {
+  background:var(--white); border-top:1px solid var(--lborder);
+  padding:14px 48px; display:flex; justify-content:space-between; align-items:center;
+}
+.footer-text { font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--lmuted2); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<div class="hdr">
+  <div>
+    <div class="hdr-eyebrow">{{header.eyebrow}}</div>
+    <div class="hdr-title">{{header.title}}</div>
+    <div class="hdr-sub">{{header.subtitle}}</div>
+  </div>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot ld-locked"></div>Locked</div>
+    <div class="leg"><div class="leg-dot ld-validated"></div>Validated</div>
+    <div class="leg"><div class="leg-dot ld-future"></div>Future Stage</div>
+    <div class="leg"><div class="leg-dot ld-open"></div>Open / Pending</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     BOARD
+════════════════════════════════════════════ -->
+<div class="board">
+
+<!-- ══════════════════════════════════════════════
+     COLUMNS 1–5: Decision columns (light register)
+     Repeat this block per column. Adjust accent, titles, cards.
+══════════════════════════════════════════════ -->
+{{#each columns}}
+<div class="col">
+  <div class="col-header">
+    <div class="col-accent" style="background:{{accent_color}};"></div>
+    <div class="col-eyebrow">{{eyebrow}}</div>
+    <div class="col-title">{{{title}}}</div>
+    <div class="col-count">{{count}}</div>
+  </div>
+
+  {{#each sections}}
+  {{#if label}}
+  {{#unless @first}}<div class="section-break"></div>{{/unless}}
+  <div class="section-label">{{label}}</div>
+  {{/if}}
+
+  {{#each cards}}
+  {{#if (eq type "north_star")}}
+  <!-- NORTH STAR CARD -->
+  <div class="dc-ns">
+    <div class="dc-inner">
+      <div class="ns-eyebrow">{{ns_eyebrow}}</div>
+      <div class="dc-top">
+        <div class="dc-left-meta">
+          <div class="dc-status ds-open">{{ns_status_label}}</div>
+          <div class="leverage">
+            <!-- Render leverage dots: filled (lf) then empty (le) to total 5 -->
+            {{#each leverage_filled}}<div class="lev-dot lf"></div>{{/each}}
+            {{#each leverage_empty}}<div class="lev-dot le"></div>{{/each}}
+          </div>
+        </div>
+        <div class="dc-code">{{code}}</div>
+      </div>
+      <div class="dc-name">{{name}}</div>
+      <div class="dc-detail">{{detail}}</div>
+    </div>
+  </div>
+  {{else}}
+  <!-- STANDARD DECISION CARD -->
+  <div class="dc {{status}}">
+    <div class="dc-inner">
+      <div class="dc-top">
+        <div class="dc-left-meta">
+          <div class="dc-status ds-{{status}}">{{status_label}}</div>
+          <div class="leverage">
+            {{#each leverage_filled}}<div class="lev-dot lf"></div>{{/each}}
+            {{#each leverage_empty}}<div class="lev-dot le"></div>{{/each}}
+          </div>
+        </div>
+        <div class="dc-code">{{code}}</div>
+      </div>
+      <div class="dc-name">{{name}}</div>
+      <div class="dc-answer">{{answer}}</div>
+      <div class="dc-detail">{{detail}}</div>
+    </div>
+  </div>
+  {{/if}}
+  {{/each}}
+
+  {{/each}}
+</div>
+{{/each}}
+
+
+<!-- ══════════════════════════════════════════════
+     COLUMN 6: SUMMARY (dark register)
+══════════════════════════════════════════════ -->
+<div class="col sum-col">
+  <div class="col-header">
+    <div class="col-accent" style="background:var(--orange); width:28px;"></div>
+    <div class="col-eyebrow">{{summary.eyebrow}}</div>
+    <div class="col-title">{{{summary.title}}}</div>
+  </div>
+
+  <!-- STATS GRID -->
+  <div class="stat-grid">
+    {{#each summary.stats}}
+    <div class="stat-box">
+      <div class="stat-val" style="color:{{color}};">{{value}}</div>
+      <div class="stat-lbl">{{label}}</div>
+    </div>
+    {{/each}}
+  </div>
+
+  <hr class="sum-divider">
+
+  <!-- SUMMARY SECTIONS (repeating) -->
+  {{#each summary.sections}}
+  <div class="sum-section">
+    <div class="sum-label">{{label}}</div>
+    {{#each items}}
+    <div class="sum-item">
+      <div class="sum-bullet {{bullet_class}}">{{bullet}}</div>
+      <div class="sum-text">{{{text}}}</div>
+    </div>
+    {{/each}}
+  </div>
+  {{#unless @last}}<hr class="sum-divider">{{/unless}}
+  {{/each}}
+
+  {{#if summary.validation}}
+  <hr class="sum-divider">
+  <div class="sum-section">
+    <div class="sum-label">Validation tracker</div>
+    <table class="val-table">
+      <thead><tr><th>Decision</th><th>Status</th></tr></thead>
+      <tbody>
+        {{#each summary.validation}}
+        <tr>
+          <td>{{decision}}</td>
+          <td><span class="{{status_class}}">{{status_text}}</span></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+
+  <hr class="sum-divider">
+
+  <!-- FOOTER METADATA -->
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--dmuted2);line-height:1.8;">
+    <div>{{summary.meta.version}}</div>
+    <div>{{summary.meta.last_change}}</div>
+    <div>{{summary.meta.next_review}}</div>
+  </div>
+
+</div><!-- /summary column -->
+
+</div><!-- /board -->
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<div class="footer">
+  <div class="footer-text">{{footer.left}}</div>
+  <div class="footer-text">{{footer.right}}</div>
+</div>
+
+</body>
+</html>
